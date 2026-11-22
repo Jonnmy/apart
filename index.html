@@ -235,7 +235,7 @@ const DEF = {
   inicialPct:20, tasa:11.5, plazo:20, extras:5000, ingresoRD:150000,
   precioEsc:'mod',
   g:{bajo:[8,15,30], medio:[6,14,25], premium:[4,10,20]},
-  real:{}, obj3:'pal3', obj2:'pal2', compare:[], tipo:3, savedAt:0
+  real:{}, obj3:'pal3', obj2:'pal2', compare:[], tipo:3, savedAt:0, lastBackup:0
 };
 const num = v => { const n = parseFloat(v); return isFinite(n) ? n : 0; };
 const clone = o => JSON.parse(JSON.stringify(o));
@@ -291,10 +291,10 @@ const ZON={norte:'Madre Vieja Norte',sur:'Madre Vieja Sur',centro:'Centro',hatil
 const ZCOL={norte:'#3F8F7B',sur:'#7A6BB5',centro:'#D08A3A',hatillo:'#3B7FB8',nova:'#B5588A',otras:'#8A9A9F'};
 const VER={A:'Anuncio leído',B:'Visto en buscador',NV:'Sin verificar'};
 const APTS=[
- {id:'pal3',h:3,n:'Palmeras del Norte',z:'norte',m2:90,b:2,p:1,precio:5030000,mon:'RD',est:'Proyecto; etapa actual por confirmar',ini:20,seg:'bajo',v:'B',url:'https://clio-realty-srl.alterestate.com/propiedad/palmeras-del-norte',nota:'Los anuncios van de RD$4.65M a RD$5.03M; usamos el más alto. Dice tener fideicomiso y bono de primera vivienda (por confirmar). Su primera etapa estaba prevista para 2023: pregunta qué unidades quedan.'},
+ {id:'pal3',h:3,n:'Palmeras del Norte',z:'norte',m2:90,b:2,p:1,precio:5025000,mon:'RD',est:'Proyecto; con unidades disponibles',ini:20,seg:'bajo',v:'A',url:'https://clio-realty-srl.alterestate.com/propiedad/palmeras-del-norte',nota:'El vendedor muestra varias unidades disponibles entre RD$4,851,000 y RD$5,025,000 (revisado el 22-nov-2026); usamos el precio más alto para no quedarnos cortos. Dice tener fideicomiso y bono de primera vivienda (por confirmar). Su primera etapa estaba prevista para 2023: pregunta qué unidades quedan.'},
  {id:'ae4378',h:3,n:'AE-4378',z:'centro',m2:89,b:2,p:1,precio:4900000,mon:'RD',est:'Terminado (4.º piso)',ini:20,seg:'bajo',v:'A',url:'https://www.rdcondominio.com/properties/republica-dominicana/san-cristobal',nota:'Residencial cerrado, en el centro. Sin riesgo de obra. Confirma si hay ascensor y si el anuncio sigue vigente.'},
  {id:'ae3837',h:3,n:'AE#3837',z:'hatillo',m2:95,b:2,p:1,precio:88330,mon:'USD',est:'En plano; entrega ago-2027 / ago-2028',ini:20,seg:'bajo',v:'B',url:'https://www.encuentra24.com/dominican-en/real-estate-for-sale-apartments-condos/invest-in-san-cristobal/32423062',nota:'Precio en dólares. Reserva RD$50,000. Parece ser el mismo proyecto de Doña Ana que anunciaba entrega en 2023: pregunta por el retraso. Baños: 2 o 3 según el anuncio.'},
- {id:'balc3',h:3,n:'Balcones de Alta Vista',z:'nova',m2:104,b:2,p:1,precio:95000,mon:'USD',alt:140000,est:'En construcción; entrega dic-2026',ini:20,seg:'medio',v:'B',url:'https://aarealtyrd.com/propiedad/residencial-privado-en-san-cristobal-1408',nota:'Los precios no coinciden: US$95,000 en un anuncio y hasta US$140,000 en otros. Pide cotización escrita por unidad. 54 unidades, vigilancia 24 h.'},
+ {id:'balc3',h:3,n:'Balcones de Alta Vista',z:'nova',m2:104,b:2,p:1,precio:95000,mon:'USD',alt:140000,est:'En construcción; entrega dic-2026',ini:20,seg:'medio',v:'B',url:'https://aarealtyrd.com/propiedad/residencial-privado-en-san-cristobal-1408',nota:'Los precios no coinciden: Corotos lo anuncia en US$95,000, pero AA Realty muestra unidades entre US$115,000 y US$140,000. Pide cotización escrita por unidad. 54 unidades, vigilancia 24 h.'},
  {id:'par3',h:3,n:'Paraíso de Dios',z:'otras',m2:120,b:2,p:null,precio:6300000,mon:'RD',est:'Terminado, listo para estrenar',ini:20,seg:'medio',v:'A',url:'https://www.corotos.com.do/l/san-crist%C3%B3bal/sc/inmuebles-en-venta/apartamentos',nota:'Grande y terminado. Un anuncio lo muestra como de 2 habitaciones con el mismo precio: confírmalo. El sector tiene valor de suelo bajo en el índice de Catastro.'},
  {id:'dg3',h:3,n:'Doña Gladys III y IV',z:'norte',m2:130,b:2.5,p:2,precio:118600,mon:'USD',est:'Entrega "mayo 2026" según un anuncio; sin verificar',ini:20,seg:'medio',v:'B',url:'https://melendezvende.com/propiedad/proyecto-de-apartamentos-residencial-dona-gladys-iii-y-iv-1147',nota:'Incluye 2 parqueos. El vendedor dice que está a 2 minutos de la autopista 6 de Noviembre (no medido). Hay otra unidad a US$120,400.'},
  {id:'cds3',h:3,n:'Camino del Sol',z:'sur',m2:90,b:2.5,p:1,precio:7000000,mon:'RD',est:'Terminado (2020)',ini:30,seg:'premium',v:'A',url:'https://www.melendezvende.com/propiedad/venta-de-apartamentos-camino-del-sol',nota:'El reel de Instagram decía RD$7.5M con 30% de inicial; este anuncio dice RD$7.0M. Pueden ser unidades distintas: pregunta. Es el más caro por metro cuadrado.'},
@@ -312,7 +312,7 @@ const LINKS={
  pal3:{src:'Clio Realty'},pal2:{src:'Clio Realty'},
  ae4378:{src:'Condominios del Caribe',gen:1},
  ae3837:{src:'Encuentra24',url:'https://www.encuentra24.com/dominican-en/real-estate-for-sale-apartments-condos/invest-in-san-cristobal/33031540'},
- balc3:{src:'AA Realty'},
+ balc3:{src:'Corotos',url:'https://www.corotos.com.do/anuncio/inmuebles-en-venta/apartamentos/residencial-balcones-de-alta-vista-seguridad-nadrxcy',v:'A'},
  par3:{src:'Corotos',url:'https://www.corotos.com.do/anuncio/inmuebles-en-venta/apartamentos/residencial-paraiso-de-dios-apartamentos-nuevos-f7h6ame'},
  dg3:{src:'Meléndez Vende'},dg2:{src:'Meléndez Vende'},dg2b:{src:'Meléndez Vende'},
  cds3:{src:'Meléndez Vende',url:'https://melendezvende.com/propiedad/venta-de-apartamentos-camino-del-sol'},
@@ -321,7 +321,9 @@ const LINKS={
  bel3:{src:'',url:''},
  yan2:{src:'Corotos',url:'https://www.corotos.com.do/anuncio/inmuebles-en-venta/apartamentos/residencial-yanna-1-apartamentos-con-ascensor-y-se-zv4sjjv'},
  naj2:{src:'Encuentra24',gen:1},part2:{src:'Encuentra24',gen:1}};
-APTS.forEach(a=>{const L=LINKS[a.id]||{};if('url' in L)a.url=L.url;a.src=L.src||'';a.gen=!!L.gen;});
+// Revisados abiertos el 22-nov-2026: precio confirmado en el anuncio.
+['ae3837','par3','dg3','dg2','dg2b','cds3','mir3','yan2'].forEach(id=>LINKS[id].v='A');
+APTS.forEach(a=>{const L=LINKS[a.id]||{};if('url' in L)a.url=L.url;if(L.v)a.v=L.v;a.src=L.src||'';a.gen=!!L.gen;});
 const byId=id=>APTS.find(a=>a.id===id)||APTS[0];
 // ===== ESTADO =====
 const KEY='mi-apartamento-sc';
@@ -365,7 +367,12 @@ function grafico(){
    <path class="ar" d="${area}" fill="url(#g)"/><path class="ln" pathLength="1" d="${line}" fill="none" stroke="var(--sage)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
    ${lastEnt?`<circle cx="${X(lastEnt).toFixed(1)}" cy="${Y(pts[lastEnt]).toFixed(1)}" r="5.5" fill="var(--sage)" stroke="var(--card)" stroke-width="2.5"/>`:''}
    ${ticks}</svg>
-   <div class="legend"><span><i style="background:var(--sage)"></i>Mi ahorro</span><span><i style="background:var(--rose)"></i>Mi meta: ${usd(meta)}</span></div>`;
+   <div class="legend"><span><i style="background:var(--sage)"></i>Mi ahorro</span><span><i style="background:var(--rose)"></i>Mi meta: ${usd(meta)}</span></div>
+   <p class="note" style="margin-top:10px">${(()=>{const k=pts.findIndex(v=>v>=meta);
+     if(k===0)return '<b>¡Ya alcanzaste tu meta!</b> Todo lo que ahorres de aquí en adelante es extra.';
+     if(k>0)return `<b>Si sigues así, llegas a tu meta en ${mesLabel(k-1).toLowerCase()}</b>${k<n?`, ${n-k} ${n-k===1?'mes':'meses'} antes de lo planeado. 🎯`:'.'}`;
+     return `<b>Al terminar tendrías ${usd(pts[n])}.</b> Te faltarían ${usd(meta-pts[n])} para tu meta: serían unos ${usd((meta-pts[n])/Math.max(1,n-ent.length))} más al mes.`;})()}
+   La línea verde es tu ahorro; la roja punteada es lo que necesitas reunir (fondo de emergencia, viajes, entrada y cierre).</p>`;
 }
 function escCards(){const nm={cons:['Conservador','Si el año viene con imprevistos'],int:['Intermedio','Con algún mes flojo'],opt:['Optimista','Sin fallar ningún mes']};
   return `<div class="esc">${['cons','int','opt'].map(k=>`<button data-set="escenario" data-val="${k}" aria-pressed="${S.escenario===k}"><div><div class="n">${nm[k][0]}</div><div class="d">${nm[k][1]}</div></div><div class="a">${usd(S.esc[k])}<span>${usd(S.esc[k]*nMeses(S))} en total</span></div></button>`).join('')}</div>`;}
@@ -390,6 +397,9 @@ function vInicio(){
   <section class="card quick"><h2>${mesLabel(mi)}</h2><p class="lede">¿Cuánto lograste ahorrar este mes?</p>
     <div class="row"><input type="number" inputmode="decimal" step="any" id="qk" value="${ya?S.real[mi]:''}" placeholder="${nf(planMes(S))}" aria-label="Ahorro de ${mesLabel(mi)} en dólares"><button class="ok" id="qkb">Guardar</button></div>
     ${ya?`<div class="done">✓ Guardado: ${usd(num(S.real[mi]))} este mes</div>`:`<div class="done">Tu plan son ${usd(planMes(S))} al mes. Si ahorraste menos, anótalo igual.</div>`}</section>
+  ${(()=>{const fal=[];for(let i=0;i<Math.min(mi,nMeses(S));i++)if(!ent.includes(String(i)))fal.push(i);if(!fal.length)return '';
+    const L=fal.slice(-3);return `<section class="card"><h2>Te faltó anotar ${L.length>1?'estos meses':'un mes'}</h2><p class="lede">Escribe lo que ahorraste. Si no ahorraste nada, pon 0.</p><div class="fields">${L.map(i=>`<div class="field"><label for="f-real.${i}">${mesLabel(i)}</label><input id="f-real.${i}" data-k="real.${i}" type="number" inputmode="decimal" step="any" placeholder="${nf(planMes(S))}"></div>`).join('')}</div>${fal.length>3?`<p class="note">Hay ${fal.length-3} meses más sin anotar en Mi ahorro.</p>`:''}</section>`;})()}
+  ${ent.length>=2&&Date.now()-num(S.lastBackup)>45*864e5?`<div class="alert y"><b>Guarda una copia de tus datos.</b> ${S.lastBackup?'Hace más de mes y medio que no la guardas.':'Todavía no tienes ninguna.'} Si se borra Safari, se pierde lo anotado.<div class="btnrow"><button class="btn" data-tab="ajustes">Guardar copia ahora</button></div></div>`:''}
   ${aviso}
   <section class="card"><h2>Dónde voy</h2><div class="grid">
     ${tile('Llevo ahorrado',usd(acum),ent.length+' de '+nMeses(S)+' meses','g')}
@@ -498,7 +508,8 @@ function vAjustes(){
    <details><summary>El préstamo</summary><div class="fields two" style="padding-bottom:14px">${field('Años para pagar','plazo')}${field('Tasa anual (%)','tasa')}${field('Seguro y mantenimiento (RD$ al mes)','extras','Es un cálculo aproximado.')}</div></details></section>
   <section class="card"><h2>Guardar mis datos</h2><p class="lede">Tus datos quedan guardados en este teléfono. Para pasarlos a otro teléfono: toca Copiar y guarda el texto en Notas. En el teléfono nuevo, borra lo que hay en el cuadro, pega tu texto y toca Restaurar.</p>
    <textarea id="bk" aria-label="Copia de seguridad" autocapitalize="off" autocorrect="off" spellcheck="false">${esc(JSON.stringify(S))}</textarea>
-   <div class="btnrow"><button class="btn ghost" id="cp">Copiar</button><button class="btn ghost" id="rs">Restaurar</button></div><p class="note" id="bkmsg"></p></section>
+   <div class="btnrow"><button class="btn" id="dl">Guardar copia en Archivos</button><label class="btn ghost" style="display:inline-flex;align-items:center">Abrir copia<input type="file" id="fl" accept=".json,application/json,text/plain" style="display:none"></label></div>
+   <div class="btnrow"><button class="btn ghost" id="cp">Copiar texto</button><button class="btn ghost" id="rs">Restaurar texto</button></div><p class="note" id="bkmsg">${S.lastBackup?'Última copia: '+new Date(S.lastBackup).toLocaleDateString('es-DO',{day:'numeric',month:'long',year:'numeric'})+'.':'Todavía no has guardado ninguna copia.'}</p></section>
   <section class="card"><h2>Colores</h2><div class="leg">
    <div><span class="sw" style="background:var(--amber-bg);border:1.5px solid var(--amber-line)"></span>Amarillo: puedes cambiar este dato.</div>
    <div><span class="sw" style="background:var(--sage-bg);border:1px solid var(--sage-line)"></span>Verde: va bien, o se calcula solo.</div>
@@ -539,7 +550,7 @@ function confeti(n){if(matchMedia('(prefers-reduced-motion: reduce)').matches)re
     document.body.appendChild(e);setTimeout(()=>e.remove(),3500);}}
 function setPath(p,v){const k=p.split('.');let o=S;for(let i=0;i<k.length-1;i++)o=o[k[i]];o[k[k.length-1]]=v;}
 document.addEventListener('click',e=>{
-  const t=e.target.closest('[data-tab],[data-set],[data-open],[data-obj],#qkb,#cp,#rs');if(!t)return;
+  const t=e.target.closest('[data-tab],[data-set],[data-open],[data-obj],#qkb,#cp,#rs,#dl');if(!t)return;
   if(t.dataset.tab){anim=view!==t.dataset.tab;view=t.dataset.tab;location.hash=view;window.scrollTo(0,0);render();return;}
   if(t.dataset.set){const k=t.dataset.set;let v=t.dataset.val;if(['fxFuture','tasa','tipo'].includes(k))v=parseFloat(v);S[k]=v;save();render();return;}
   if(t.dataset.open){open=open===t.dataset.open?null:t.dataset.open;render();return;}
@@ -551,7 +562,12 @@ document.addEventListener('click',e=>{
     if(hit){confeti(90);toast(hit===1?'🏠 ¡Llegaste a tu meta, Valery! Lo lograste.':`🎉 ¡Ya llevas el ${hit*100}% de tu meta!`);}
     else if(v>0){confeti(v>=planMes(S)?50:25);toast(v>=planMes(S)?'¡Mes cumplido! 💪 Sigue así.':'¡Guardado! Cada peso cuenta. 💚');}
     return;}
-  if(t.id==='cp'){const ta=document.getElementById('bk'),msg=document.getElementById('bkmsg');ta.focus();ta.select();ta.setSelectionRange(0,ta.value.length);
+  if(t.id==='dl'){S.lastBackup=Date.now();save();const txt=JSON.stringify(S),d=new Date(),nm=`mi-apartamento-${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}.json`;
+    const f=new File([txt],nm,{type:'application/json'});
+    if(navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f],title:'Copia de Mi apartamento'}).catch(()=>{});}
+    else{const a=document.createElement('a');a.href=URL.createObjectURL(f);a.download=nm;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1000);}
+    render();toast('Copia lista. Guárdala en Archivos o en iCloud. 💾');return;}
+  if(t.id==='cp'){S.lastBackup=Date.now();save();const ta=document.getElementById('bk'),msg=document.getElementById('bkmsg');ta.focus();ta.select();ta.setSelectionRange(0,ta.value.length);
     const say=ok=>{msg.textContent=ok?'Copiado.':'Selecciona el texto y cópialo a mano.';};
     let done=false;try{done=document.execCommand('copy');}catch(_){}
     if(done){say(true);}
@@ -562,6 +578,7 @@ document.addEventListener('click',e=>{
 });
 document.addEventListener('change',e=>{
   const el=e.target;
+  if(el.id==='fl'&&el.files[0]){const r=new FileReader();r.onload=()=>{try{const o=JSON.parse(r.result);if(!o||typeof o!=='object'||Array.isArray(o)||!('real' in o))throw 0;S=merge(DEF,o);save();render();toast('Datos restaurados. ✅');}catch(_){toast('Ese archivo no es una copia de la app.');}};r.readAsText(el.files[0]);return;}
   if(el.dataset.cmp){const id=el.dataset.cmp;let c=S.compare.filter(x=>x!==id);
     if(el.checked){c.push(id);if(c.length>3)c.shift();}S.compare=c;save();render();return;}
   if(el.dataset.k){let v=el.value;
