@@ -307,6 +307,21 @@ const APTS=[
  {id:'yan2',h:2,n:'Yanna I',z:'sur',m2:92,b:2,p:null,precio:123542,mon:'USD',est:'Sin dato',ini:20,seg:'premium',v:'A',url:'https://www.corotos.com.do/l/san-crist%C3%B3bal/sc/inmuebles-en-venta/apartamentos',nota:'Ascensor y seguridad 24/7. Es de lo más caro por metro cuadrado.'},
  {id:'naj2',h:2,n:'Najayo Abajo / Casamar',z:'otras',m2:null,b:null,p:null,precio:82900,mon:'USD',est:'Sin dato',ini:20,seg:'medio',v:'B',url:'https://www.encuentra24.com/dominican-en/real-estate-for-sale-apartments-condos/san-cristobal',nota:'Zona de playa, lejos de los servicios de la ciudad. No publica los metros cuadrados.'},
  {id:'part2',h:2,n:'Vendedor particular',z:'otras',m2:null,b:null,p:null,precio:6000000,mon:'RD',est:'Título al día',ini:20,seg:'medio',v:'A',url:'https://www.encuentra24.com/dominicana-es/bienes-raices-venta-de-propiedades-apartamentos/san-cristobal',nota:'Anuncio con los metros cuadrados mal cargados y ubicación sin precisar. Solo como referencia.'}];
+// Enlaces revisados el 22-nov-2026. gen: la página es una lista, no el anuncio exacto.
+const LINKS={
+ pal3:{src:'Clio Realty'},pal2:{src:'Clio Realty'},
+ ae4378:{src:'Condominios del Caribe',gen:1},
+ ae3837:{src:'Encuentra24',url:'https://www.encuentra24.com/dominican-en/real-estate-for-sale-apartments-condos/invest-in-san-cristobal/33031540'},
+ balc3:{src:'AA Realty'},
+ par3:{src:'Corotos',url:'https://www.corotos.com.do/anuncio/inmuebles-en-venta/apartamentos/residencial-paraiso-de-dios-apartamentos-nuevos-f7h6ame'},
+ dg3:{src:'Meléndez Vende'},dg2:{src:'Meléndez Vende'},dg2b:{src:'Meléndez Vende'},
+ cds3:{src:'Meléndez Vende',url:'https://melendezvende.com/propiedad/venta-de-apartamentos-camino-del-sol'},
+ mir3:{src:'Encuentra24'},
+ p1610:{src:'Casas24',gen:1},
+ bel3:{src:'',url:''},
+ yan2:{src:'Corotos',url:'https://www.corotos.com.do/anuncio/inmuebles-en-venta/apartamentos/residencial-yanna-1-apartamentos-con-ascensor-y-se-zv4sjjv'},
+ naj2:{src:'Encuentra24',gen:1},part2:{src:'Encuentra24',gen:1}};
+APTS.forEach(a=>{const L=LINKS[a.id]||{};if('url' in L)a.url=L.url;a.src=L.src||'';a.gen=!!L.gen;});
 const byId=id=>APTS.find(a=>a.id===id)||APTS[0];
 // ===== ESTADO =====
 const KEY='mi-apartamento-sc';
@@ -366,15 +381,16 @@ function vInicio(){
   else if(dif>=-0.1*planMes(S)*ent.length){t='Vas por buen camino.';s='Estás '+usd(-dif)+' por debajo de lo previsto, se puede recuperar.';}
   else {t='Necesitas ahorrar un poco más.';s='Estás '+usd(-dif)+' por debajo de lo previsto.';}
   let s2;
-  if(ok.length) s2=`Tu ahorro proyectado ya alcanza para ${ok.length} de ${APTS.length} opciones. Mira cuáles en Apartamentos.`;
+  if(!ent.length) s2='';
+  else if(ok.length) s2=`Tu ahorro proyectado ya alcanza para ${ok.length} de ${APTS.length} opciones. Mira cuáles en Apartamentos.`;
   else if(c3.cashOK) s2='Tendrás el dinero de la entrada, pero la cuota del banco sería muy alta con el ingreso que pusiste.';
   else s2=`Para ${esc(t3.n)} te faltarían ${usd(c3.falta)}: serían ${usd(c3.needMonthly)} al mes.`;
-  const aviso=S.neto==='pendiente'?`<div class="alert r"><b>Falta confirmar un dato:</b> estamos suponiendo que tus ${usd(num(S.ingreso))} son lo que te queda limpio cada mes. Si es antes de impuestos, podrás ahorrar menos. Puedes cambiarlo en Ajustes.</div>`:'';
-  return `${aviso}
-  <section class="card hero">${anillo(pct)}<div>${(()=>{const q=nMeses(S)-Math.max(0,mesActual());return q>1?`<div class="cd">⏳ Faltan ${q} meses</div>`:q===1?'<div class="cd">⏳ ¡Último mes!</div>':'<div class="cd">🏠 ¡Llegó el momento!</div>';})()}<div class="t">${t}</div><div class="s">${s}</div><div class="s">${s2}</div></div></section>
+  const aviso=S.neto==='pendiente'?`<div class="alert y"><b>Un dato por confirmar:</b> estamos suponiendo que tus ${usd(num(S.ingreso))} son lo que te queda limpio cada mes. Si es antes de impuestos, podrás ahorrar menos. Puedes cambiarlo en Ajustes.</div>`:'';
+  return `<section class="card hero">${anillo(pct)}<div>${(()=>{const q=nMeses(S)-Math.max(0,mesActual());return q>1?`<div class="cd">⏳ Faltan ${q} meses</div>`:q===1?'<div class="cd">⏳ ¡Último mes!</div>':'<div class="cd">🏠 ¡Llegó el momento!</div>';})()}<div class="t">${t}</div><div class="s">${s}</div>${s2?`<div class="s">${s2}</div>`:''}</div></section>
   <section class="card quick"><h2>${mesLabel(mi)}</h2><p class="lede">¿Cuánto lograste ahorrar este mes?</p>
     <div class="row"><input type="number" inputmode="decimal" step="any" id="qk" value="${ya?S.real[mi]:''}" placeholder="${nf(planMes(S))}" aria-label="Ahorro de ${mesLabel(mi)} en dólares"><button class="ok" id="qkb">Guardar</button></div>
     ${ya?`<div class="done">✓ Guardado: ${usd(num(S.real[mi]))} este mes</div>`:`<div class="done">Tu plan son ${usd(planMes(S))} al mes. Si ahorraste menos, anótalo igual.</div>`}</section>
+  ${aviso}
   <section class="card"><h2>Dónde voy</h2><div class="grid">
     ${tile('Llevo ahorrado',usd(acum),ent.length+' de '+nMeses(S)+' meses','g')}
     ${tile('Disponible para comprar',usd(res.disp),'Sin tocar el fondo de emergencia',res.disp>0?'g':'')}
@@ -384,11 +400,12 @@ function vInicio(){
   <section class="card"><h2>Cómo crece mi ahorro</h2>${grafico()}</section>
   <section class="card"><h2>Mi apartamento</h2><p class="lede">${esc(t3.n)} · ${ZON[t3.z]}${t3.m2?' · '+t3.m2+' m²':''}</p>
    <dl class="kv"><dt>Precio hoy</dt><dd>${rdm(c3.nowRD)}</dd><dt>Precio estimado en ${anioFinal()}</dt><dd>${rdm(c3.futRD)}</dd>
-   <dt>Entrada (${Math.round(c3.ini*100)}%)</dt><dd>${usd(c3.iniUSD)}</dd><dt>Gastos de cierre</dt><dd>${usd(c3.cierreUSD)}</dd>
+   <dt>Entrada (${Math.round(c3.ini*100)}%)</dt><dd>${usd(c3.iniUSD)}</dd><dt>Gastos de cierre<small class="h" style="display:block;font-weight:400">Impuestos y abogado al firmar</small></dt><dd>${usd(c3.cierreUSD)}</dd>
    <dt>Necesitas reunir</dt><dd>${usd(c3.cash)}</dd><dt>Tendrás disponible</dt><dd>${usd(c3.disp)}</dd>
    <dt>Diferencia</dt><dd class="${c3.cashOK?'pos':'neg'}">${c3.cashOK?'Te sobran '+usd(c3.disp-c3.cash):'Te faltan '+usd(c3.falta)}</dd>
    <dt>Cuota del banco</dt><dd>${rd(c3.cuotaTotal)} al mes</dd></dl>
-   <p class="note">El precio de ${anioFinal()} es un cálculo con el escenario "${{cons:'conservador',mod:'moderado',alto:'alto'}[S.precioEsc]}", no un precio garantizado. Puedes elegir otro apartamento en la pestaña Apartamentos.</p></section>
+   <p class="note">El precio de ${anioFinal()} es un cálculo con el escenario "${{cons:'conservador',mod:'moderado',alto:'alto'}[S.precioEsc]}", no un precio garantizado.</p>
+   <div class="btnrow"><button class="btn ghost" data-tab="apartamentos">Cambiar de apartamento</button></div></section>
   <section class="card"><h2>Mi plan de ahorro</h2><p class="lede">Toca el que vas a seguir.</p>${escCards()}</section>`;
 }
 // ===== PANTALLA: MI AHORRO =====
@@ -419,7 +436,7 @@ function aptCard(a){
   return `<article class="card apt"><div class="head" style="--z:${ZCOL[a.z]}">
    <div class="ttl"><div><div class="nm">${esc(a.n)}</div><div class="meta">${ZON[a.z]} · ${a.h} habitaciones${a.m2?' · '+a.m2+' m²':' · metros sin dato'}${a.p?' · '+a.p+' parqueo'+(a.p>1?'s':''):''}</div></div><span class="pill ${st[0]}">${st[1]}</span></div>
    <div class="price"><b>${a.mon==='USD'?usd(a.precio):rd(a.precio)}</b><span>${a.mon==='USD'?rd(c.nowRD):usd(c.nowUSD)}${c.ppm2?' · '+rd(c.ppm2)+' el m²':''}</span></div>
-   <div class="chips"><span class="pill n">${VER[a.v]}</span>${c.califica?'<span class="pill y">Podría ser de bajo costo</span>':''}<span class="pill n">${esc(a.est)}</span></div></div>
+   <div class="chips"><span class="pill n">${VER[a.v]}</span>${c.califica?'<span class="pill y" title="Vivienda con precio bajo el tope del gobierno: paga menos impuestos y puede tener mejor tasa">Podría ser de bajo costo</span>':''}<span class="pill n">${esc(a.est)}</span></div></div>
    ${ab?`<div class="more"><dl class="kv">
      <dt>Precio estimado en ${anioFinal()}</dt><dd>${rdm(c.futRD)}</dd></dl>
      <p class="note" style="margin:12px 0 6px"><b>Según cuánto suban los precios:</b></p><dl class="kv">${g3}</dl><dl class="kv" style="margin-top:12px">
@@ -429,9 +446,10 @@ function aptCard(a){
      <dt>Préstamo del banco</dt><dd>${rd(c.loan)}</dd><dt>Cuota, con seguro y mantenimiento</dt><dd>${rd(c.cuotaTotal)} al mes</dd>
      <dt>Ingreso que pide esa cuota</dt><dd>${rd(c.ingresoNecesario)} al mes</dd></dl>
     <p style="margin:12px 0 0"><span class="pill ${c.sem}">${SEM[c.sem]}: ${Math.round(c.ratio*100)}% de tu ingreso</span></p>
-    ${c.califica?`<p class="note">Si llegara a calificar como vivienda de bajo costo, el cierre bajaría a ${S.cierreBajo}% y necesitarías ${usd(c.cash-c.cierreUSD+c.cierreBajoUSD)}. Hay que confirmarlo con la DGII, el banco y un abogado.</p>`:''}
+    ${c.califica?`<p class="note"><b>Vivienda de bajo costo:</b> es la que cuesta menos que el tope que fija el gobierno; paga menos impuestos y puede tener mejor tasa. Si llegara a calificar, el cierre bajaría a ${S.cierreBajo}% y necesitarías ${usd(c.cash-c.cierreUSD+c.cierreBajoUSD)}. Hay que confirmarlo con la DGII, el banco y un abogado.</p>`:''}
     ${alt}<p class="note">${esc(a.nota)}</p>
-    <div class="btnrow"><a class="btn ghost" href="${a.url}" target="_blank" rel="noopener">Ver el anuncio</a><button class="btn" data-obj="${a.id}">Este es mi apartamento</button></div></div>`:''}
+    ${a.url&&a.gen?`<p class="note">El anuncio exacto ya no aparece. El botón abre la lista de ${esc(a.src)} para buscarlo, o pregúntale al vendedor.</p>`:''}${a.url?'':'<p class="note">Anuncio no disponible: ya no está publicado. Pregunta directamente al vendedor.</p>'}
+    <div class="btnrow">${a.url?`<a class="btn ghost" href="${a.url}" target="_blank" rel="noopener">${a.gen?'Buscar en ':'Ver anuncio en '}${esc(a.src)}</a>`:''}<button class="btn" data-obj="${a.id}">Este es mi apartamento</button></div></div>`:''}
    <div class="foot"><button data-open="${a.id}" aria-expanded="${ab}">${ab?'Ocultar detalles':'Ver detalles y cuota'}</button>
     <label><input type="checkbox" data-cmp="${a.id}" ${cmp?'checked':''}> Comparar</label></div></article>`;
 }
