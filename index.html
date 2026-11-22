@@ -439,7 +439,7 @@ function vApts(){
    <div class="field"><label>¿Cuánto subirán los precios?</label>${chips([['cons','Poco'],['mod','Lo normal'],['alto','Mucho']],'precioEsc',S.precioEsc)}<div class="h">Nadie lo sabe. Son escenarios para planificar.</div></div>
    <div class="field" style="margin-top:14px"><label>El dólar cuando compres (RD$)</label>${chips([[57,'57'],[60,'60'],[65,'65'],[70,'70']],'fxFuture',S.fxFuture)}<div class="h">Hoy está cerca de RD$${S.fx0}. Si baja, un apartamento en pesos te cuesta más dólares.</div></div>
    <div class="field" style="margin-top:14px"><label>Tasa de interés del préstamo</label>${chips([[8,'8%'],[9.5,'9.5%'],[11.5,'11.5%'],[13.5,'13.5%']],'tasa',S.tasa)}<div class="h">El 11.5% es el promedio actual. El 8% solo aplica a vivienda de bajo costo que califique. El banco confirma la real.</div></div>
-   <div class="fields two" style="margin-top:14px">${field('Lo que ganarán al mes en RD$','ingresoRD','Entre los dos, cuando regresen. Aún por confirmar.')}${field('Entrada mínima (%)','inicialPct','Algunos proyectos piden más.')}</div></section>
+   <div class="fields two" style="margin-top:14px">${field('Lo que ganarás al mes en RD$','ingresoRD','')}${field('Entrada mínima (%)','inicialPct','Algunos proyectos piden más.')}</div></section>
   ${cmpTable()}${list.map(aptCard).join('')}`;
 }
 // ===== PANTALLA: AJUSTES =====
