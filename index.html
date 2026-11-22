@@ -501,10 +501,13 @@ document.addEventListener('click',e=>{
   if(t.dataset.obj){const a=byId(t.dataset.obj);S[a.h===3?'obj3':'obj2']=a.id;save();view='inicio';location.hash='inicio';window.scrollTo(0,0);render();return;}
   if(t.id==='qkb'){const el=document.getElementById('qk'),mi=Math.max(0,Math.min(nMeses(S)-1,mesActual()));
     if(el.value==='')delete S.real[mi];else S.real[mi]=parseFloat(el.value)||0;save();render();return;}
-  if(t.id==='cp'){const ta=document.getElementById('bk');ta.select();let ok=false;
-    try{ok=!!(navigator.clipboard&&navigator.clipboard.writeText(ta.value));}catch(_){}
-    document.getElementById('bkmsg').textContent=ok?'Copiado.':'Selecciona el texto y cópialo a mano.';return;}
-  if(t.id==='rs'){try{S=merge(DEF,JSON.parse(document.getElementById('bk').value));save();render();}
+  if(t.id==='cp'){const ta=document.getElementById('bk'),msg=document.getElementById('bkmsg');ta.focus();ta.select();ta.setSelectionRange(0,ta.value.length);
+    const say=ok=>{msg.textContent=ok?'Copiado.':'Selecciona el texto y cópialo a mano.';};
+    let done=false;try{done=document.execCommand('copy');}catch(_){}
+    if(done){say(true);}
+    else if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(ta.value).then(()=>say(true),()=>say(false));}
+    else say(false);return;}
+  if(t.id==='rs'){try{const o=JSON.parse(document.getElementById('bk').value);if(!o||typeof o!=='object'||Array.isArray(o))throw 0;S=merge(DEF,o);save();render();const m=document.getElementById('bkmsg');if(m)m.textContent='Datos restaurados.';}
     catch(_){document.getElementById('bkmsg').textContent='Ese texto no sirve, revisa que esté completo.';}}
 });
 document.addEventListener('change',e=>{
