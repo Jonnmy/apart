@@ -362,7 +362,7 @@ function vInicio(){
   const ok=APTS.filter(a=>{const c=calc(S,a);return c.cashOK&&c.sem!=='r';});
   let t,s;
   if(!ent.length){t='Vamos a empezar.';s='Anota abajo lo que lograste ahorrar este mes. Con eso la app te dice si vas bien.';}
-  else if(dif>=0){t='¡Excelente! Vas según tu plan.';s='Llevas '+usd(dif)+' por encima de lo previsto.';}
+  else if(dif>=0){t='¡Excelente! Vas según tu plan.';s=dif>0?'Llevas '+usd(dif)+' por encima de lo previsto.':'Ahorraste justo lo que planeaste.';}
   else if(dif>=-0.1*planMes(S)*ent.length){t='Vas por buen camino.';s='Estás '+usd(-dif)+' por debajo de lo previsto, se puede recuperar.';}
   else {t='Necesitas ahorrar un poco más.';s='Estás '+usd(-dif)+' por debajo de lo previsto.';}
   let s2;
