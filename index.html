@@ -299,13 +299,10 @@ const APTS=[
  {id:'dg3',h:3,n:'Doña Gladys III y IV',z:'norte',m2:130,b:2.5,p:2,precio:118600,mon:'USD',est:'Entrega "mayo 2026" según un anuncio; sin verificar',ini:20,seg:'medio',v:'B',url:'https://melendezvende.com/propiedad/proyecto-de-apartamentos-residencial-dona-gladys-iii-y-iv-1147',nota:'Incluye 2 parqueos. El vendedor dice que está a 2 minutos de la autopista 6 de Noviembre (no medido). Hay otra unidad a US$120,400.'},
  {id:'cds3',h:3,n:'Camino del Sol',z:'sur',m2:90,b:2.5,p:1,precio:7000000,mon:'RD',est:'Terminado (2020)',ini:30,seg:'premium',v:'A',url:'https://www.melendezvende.com/propiedad/venta-de-apartamentos-camino-del-sol',nota:'El reel de Instagram decía RD$7.5M con 30% de inicial; este anuncio dice RD$7.0M. Pueden ser unidades distintas: pregunta. Es el más caro por metro cuadrado.'},
  {id:'mir3',h:3,n:'Ciudad Modelo Mirador Norte',z:'otras',m2:null,b:2,p:1,precio:110000,mon:'USD',est:'En plano; fases abr-2027 y dic-2027',ini:40,seg:'medio',v:'B',url:'https://www.encuentra24.com/dominican-en/real-estate-for-sale-apartments-condos/apartamento-en-san-cristobal/33171107',nota:'Precio "desde". Plan: reserva US$5,000, 10% de separación, 30% durante la obra y 60% contra entrega. No publica los metros cuadrados.'},
- {id:'p1610',h:3,n:'Proyecto 1610',z:'otras',m2:107,b:2,p:2,precio:82700,mon:'USD',est:'Sin dato',ini:20,seg:'medio',v:'B',url:'https://www.casas24.com/dominicana-es/propiedades-residenciales-venta-apartamentos/san-cristobal',nota:'El más barato por metro cuadrado que encontramos, pero no se sabe dónde queda ni si está terminado. Verifícalo antes de ilusionarte.'},
- {id:'bel3',h:3,n:'Bellazul',z:'sur',m2:130,b:2.5,p:1,precio:125000,mon:'USD',est:'Nuevo',ini:20,seg:'medio',v:'B',url:'https://www.lapulga.com.do/apartamento-en-san-cristobal-detras-de-la-sirena-madre-vieja-sur_7209990.html',nota:'Rango US$125,000–155,000 para 130–169 m²; usamos el más bajo con 130 m². Gimnasio y salón. Detrás de La Sirena.'},
  {id:'pal2',h:2,n:'Palmeras del Norte',z:'norte',m2:80,b:2,p:1,precio:5025000,mon:'RD',est:'Proyecto; etapa actual por confirmar',ini:20,seg:'bajo',v:'B',url:'https://clio-realty-srl.alterestate.com/propiedad/palmeras-del-norte',nota:'Cuesta casi lo mismo que el de 3 habitaciones del mismo proyecto. Compara los dos antes de decidir.'},
  {id:'dg2',h:2,n:'Doña Gladys III y IV',z:'norte',m2:101,b:2.5,p:1,precio:93400,mon:'USD',est:'Entrega "mayo 2026" según un anuncio; sin verificar',ini:20,seg:'medio',v:'B',url:'https://melendezvende.com/propiedad/proyecto-de-apartamentos-residencial-dona-gladys-iii-y-iv-1147',nota:'Unidad del 5.º nivel. Hay otra de 120 m² a US$102,900.'},
  {id:'dg2b',h:2,n:'Doña Gladys III y IV · 120 m²',z:'norte',m2:120,b:2.5,p:1,precio:102900,mon:'USD',est:'Entrega "mayo 2026" según un anuncio; sin verificar',ini:20,seg:'medio',v:'B',url:'https://melendezvende.com/propiedad/proyecto-de-apartamentos-residencial-dona-gladys-iii-y-iv-1147',nota:'Dos habitaciones grandes; casi del tamaño de un 3 habitaciones.'},
  {id:'yan2',h:2,n:'Yanna I',z:'sur',m2:92,b:2,p:null,precio:123542,mon:'USD',est:'Sin dato',ini:20,seg:'premium',v:'A',url:'https://www.corotos.com.do/l/san-crist%C3%B3bal/sc/inmuebles-en-venta/apartamentos',nota:'Ascensor y seguridad 24/7. Es de lo más caro por metro cuadrado.'},
- {id:'naj2',h:2,n:'Najayo Abajo / Casamar',z:'otras',m2:null,b:null,p:null,precio:82900,mon:'USD',est:'Sin dato',ini:20,seg:'medio',v:'B',url:'https://www.encuentra24.com/dominican-en/real-estate-for-sale-apartments-condos/san-cristobal',nota:'Zona de playa, lejos de los servicios de la ciudad. No publica los metros cuadrados.'},
  {id:'part2',h:2,n:'Vendedor particular',z:'otras',m2:null,b:null,p:null,precio:6000000,mon:'RD',est:'Título al día',ini:20,seg:'medio',v:'A',url:'https://www.encuentra24.com/dominicana-es/bienes-raices-venta-de-propiedades-apartamentos/san-cristobal',nota:'Anuncio con los metros cuadrados mal cargados y ubicación sin precisar. Solo como referencia.'}];
 // Enlaces revisados el 22-nov-2026. gen: la página es una lista, no el anuncio exacto.
 const LINKS={
@@ -317,18 +314,19 @@ const LINKS={
  dg3:{src:'Meléndez Vende'},dg2:{src:'Meléndez Vende'},dg2b:{src:'Meléndez Vende'},
  cds3:{src:'Meléndez Vende',url:'https://melendezvende.com/propiedad/venta-de-apartamentos-camino-del-sol'},
  mir3:{src:'Encuentra24'},
- p1610:{src:'',url:''},
- bel3:{src:'',url:''},
  yan2:{src:'Corotos',url:'https://www.corotos.com.do/anuncio/inmuebles-en-venta/apartamentos/residencial-yanna-1-apartamentos-con-ascensor-y-se-zv4sjjv'},
- naj2:{src:'',url:''},part2:{src:'Encuentra24',gen:1}};
+ part2:{src:'Encuentra24',gen:1}};
 // Revisados abiertos el 22-nov-2026: precio confirmado en el anuncio.
 ['ae3837','par3','dg3','dg2','dg2b','cds3','mir3','yan2'].forEach(id=>LINKS[id].v='A');
 APTS.forEach(a=>{const L=LINKS[a.id]||{};if('url' in L)a.url=L.url;if(L.v)a.v=L.v;a.src=L.src||'';a.gen=!!L.gen;});
 const byId=id=>APTS.find(a=>a.id===id)||APTS[0];
+const existe=id=>APTS.some(a=>a.id===id);
 // ===== ESTADO =====
 const KEY='mi-apartamento-sc';
 let S=(function(){try{const r=localStorage.getItem(KEY);if(r)return merge(DEF,JSON.parse(r));}catch(e){}return clone(DEF);})();
 let view=(location.hash||'#inicio').slice(1), open=null, flash=0, anim=true;
+// Quita apartamentos que ya no están en la lista (datos guardados viejos).
+S.compare=(S.compare||[]).filter(existe);if(!existe(S.obj3))S.obj3=DEF.obj3;if(!existe(S.obj2))S.obj2=DEF.obj2;
 function save(){S.savedAt=Date.now();try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 // ===== FORMATO =====
 const nf=n=>Math.round(n).toLocaleString('en-US');
@@ -464,7 +462,7 @@ function aptCard(a){
     <label><input type="checkbox" data-cmp="${a.id}" ${cmp?'checked':''}> Comparar</label></div></article>`;
 }
 function cmpTable(){
-  const L=S.compare.map(byId).filter(Boolean);if(L.length<2)return '';
+  const L=S.compare.filter(existe).map(byId);if(L.length<2)return '';
   const C=L.map(a=>calc(S,a)),row=(l,f)=>`<tr><td>${l}</td>${L.map((a,i)=>`<td>${f(a,C[i])}</td>`).join('')}</tr>`;
   const mn=f=>C.reduce((b,c,i)=>f(c)<f(C[b])?i:b,0);
   const con=[`<b>${esc(L[mn(c=>c.cash)].n)}</b> pide menos dinero de entrada: ${usd(C[mn(c=>c.cash)].cash)}.`,
