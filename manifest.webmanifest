@@ -1,0 +1,16 @@
+{
+  "name": "Mi apartamento en San Cristóbal",
+  "short_name": "Mi apartamento",
+  "description": "Plan de ahorro para comprar un apartamento en San Cristóbal.",
+  "lang": "es-DO",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F6F3EC",
+  "theme_color": "#0F4C5C",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}
