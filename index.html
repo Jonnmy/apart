@@ -292,7 +292,7 @@ const ZCOL={norte:'#3F8F7B',sur:'#7A6BB5',centro:'#D08A3A',hatillo:'#3B7FB8',nov
 const VER={A:'Anuncio leído',B:'Visto en buscador',NV:'Sin verificar'};
 const APTS=[
  {id:'pal3',h:3,n:'Palmeras del Norte',z:'norte',m2:90,b:2,p:1,precio:5025000,mon:'RD',est:'Proyecto; con unidades disponibles',ini:20,seg:'bajo',v:'A',url:'https://clio-realty-srl.alterestate.com/propiedad/palmeras-del-norte',nota:'El vendedor muestra varias unidades disponibles entre RD$4,851,000 y RD$5,025,000 (revisado el 22-nov-2026); usamos el precio más alto para no quedarnos cortos. Dice tener fideicomiso y bono de primera vivienda (por confirmar). Su primera etapa estaba prevista para 2023: pregunta qué unidades quedan.'},
- {id:'ae4378',h:3,n:'AE-4378',z:'centro',m2:89,b:2,p:1,precio:4900000,mon:'RD',est:'Terminado (4.º piso)',ini:20,seg:'bajo',v:'A',url:'https://www.rdcondominio.com/properties/republica-dominicana/san-cristobal',nota:'Residencial cerrado, en el centro. Sin riesgo de obra. Confirma si hay ascensor y si el anuncio sigue vigente.'},
+ {id:'ae4378',h:3,n:'AE-4378',z:'centro',m2:89,b:2,p:1,precio:4900000,mon:'RD',est:'Terminado (4.º piso)',ini:20,seg:'bajo',v:'A',url:'https://www.rdcondominio.com/properties/republica-dominicana/san-cristobal',nota:'Residencial cerrado, en el centro. Sin riesgo de obra. Sigue anunciado el 22-nov-2026 (RD$4,900,000, 89 m², 4.º piso). Confirma si hay ascensor.'},
  {id:'ae3837',h:3,n:'AE#3837',z:'hatillo',m2:95,b:2,p:1,precio:88330,mon:'USD',est:'En plano; entrega ago-2027 / ago-2028',ini:20,seg:'bajo',v:'B',url:'https://www.encuentra24.com/dominican-en/real-estate-for-sale-apartments-condos/invest-in-san-cristobal/32423062',nota:'Precio en dólares. Reserva RD$50,000. Parece ser el mismo proyecto de Doña Ana que anunciaba entrega en 2023: pregunta por el retraso. Baños: 2 o 3 según el anuncio.'},
  {id:'balc3',h:3,n:'Balcones de Alta Vista',z:'nova',m2:104,b:2,p:1,precio:95000,mon:'USD',alt:140000,est:'En construcción; entrega dic-2026',ini:20,seg:'medio',v:'B',url:'https://aarealtyrd.com/propiedad/residencial-privado-en-san-cristobal-1408',nota:'Los precios no coinciden: Corotos lo anuncia en US$95,000, pero AA Realty muestra unidades entre US$115,000 y US$140,000. Pide cotización escrita por unidad. 54 unidades, vigilancia 24 h.'},
  {id:'par3',h:3,n:'Paraíso de Dios',z:'otras',m2:120,b:2,p:null,precio:6300000,mon:'RD',est:'Terminado, listo para estrenar',ini:20,seg:'medio',v:'A',url:'https://www.corotos.com.do/l/san-crist%C3%B3bal/sc/inmuebles-en-venta/apartamentos',nota:'Grande y terminado. Un anuncio lo muestra como de 2 habitaciones con el mismo precio: confírmalo. El sector tiene valor de suelo bajo en el índice de Catastro.'},
@@ -310,17 +310,17 @@ const APTS=[
 // Enlaces revisados el 22-nov-2026. gen: la página es una lista, no el anuncio exacto.
 const LINKS={
  pal3:{src:'Clio Realty'},pal2:{src:'Clio Realty'},
- ae4378:{src:'Condominios del Caribe',gen:1},
+ ae4378:{src:'Condominios del Caribe',url:'https://www.rdcondominio.com/property/apartamento-en-venta-centro-san-cristobal-3-hab-2-bn-1-parqueo',v:'A'},
  ae3837:{src:'Encuentra24',url:'https://www.encuentra24.com/dominican-en/real-estate-for-sale-apartments-condos/invest-in-san-cristobal/33031540'},
  balc3:{src:'Corotos',url:'https://www.corotos.com.do/anuncio/inmuebles-en-venta/apartamentos/residencial-balcones-de-alta-vista-seguridad-nadrxcy',v:'A'},
  par3:{src:'Corotos',url:'https://www.corotos.com.do/anuncio/inmuebles-en-venta/apartamentos/residencial-paraiso-de-dios-apartamentos-nuevos-f7h6ame'},
  dg3:{src:'Meléndez Vende'},dg2:{src:'Meléndez Vende'},dg2b:{src:'Meléndez Vende'},
  cds3:{src:'Meléndez Vende',url:'https://melendezvende.com/propiedad/venta-de-apartamentos-camino-del-sol'},
  mir3:{src:'Encuentra24'},
- p1610:{src:'Casas24',gen:1},
+ p1610:{src:'',url:''},
  bel3:{src:'',url:''},
  yan2:{src:'Corotos',url:'https://www.corotos.com.do/anuncio/inmuebles-en-venta/apartamentos/residencial-yanna-1-apartamentos-con-ascensor-y-se-zv4sjjv'},
- naj2:{src:'Encuentra24',gen:1},part2:{src:'Encuentra24',gen:1}};
+ naj2:{src:'',url:''},part2:{src:'Encuentra24',gen:1}};
 // Revisados abiertos el 22-nov-2026: precio confirmado en el anuncio.
 ['ae3837','par3','dg3','dg2','dg2b','cds3','mir3','yan2'].forEach(id=>LINKS[id].v='A');
 APTS.forEach(a=>{const L=LINKS[a.id]||{};if('url' in L)a.url=L.url;if(L.v)a.v=L.v;a.src=L.src||'';a.gen=!!L.gen;});
