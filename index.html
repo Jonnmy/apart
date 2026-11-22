@@ -244,7 +244,7 @@ const topeFuturo = S => num(S.topeBase)*Math.pow(1+num(S.topeCrece)/100, nMeses(
 function calc(S, a, override){
   const precio = override || a.precio;
   const g = num(S.g[a.seg][GI[S.precioEsc]])/100;
-  const fx0 = num(S.fx0), fxF = num(S.fxFuture);
+  const fx0 = num(S.fx0)||DEF.fx0, fxF = num(S.fxFuture)||DEF.fxFuture;
   let nowRD, nowUSD, futRD, futUSD;
   if (a.mon==='USD'){ nowUSD=precio; nowRD=precio*fx0; futUSD=precio*(1+g); futRD=futUSD*fxF; }
   else { nowRD=precio; nowUSD=precio/fx0; futRD=precio*(1+g); futUSD=futRD/fxF; }
@@ -303,11 +303,12 @@ const rd=n=>'RD$'+nf(n);
 const rdm=n=>'RD$'+(n/1e6).toFixed(2)+'M';
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
-function fecha(i){const[y,m]=S.inicio.split('-').map(Number);return new Date(y,(m-1)+i,1);}
+const ym=()=>{const v=/^\d{4}-\d{2}$/.test(S.inicio)?S.inicio:DEF.inicio;return v.split('-').map(Number);};
+function fecha(i){const[y,m]=ym();return new Date(y,(m-1)+i,1);}
 const mesLabel=i=>cap(fecha(i).toLocaleDateString('es-DO',{month:'long',year:'numeric'}));
 const mesCorto=i=>cap(fecha(i).toLocaleDateString('es-DO',{month:'short',year:'2-digit'}));
 const anioFinal=()=>fecha(nMeses(S)-1).getFullYear();
-const mesActual=()=>{const t=new Date(),[y,m]=S.inicio.split('-').map(Number);return (t.getFullYear()-y)*12+(t.getMonth()-(m-1));};
+const mesActual=()=>{const t=new Date(),[y,m]=ym();return (t.getFullYear()-y)*12+(t.getMonth()-(m-1));};
 const tile=(l,v,h,c)=>`<div class="tile ${c||''}"><div class="l">${l}</div><div class="v">${v}</div><div class="h">${h||''}</div></div>`;
 const SEM={g:'Cuota razonable',y:'Cuota ajustada',r:'Cuota muy alta'};
 function field(label,key,hint,type){const v=key.split('.').reduce((o,k)=>o[k],S);
@@ -397,7 +398,7 @@ function aptCard(a){
   const st=c.cashOK?(c.sem==='r'?['r','Cuota muy alta']:['g','Te alcanzaría']):['y','Faltan '+usd(c.falta)];
   const g3=['cons','mod','alto'].map(k=>{const g=num(S.g[a.seg][GI[k]])/100;const f=a.mon==='USD'?a.precio*(1+g)*num(S.fxFuture):a.precio*(1+g);
     return `<dt>Si sube ${k==='cons'?'poco':k==='mod'?'lo normal':'mucho'} (+${S.g[a.seg][GI[k]]}%)</dt><dd>${rdm(f)}</dd>`;}).join('');
-  const alt=a.alt?(()=>{const c2=calc(S,a,a.alt);return `<p class="note"><b>Si termina costando ${usd(a.alt)}:</b> necesitarías ${usd(c2.cash)} de entrada y la cuota sería ${rd(c2.cuotaTotal)} al mes.</p>`;})():'';
+  const alt=a.alt?(()=>{const c2=calc(S,a,a.alt);return `<p class="note"><b>Si termina costando ${usd(a.alt)}:</b> necesitarías reunir ${usd(c2.cash)} y la cuota sería ${rd(c2.cuotaTotal)} al mes.</p>`;})():'';
   return `<article class="card apt"><div class="head" style="--z:${ZCOL[a.z]}">
    <div class="ttl"><div><div class="nm">${esc(a.n)}</div><div class="meta">${ZON[a.z]} · ${a.h} habitaciones${a.m2?' · '+a.m2+' m²':' · metros sin dato'}${a.p?' · '+a.p+' parqueo'+(a.p>1?'s':''):''}</div></div><span class="pill ${st[0]}">${st[1]}</span></div>
    <div class="price"><b>${a.mon==='USD'?usd(a.precio):rd(a.precio)}</b><span>${a.mon==='USD'?rd(c.nowRD):usd(c.nowUSD)}${c.ppm2?' · '+rd(c.ppm2)+' el m²':''}</span></div>
@@ -460,8 +461,8 @@ function vAjustes(){
     ${['bajo','medio','premium'].map(k=>`<tr><td>${nm[k]}</td>${[0,1,2].map(i=>`<td><input type="number" inputmode="decimal" step="any" data-k="g.${k}.${i}" value="${S.g[k][i]}" style="width:74px" aria-label="${nm[k]}"></td>`).join('')}</tr>`).join('')}
     </tbody></table></div></details>
    <details><summary>El préstamo</summary><div class="fields two" style="padding-bottom:14px">${field('Años para pagar','plazo')}${field('Tasa anual (%)','tasa')}${field('Seguro y mantenimiento (RD$ al mes)','extras','Es un cálculo aproximado.')}</div></details></section>
-  <section class="card"><h2>Guardar mis datos</h2><p class="lede">Tus datos quedan guardados en este teléfono. Para pasarlos a otro, copia este texto y pégalo allá.</p>
-   <textarea id="bk" readonly aria-label="Copia de seguridad">${esc(JSON.stringify(S))}</textarea>
+  <section class="card"><h2>Guardar mis datos</h2><p class="lede">Tus datos quedan guardados en este teléfono. Para pasarlos a otro teléfono: toca Copiar y guarda el texto en Notas. En el teléfono nuevo, borra lo que hay en el cuadro, pega tu texto y toca Restaurar.</p>
+   <textarea id="bk" aria-label="Copia de seguridad" autocapitalize="off" autocorrect="off" spellcheck="false">${esc(JSON.stringify(S))}</textarea>
    <div class="btnrow"><button class="btn ghost" id="cp">Copiar</button><button class="btn ghost" id="rs">Restaurar</button></div><p class="note" id="bkmsg"></p></section>
   <section class="card"><h2>Colores</h2><div class="leg">
    <div><span class="sw" style="background:var(--amber-bg);border:1.5px solid var(--amber-line)"></span>Amarillo: puedes cambiar este dato.</div>
