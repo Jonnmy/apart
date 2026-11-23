@@ -5,588 +5,667 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Mi apartamento en San Cristóbal</title>
 <meta name="description" content="Plan de ahorro para comprar un apartamento en San Cristóbal.">
-<meta name="theme-color" content="#0F4C5C">
+<meta name="theme-color" content="#FDF2F4">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Mi apartamento">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="apple-touch-icon" href="icon-180.png">
-<link rel="icon" href="icon-180.png">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="apple-touch-icon" href="./icon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
 <style>
-/* Paleta: azul petróleo (navegación) · verde salvia (progreso) · ámbar (lo editable) · arena cálida (fondo).
-   Tipos: Bricolage Grotesque para cifras y títulos, Plus Jakarta Sans para leer.
-   Disposición: una columna de tarjetas con barra inferior fija, pensada para iPhone. */
+/* Paleta rosa: fondo rubor, tarjetas blancas, frambuesa para progreso, lila y dorado para logros. */
 :root{
-  --paper:#F6F3EC; --card:#FFFFFF; --ink:#16272C; --soft:#5C6F75; --line:#E4DFD3;
-  --deep:#0F4C5C; --deep-2:#14606F; --on-deep:#FFFDF8;
-  --sage:#2F8A6B; --sage-bg:#E2F1E9; --sage-line:#A8D8C3;
-  --amber:#9A6B06; --amber-bg:#FFF4CE; --amber-line:#E8C65A;
-  --rose:#B5423A; --rose-bg:#FBE8E5;
-  --shadow:0 1px 2px rgba(22,39,44,.05), 0 8px 24px -12px rgba(22,39,44,.18);
-  --display:'Bricolage Grotesque',Georgia,serif;
-  --body:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
-  --r:18px;
+  --bg:#FFF5F7; --bg2:#FDF2F4; --card:#FFFFFF; --line:#FBCFE8; --line2:#FCE7F3;
+  --pri:#EC4899; --pri2:#F472B6; --chicle:#F9A8D4; --lila:#C084FC; --oro:#F59E0B; --oro-bg:#FEF3C7;
+  --ink:#3B1E2B; --soft:#86576D; --mute:#B48A9C; --ok:#0F9D6B; --ok-bg:#E7F8F0; --warn-bg:#FFF4E5;
+  --sh:0 6px 22px rgba(236,72,153,.10), 0 1px 3px rgba(236,72,153,.08);
+  --r:20px; --title:'Quicksand',ui-rounded,system-ui,sans-serif; --body:'Nunito',ui-rounded,system-ui,sans-serif;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --paper:#0E1619; --card:#19252A; --ink:#ECF2F2; --soft:#9CB0B6; --line:#28383E;
-  --deep:#0B3A47; --deep-2:#0F4C5C; --on-deep:#F3FAF9;
-  --sage:#62C9A1; --sage-bg:#16352B; --sage-line:#2C5A4A;
-  --amber:#E7B64E; --amber-bg:#3B3010; --amber-line:#6E5A1C;
-  --rose:#F08C82; --rose-bg:#3A1D1A;
-  --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.6);
-  color-scheme:dark;}}
-:root[data-theme="dark"]{
-  --paper:#0E1619; --card:#19252A; --ink:#ECF2F2; --soft:#9CB0B6; --line:#28383E;
-  --deep:#0B3A47; --deep-2:#0F4C5C; --on-deep:#F3FAF9;
-  --sage:#62C9A1; --sage-bg:#16352B; --sage-line:#2C5A4A;
-  --amber:#E7B64E; --amber-bg:#3B3010; --amber-line:#6E5A1C;
-  --rose:#F08C82; --rose-bg:#3A1D1A;
-  --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.6);
-  color-scheme:dark;}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{height:100%}
-body{margin:0;min-height:100%;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;
-  padding-bottom:calc(76px + env(safe-area-inset-bottom));-webkit-font-smoothing:antialiased}
-h1,h2,h3,.num{font-family:var(--display);text-wrap:balance}
-.top{background:linear-gradient(170deg,var(--deep-2),var(--deep));color:var(--on-deep);
-  padding:calc(20px + env(safe-area-inset-top)) 20px 22px;border-radius:0 0 26px 26px}
-.top .eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;opacity:.72}
-.top h1{margin:4px 0 0;font-size:26px;font-weight:800;letter-spacing:-.01em}
-.top .sub{margin-top:3px;font-size:14px;opacity:.82}
-main{max-width:720px;margin:0 auto;padding:16px;display:flex;flex-direction:column;gap:16px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px;box-shadow:var(--shadow)}
-.card>h2{margin:0 0 4px;font-size:19px;font-weight:700;letter-spacing:-.01em}
-.card>h2+.lede{margin:0 0 14px;color:var(--soft);font-size:14px}
-.card>h2:last-child,.card>h2+*:not(.lede){margin-top:0}
-h3{margin:18px 0 8px;font-size:15px;font-weight:700}
-.note{font-size:13.5px;color:var(--soft);margin:10px 0 0}
-.num{font-variant-numeric:tabular-nums;letter-spacing:-.02em}
-/* nav */
-.tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;justify-content:center;
-  background:color-mix(in srgb,var(--card) 92%,transparent);backdrop-filter:blur(12px);
-  border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
-.tabs button{flex:1;max-width:160px;background:none;border:0;cursor:pointer;color:var(--soft);
-  font:600 11.5px/1.1 var(--body);padding:9px 2px 10px;display:flex;flex-direction:column;align-items:center;gap:4px}
-.tabs button svg{width:23px;height:23px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.tabs button[aria-current="page"]{color:var(--deep)}
-@media (prefers-color-scheme:dark){.tabs button[aria-current="page"]{color:var(--sage)}}
-:root[data-theme="dark"] .tabs button[aria-current="page"]{color:var(--sage)}
-:focus-visible{outline:3px solid var(--amber-line);outline-offset:2px;border-radius:6px}
-/* hero */
-.hero{display:flex;gap:18px;align-items:center}
-.ring{flex:none;width:118px;height:118px;position:relative}
-.ring b{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  font-family:var(--display);font-size:27px;font-weight:800;letter-spacing:-.02em}
-.ring b em{font-style:normal;font-family:var(--body);font-size:10.5px;font-weight:600;color:var(--soft);letter-spacing:.04em;text-transform:uppercase}
-.hero .t{font-family:var(--display);font-size:19px;font-weight:700;line-height:1.25}
-.hero .s{color:var(--soft);font-size:14px;margin-top:6px}
-/* tiles */
-.grid{display:grid;gap:10px;grid-template-columns:1fr 1fr}
-.grid.three{grid-template-columns:repeat(auto-fit,minmax(140px,1fr))}
-.tile{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:13px 14px}
-.tile .l{font-size:12px;font-weight:700;color:var(--soft);letter-spacing:.02em}
-.tile .v{font-family:var(--display);font-size:23px;font-weight:800;margin-top:3px;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
-.tile .h{font-size:11.5px;color:var(--soft);margin-top:3px;line-height:1.35}
-.tile.g{background:var(--sage-bg);border-color:var(--sage-line)}.tile.g .v{color:var(--sage)}
-.tile.r{background:var(--rose-bg);border-color:transparent}.tile.r .v{color:var(--rose)}
-.tile.y{background:var(--amber-bg);border-color:var(--amber-line)}.tile.y .v{color:var(--amber)}
-/* quick entry */
-.quick{background:linear-gradient(165deg,var(--deep-2),var(--deep));color:var(--on-deep);border:0}
-.quick h2{color:var(--on-deep)}
-.quick .lede{color:rgba(255,253,248,.78)!important}
-.quick .row{display:flex;gap:10px;align-items:stretch;margin-top:12px}
-.quick input{flex:1;min-width:0;font:700 22px var(--display);font-variant-numeric:tabular-nums;
-  padding:12px 14px;border-radius:13px;border:2px solid var(--amber-line);background:var(--amber-bg);color:#16272C}
-@media (prefers-color-scheme:dark){.quick input{color:var(--ink)}}
-:root[data-theme="dark"] .quick input{color:var(--ink)}
-.quick .ok{flex:none;background:var(--on-deep);color:var(--deep);border:0;border-radius:13px;padding:0 20px;font:700 15px var(--body);cursor:pointer}
-.quick .done{margin-top:10px;font-size:13.5px;color:rgba(255,253,248,.9);display:flex;align-items:center;gap:7px}
-/* chart */
-.chart{width:100%;height:188px;display:block;overflow:visible}
-.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--soft);margin-top:10px}
-.legend i{display:inline-block;width:16px;height:3px;border-radius:2px;vertical-align:3px;margin-right:6px}
-/* escenarios */
-.esc{display:flex;flex-direction:column;gap:9px}
-.esc button{display:flex;justify-content:space-between;align-items:center;gap:12px;text-align:left;
-  border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:14px;padding:13px 15px;font:inherit;cursor:pointer}
-.esc button[aria-pressed="true"]{border-color:var(--sage);background:var(--sage-bg)}
-.esc .n{font-weight:700;font-size:15px}.esc .d{font-size:12.5px;color:var(--soft);margin-top:1px}
-.esc .a{font-family:var(--display);font-size:19px;font-weight:800;font-variant-numeric:tabular-nums;text-align:right;flex:none}
-.esc .a span{display:block;font-family:var(--body);font-size:11px;font-weight:600;color:var(--soft)}
-/* forms */
-.fields{display:flex;flex-direction:column;gap:14px}
-.fields.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.field label{display:block;font-weight:600;font-size:14px;margin-bottom:5px}
-.field .h{font-size:12.5px;color:var(--soft);margin-top:5px;line-height:1.4}
-input[type=number],input[type=month],input[type=text],select,textarea{
-  width:100%;font:600 16px var(--body);font-variant-numeric:tabular-nums;padding:11px 13px;border-radius:12px;
-  border:1.5px solid var(--amber-line);background:var(--amber-bg);color:var(--ink);-webkit-appearance:none;appearance:none}
-select{background-image:none}
-textarea{font-weight:400;font-size:12px;min-height:88px;font-family:ui-monospace,monospace}
-.btn{border:0;border-radius:12px;padding:12px 18px;font:700 14.5px var(--body);background:var(--deep);color:var(--on-deep);cursor:pointer}
-.btn.ghost{background:transparent;color:var(--deep);border:1.5px solid var(--line)}
-.btn.block{display:block;width:100%}
-@media (prefers-color-scheme:dark){.btn.ghost{color:var(--sage)}}
-:root[data-theme="dark"] .btn.ghost{color:var(--sage)}
-.btnrow{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;
-  padding:9px 15px;font:600 14px var(--body);cursor:pointer}
-.chip[aria-pressed="true"]{background:var(--deep);color:var(--on-deep);border-color:var(--deep)}
-.seg{display:flex;gap:8px}.seg .chip{flex:1;text-align:center}
-/* month list */
-.months{display:flex;flex-direction:column;gap:7px}
-.m{display:flex;align-items:center;gap:12px;background:var(--paper);border:1px solid var(--line);border-radius:13px;padding:10px 13px}
-.m.hito{border-color:var(--sage-line);background:var(--sage-bg)}
-.m .i{flex:none;width:30px;font-family:var(--display);font-weight:800;font-size:13px;color:var(--soft);font-variant-numeric:tabular-nums}
-.m .d{flex:1;min-width:0}
-.m .d b{display:block;font-size:14.5px;font-weight:700;text-transform:capitalize}
-.m .d span{font-size:12px;color:var(--soft)}
-.m input{flex:none;width:112px;padding:9px 10px;font-size:15.5px;text-align:right}
-.m .st{flex:none;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px}
-.st.ok{background:var(--sage-bg);color:var(--sage)}.st.lo{background:var(--amber-bg);color:var(--amber)}
-.st.no{background:var(--rose-bg);color:var(--rose)}.st.pend{background:transparent;color:var(--soft)}
-.bar{height:9px;border-radius:999px;background:var(--line);overflow:hidden;margin-top:12px}
-.bar i{display:block;height:100%;background:var(--sage);border-radius:999px}
-@media (prefers-reduced-motion:no-preference){.bar i{transition:width .45s ease}
- .anim .ring circle+circle{animation:ringIn 1.1s cubic-bezier(.2,.8,.2,1) both}
- .anim .ring b{animation:fadeUp .7s .25s ease both}
- .anim .chart .ln{stroke-dasharray:1;animation:draw 1.3s .15s ease-out both}
- .anim .chart .ar{animation:fadeIn 1s .6s ease both}
- .anim .card{animation:fadeUp .5s ease both}
- .anim .card:nth-child(2){animation-delay:.05s}.anim .card:nth-child(3){animation-delay:.1s}.anim .card:nth-child(4){animation-delay:.15s}}
-@keyframes ringIn{from{stroke-dasharray:0 400}}
-@keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.45 var(--body);-webkit-font-smoothing:antialiased;min-height:100vh;
+  padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.06;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'%3E%3Cg fill='%23EC4899'%3E%3Cellipse cx='26' cy='22' rx='5' ry='13' transform='rotate(-12 26 22)'/%3E%3Cellipse cx='39' cy='22' rx='5' ry='13' transform='rotate(12 39 22)'/%3E%3Ccircle cx='32.5' cy='40' r='12'/%3E%3Ccircle cx='44' cy='48' r='5'/%3E%3Cpath d='M108 34c-4-7-15-5-14 3 1 6 14 12 14 12s13-6 14-12c1-8-10-10-14-3z'/%3E%3Cpath d='M66 96l4 9 10 1-8 6 3 10-9-5-9 5 3-10-8-6 10-1z'/%3E%3Ccircle cx='126' cy='118' r='3'/%3E%3Ccircle cx='14' cy='104' r='2.5'/%3E%3Cpath d='M128 80l2 5 5 2-5 2-2 5-2-5-5-2 5-2z'/%3E%3C/g%3E%3C/svg%3E");
+  background-size:150px 150px}
+#app,.top,.tabs,.sheet,.toast{position:relative;z-index:1}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:var(--pri)}
+h1,h2,h3{font-family:var(--title);margin:0;letter-spacing:-.005em}
+.wrap{max-width:560px;margin:0 auto;padding:0 14px}
+
+/* Encabezado compacto */
+.top{padding:calc(10px + env(safe-area-inset-top)) 0 4px}
+.top .wrap{display:flex;align-items:center;gap:10px}
+.top h1{font-size:21px;font-weight:700;line-height:1.15}
+.top .sub{font-size:13px;color:var(--soft);font-weight:600}
+.top .grow{flex:1;min-width:0}
+.bunny{width:52px;height:52px;flex:none}
+.bunny.hop{animation:hop .9s cubic-bezier(.34,1.56,.64,1)}
+@keyframes hop{0%,100%{transform:translateY(0)}30%{transform:translateY(-16px) rotate(-6deg)}55%{transform:translateY(0) scale(1.06,.94)}75%{transform:translateY(-5px)}}
+.cur{display:flex;background:var(--card);border:1.5px solid var(--line);border-radius:999px;padding:3px;flex:none}
+.cur button{border:0;background:none;border-radius:999px;padding:6px 10px;font-size:12.5px;font-weight:800;color:var(--soft);min-height:34px}
+.cur button[aria-pressed=true]{background:var(--pri);color:#fff}
+
+/* Tarjetas */
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:var(--r);box-shadow:var(--sh);padding:16px;margin:12px 0}
+.card h2{font-size:18px;font-weight:700;display:flex;align-items:center;gap:8px}
+.card h2 .ic{font-size:18px}
+.lede{color:var(--soft);font-size:14px;margin:4px 0 0}
+.note{color:var(--soft);font-size:13px;margin:10px 0 0}
+.banner{border-radius:16px;padding:12px 14px;margin:12px 0 0;font-size:14px;border:1.5px solid var(--line);background:var(--bg2)}
+.banner.gold{background:var(--oro-bg);border-color:#FCD34D}
+.banner .btnrow{margin-top:8px}
+
+/* Héroe de progreso */
+.hero{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center}
+.ring{position:relative;width:128px;height:128px}
+.ring svg{display:block}
+.ring .c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.ring .c b{font:700 30px/1 var(--title);color:var(--pri)}
+.ring .c span{font-size:11px;font-weight:800;color:var(--soft);text-transform:uppercase;letter-spacing:.05em;margin-top:3px}
+.hero .lbl{font-size:13px;color:var(--soft);font-weight:700}
+.hero .big{font:700 24px/1.15 var(--title)}
+.hero .big small{display:block;font:600 12.5px var(--body);color:var(--mute)}
+.hero .of{font-size:13.5px;color:var(--soft);margin-top:4px}
+.msg{grid-column:1/-1;background:var(--bg2);border-radius:14px;padding:10px 12px;font-weight:700;font-size:14.5px;text-align:center}
+.cta{grid-column:1/-1}
+
+/* Botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;border-radius:14px;min-height:46px;padding:10px 16px;
+  font-weight:800;font-size:15px;background:linear-gradient(135deg,var(--pri2),var(--pri));color:#fff;text-decoration:none;box-shadow:0 6px 16px rgba(236,72,153,.28)}
+.btn:active{transform:scale(.98)}
+.btn.ghost{background:var(--card);color:var(--pri);border:1.5px solid var(--line);box-shadow:none}
+.btn.soft{background:var(--bg2);color:var(--pri);box-shadow:none}
+.btn.block{display:flex;width:100%}
+.btn.sm{min-height:40px;padding:8px 12px;font-size:14px;border-radius:12px}
+.btn.danger{background:#fff;color:#BE123C;border:1.5px solid #FECDD3;box-shadow:none}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.btnrow .btn{flex:1 1 auto}
+.linkbtn{background:none;border:0;color:var(--pri);font-weight:800;text-decoration:underline;padding:8px;min-height:40px}
+
+/* KPIs */
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.kpi{background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:12px;box-shadow:var(--sh)}
+.kpi .l{font-size:12px;font-weight:800;color:var(--soft);text-transform:uppercase;letter-spacing:.04em}
+.kpi .v{font:700 19px/1.2 var(--title);margin-top:4px;word-break:break-word}
+.kpi .h{font-size:12px;color:var(--mute);margin-top:2px}
+.kpi.p .v{color:var(--pri)}
+
+/* Hitos */
+.hitos{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.hito{display:grid;grid-template-columns:36px 1fr auto;gap:10px;align-items:center}
+.hito .dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;
+  background:var(--bg2);color:var(--pri);border:1.5px solid var(--line)}
+.hito.done .dot{background:var(--oro-bg);border-color:#FCD34D;color:var(--oro);font-size:18px}
+.hito .t{font-weight:800;font-size:14.5px}
+.hito .d{font-size:12.5px;color:var(--soft)}
+.hito .a{font-weight:800;font-size:13.5px;text-align:right}
+.hito .a small{display:block;font-weight:700;font-size:11.5px;color:var(--mute)}
+.hito.done .a small{color:var(--oro)}
+.mini{grid-column:2/-1;height:7px;border-radius:999px;background:var(--line2);overflow:hidden}
+.mini i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--chicle),var(--pri))}
+.hito.done .mini i{background:linear-gradient(90deg,#FCD34D,var(--oro))}
+
+/* Barra */
+.bar{height:10px;border-radius:999px;background:var(--line2);overflow:hidden;margin-top:8px}
+.bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--chicle),var(--pri))}
+
+/* Simulador */
+.range{width:100%;margin:14px 0 4px;accent-color:var(--pri);height:28px}
+.simv{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-top:12px}
+.simv b{font:700 22px var(--title);color:var(--pri)}
+.simres{background:var(--bg2);border-radius:14px;padding:12px;margin-top:12px;font-size:14.5px;text-align:center}
+.simres b{color:var(--pri)}
+
+/* Campos */
+.fields{display:grid;gap:12px;margin-top:12px}
+.fields.two{grid-template-columns:1fr 1fr}
+.field label,.flabel{display:block;font-size:13px;font-weight:800;color:var(--soft);margin-bottom:5px}
+.field input,.field select,.field textarea{width:100%;min-height:46px;border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;background:#fff;font-size:16px}
+.field textarea{min-height:70px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--pri);box-shadow:0 0 0 3px rgba(236,72,153,.15)}
+.field .h{font-size:12px;color:var(--mute);margin-top:4px}
+.money-in{display:flex;gap:8px}
+.money-in input{flex:1}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:8px 13px;font-size:14px;font-weight:700;min-height:40px;color:var(--ink)}
+.chip[aria-pressed=true]{background:var(--pri);border-color:var(--pri);color:#fff}
+.seg{display:flex;background:var(--bg2);border-radius:14px;padding:4px;gap:4px;margin:12px 0 0}
+.seg button{flex:1;border:0;background:none;border-radius:11px;padding:9px 6px;font-weight:800;font-size:14px;color:var(--soft);min-height:42px}
+.seg button[aria-pressed=true]{background:#fff;color:var(--pri);box-shadow:0 2px 8px rgba(236,72,153,.15)}
+
+/* Historial */
+.mes{margin-top:14px}
+.mes h3{font-size:14px;font-weight:700;color:var(--soft);display:flex;justify-content:space-between;padding:0 4px 6px}
+.item{display:grid;grid-template-columns:42px 1fr auto;gap:10px;align-items:center;width:100%;text-align:left;background:#fff;border:1.5px solid var(--line);
+  border-radius:16px;padding:10px 12px;margin-bottom:8px;min-height:60px}
+.item .em{width:42px;height:42px;border-radius:13px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:20px}
+.item .t{font-weight:800;font-size:14.5px}
+.item .n{font-size:12.5px;color:var(--soft);overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.item .m{font-weight:800;text-align:right;color:var(--pri)}
+.item .m small{display:block;font-size:11.5px;color:var(--mute);font-weight:700}
+.empty{text-align:center;padding:18px 10px;color:var(--soft)}
+.empty svg{width:96px;height:96px}
+
+/* Apartamentos */
+.apt h3{font-size:17px;font-weight:700}
+.apt .meta{font-size:13px;color:var(--soft);margin-top:2px}
+.apt .price{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-top:8px}
+.apt .price b{font:700 22px var(--title)}
+.apt .price span{font-size:13px;color:var(--mute);font-weight:700}
+.badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.badge{font-size:12px;font-weight:800;border-radius:999px;padding:4px 9px;background:var(--bg2);color:var(--soft);border:1px solid var(--line2)}
+.badge.pink{background:#FCE7F3;color:#BE185D;border-color:var(--line)}
+.badge.lila{background:#F3E8FF;color:#7E22CE;border-color:#E9D5FF}
+.badge.gold{background:var(--oro-bg);color:#B45309;border-color:#FDE68A}
+.badge.ok{background:var(--ok-bg);color:var(--ok);border-color:#BBF0D8}
+.badge.warn{background:var(--warn-bg);color:#B45309;border-color:#FDE2B8}
+.need{background:var(--bg2);border-radius:14px;padding:10px 12px;margin-top:10px}
+.need .row{display:flex;justify-content:space-between;gap:10px;font-size:14px}
+.need .row b{font-weight:800}
+.need .row.big{font-size:15px}
+.need .row.big b{color:var(--pri)}
+.heart{border:1.5px solid var(--line);background:#fff;border-radius:12px;min-width:46px;min-height:46px;font-size:20px;color:var(--pri)}
+.heart[aria-pressed=true]{background:#FCE7F3}
+.portales{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.portal{display:flex;flex-direction:column;gap:2px;text-decoration:none;color:var(--ink);background:var(--bg2);border:1.5px solid var(--line);border-radius:16px;padding:12px;min-height:70px}
+.portal b{color:var(--pri);font-size:15px}
+.portal span{font-size:12px;color:var(--soft)}
+
+/* Navegación inferior */
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-top:1.5px solid var(--line);padding:6px 6px calc(6px + env(safe-area-inset-bottom))}
+.tabs .wrap{display:flex;padding:0}
+.tabs button{flex:1;border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px;font-size:11.5px;font-weight:800;color:var(--mute);min-height:52px}
+.tabs svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tabs button[aria-current=page]{color:var(--pri)}
+
+/* Hoja de registro */
+.ov{position:fixed;inset:0;background:rgba(59,30,43,.35);z-index:40;display:flex;align-items:flex-end;justify-content:center;animation:fadeIn .2s ease}
+.sheet{background:#fff;width:100%;max-width:560px;border-radius:26px 26px 0 0;padding:10px 16px calc(18px + env(safe-area-inset-bottom));max-height:92vh;overflow:auto;
+  animation:up .32s cubic-bezier(.34,1.3,.64,1)}
+.sheet .grab{width:44px;height:5px;border-radius:9px;background:var(--line);margin:0 auto 10px}
+.sheet h2{font-size:20px}
+.bigin{font:700 30px var(--title)!important;text-align:center;color:var(--pri)}
+@keyframes up{from{transform:translateY(100%)}}
 @keyframes fadeIn{from{opacity:0}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}}
-.cd{display:inline-flex;align-items:center;gap:6px;margin-bottom:8px;padding:4px 10px;border-radius:999px;background:var(--sage-bg);border:1px solid var(--sage-line);font-size:12.5px;font-weight:700;color:var(--ink)}
-.toast{position:fixed;left:50%;bottom:calc(92px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:60;max-width:88vw;
- background:var(--deep);color:var(--on-deep);padding:12px 18px;border-radius:16px;font-weight:600;font-size:14.5px;text-align:center;
- box-shadow:0 10px 30px rgba(0,0,0,.25);animation:toast 3.2s ease both;pointer-events:none}
-@keyframes toast{0%{opacity:0;transform:translate(-50%,12px)}10%,85%{opacity:1;transform:translate(-50%,0)}100%{opacity:0;transform:translate(-50%,-6px)}}
-.cf{position:fixed;top:-12px;width:8px;height:12px;border-radius:2px;z-index:59;pointer-events:none;animation:fall var(--d) cubic-bezier(.25,.6,.4,1) forwards}
-@keyframes fall{to{transform:translate(var(--x),105vh) rotate(var(--r));opacity:.9}}
-/* apartments */
-.apt{padding:0;overflow:hidden}
-.apt .head{padding:16px 18px;display:flex;flex-direction:column;gap:9px;border-left:5px solid var(--z,var(--line))}
-.apt .ttl{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
-.apt .nm{font-family:var(--display);font-weight:800;font-size:17.5px;line-height:1.2;letter-spacing:-.01em}
-.apt .meta{font-size:12.5px;color:var(--soft);margin-top:3px}
-.apt .price{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
-.apt .price b{font-family:var(--display);font-size:22px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
-.apt .price span{font-size:13px;color:var(--soft)}
-.pill{display:inline-block;border-radius:999px;padding:4px 11px;font-size:11.5px;font-weight:700;white-space:nowrap;line-height:1.35}
-.pill.g{background:var(--sage-bg);color:var(--sage)}.pill.r{background:var(--rose-bg);color:var(--rose)}
-.pill.y{background:var(--amber-bg);color:var(--amber)}
-.pill.n{background:var(--paper);color:var(--soft);border:1px solid var(--line)}
-.apt .more{border-top:1px solid var(--line);padding:14px 18px;background:var(--paper)}
-.apt .foot{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:11px 18px;border-top:1px solid var(--line)}
-.apt .foot button{background:none;border:0;color:var(--deep);font:700 13.5px var(--body);cursor:pointer;padding:4px 0}
-@media (prefers-color-scheme:dark){.apt .foot button{color:var(--sage)}}
-:root[data-theme="dark"] .apt .foot button{color:var(--sage)}
-.apt .foot label{font-size:13px;color:var(--soft);display:flex;align-items:center;gap:7px;cursor:pointer}
-.apt .foot input{width:19px;height:19px;accent-color:var(--sage)}
-.kv{display:grid;grid-template-columns:1fr auto;gap:7px 14px;font-size:14px}
-.kv dt{color:var(--soft)}
-.kv dd{margin:0;text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
-.kv dd.pos{color:var(--sage)}.kv dd.neg{color:var(--rose)}
-.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -18px;padding:0 18px}
-table{border-collapse:collapse;font-size:13.5px;font-variant-numeric:tabular-nums;min-width:100%}
-th{font-size:11.5px;text-align:left;color:var(--soft);padding:7px 10px;white-space:nowrap;font-weight:700}
-td{padding:8px 10px;border-top:1px solid var(--line);white-space:nowrap}
-td:first-child,th:first-child{position:sticky;left:0;background:var(--card);font-weight:600}
-.leg{display:flex;flex-direction:column;gap:9px;font-size:14px}
-.leg .sw{display:inline-block;width:15px;height:15px;border-radius:5px;vertical-align:-2px;margin-right:9px}
-ol.steps{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:7px;font-size:14.5px}
-a{color:var(--deep);text-underline-offset:2px}
-@media (prefers-color-scheme:dark){a{color:var(--sage)}}
-:root[data-theme="dark"] a{color:var(--sage)}
-.alert{border-radius:14px;padding:13px 15px;font-size:13.5px;line-height:1.45}
-.alert.r{background:var(--rose-bg);color:var(--rose);border:1px solid var(--rose)}
-.alert.y{background:var(--amber-bg);color:var(--amber)}
-details>summary{cursor:pointer;font-weight:700;font-size:14.5px;padding:10px 0;list-style:none;display:flex;justify-content:space-between;align-items:center}
-details>summary::-webkit-details-marker{display:none}
-details>summary::after{content:'+';font-family:var(--display);font-size:20px;color:var(--soft)}
-details[open]>summary::after{content:'–'}
-details{border-bottom:1px solid var(--line)}
-details:last-of-type{border-bottom:0}
-@media (max-width:360px){.grid{grid-template-columns:1fr}.hero{flex-direction:column;text-align:center}}
+
+/* Bienvenida */
+.welcome{min-height:100vh;display:flex;align-items:center;padding:20px 0}
+.welcome .card{text-align:center;padding:22px 18px}
+.welcome .bunny{width:110px;height:110px;margin:0 auto}
+.welcome h1{font-size:25px;margin-top:6px}
+.welcome .fields{text-align:left}
+
+/* Animaciones */
+@media (prefers-reduced-motion:no-preference){
+  .anim .card,.anim .kpi{animation:pop .5s cubic-bezier(.34,1.56,.64,1) both}
+  .anim .kpi:nth-child(2){animation-delay:.04s}.anim .kpi:nth-child(3){animation-delay:.08s}.anim .kpi:nth-child(4){animation-delay:.12s}
+  .anim .ring .arc{animation:ring 1.3s cubic-bezier(.34,1.45,.64,1) both}
+  .anim .mini i,.anim .bar i{animation:grow 1.1s cubic-bezier(.34,1.4,.64,1) both}
+}
+@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.98)}}
+@keyframes ring{from{stroke-dasharray:0 999}}
+@keyframes grow{from{width:0}}
+.toast{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:60;max-width:90vw;width:max-content;
+  background:var(--ink);color:#fff;padding:12px 18px;border-radius:16px;font-weight:700;font-size:14.5px;text-align:center;box-shadow:0 10px 30px rgba(59,30,43,.3);
+  animation:toast 3.4s ease both;pointer-events:none}
+@keyframes toast{0%{opacity:0;transform:translate(-50%,14px)}9%,86%{opacity:1;transform:translate(-50%,0)}100%{opacity:0;transform:translate(-50%,-6px)}}
+.cf{position:fixed;top:-24px;z-index:59;pointer-events:none;line-height:1;text-shadow:0 0 2px rgba(236,72,153,.5);animation:fall var(--d) cubic-bezier(.25,.6,.4,1) forwards}
+@keyframes fall{to{transform:translate(var(--x),108vh) rotate(var(--r));opacity:.85}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 </style>
 </head>
 <body>
-<header class="top">
-  <div class="eyebrow" id="eyebrow">Mi plan</div>
-  <h1>Mi apartamento en San Cristóbal</h1>
-  <div class="sub" id="sub">Ahorrando para comprar</div>
-</header>
-<main id="view"></main>
-<nav class="tabs" id="tabs"></nav>
+<header class="top" id="top"></header>
+<main class="wrap" id="app"></main>
+<nav class="tabs" id="tabs" aria-label="Secciones"></nav>
+<div id="sheetRoot"></div>
 <script>
-// ===== LOGIC (pure) =====
-const DEF = {
-  ingreso:2500, renta:500, gastos:800, otros:0, ahorroActual:0, meses:36, fondo:8000, reserva:3000,
-  neto:'pendiente', inicio:'2026-11', escenario:'int',
-  esc:{cons:800, int:1000, opt:1200},
-  fx0:59.52, fxFuture:60,
-  cierreNormal:4, cierreBajo:1, topeBase:5450851.12, topeCrece:5,
-  inicialPct:20, tasa:11.5, plazo:20, extras:5000, ingresoRD:150000,
-  precioEsc:'mod',
-  g:{bajo:[8,15,30], medio:[6,14,25], premium:[4,10,20]},
-  real:{}, obj3:'pal3', obj2:'pal2', compare:[], tipo:3, savedAt:0, lastBackup:0
-};
-const num = v => { const n = parseFloat(v); return isFinite(n) ? n : 0; };
-const clone = o => JSON.parse(JSON.stringify(o));
-function merge(base, over){
-  const out = clone(base);
-  (function m(o, s){ for (const k in s){ if (s[k] && typeof s[k]==='object' && !Array.isArray(s[k]) && o[k] && typeof o[k]==='object' && !Array.isArray(o[k])) m(o[k], s[k]); else o[k]=s[k]; } })(out, over||{});
-  return out;
+'use strict';
+// ===== Datos base =====
+const KEY='apart_sc_v1', OLD_KEY='mi-apartamento-sc';
+const TAGS=[['quincena','Quincena','🌸'],['regalia','Doble sueldo / Regalía','🎁'],['bono','Bono','✨'],['extra','Ingreso extra','💼'],['venta','Venta','🛍️']];
+const SECTORES=['Madre Vieja Norte','Madre Vieja Sur','Centro','Lavapiés','Canastica','Sainaguá','El Hatillo','Los Nova','Mirador Norte'];
+const TASA_HIPOTECA=11.5, PLAZO_ANOS=20;
+const DEF={v:1,onboarded:false,ejemplo:false,nombre:'Valery',moneda:'RD',tasa:60.5,precio:5025000,metaAptId:'pal3',metaNombre:'Palmeras del Norte',
+  inicialPct:20,reserva:50000,gastosPct:4,mudanza:50000,saldoInicial:0,aportes:[],favoritos:[],favApts:[],
+  ideal:{sectores:['Madre Vieja Norte','Centro'],hab:3,parqueos:1,piso:'cualquiera',bono:true},lastBackup:0};
+// Copia de la lista para cuando no hay internet (la versión al día está en data/apartamentos.json).
+const FALLBACK=/*FALLBACK*/{"updatedAt":"2026-11-23T23:51:28.215Z","apartamentos":[{"id":"pal3","titulo":"Palmeras del Norte","sector":"Madre Vieja Norte","hab":3,"banos":2,"m2":90,"parqueos":1,"precio":5025000,"moneda":"RD","estado":"Proyecto con unidades disponibles","bono":true,"fuente":"Clio Realty","url":"https://clio-realty-srl.alterestate.com/propiedad/palmeras-del-norte","nota":"Unidades entre RD$4,851,000 y RD$5,025,000. Fideicomiso y bono de primera vivienda según el vendedor.","verificado":true,"revisadoEl":"2026-11-23T23:51:28.215Z","aviso":null},{"id":"ae4378","titulo":"Apartamento en el centro (AE-4378)","sector":"Centro","hab":3,"banos":2,"m2":89,"parqueos":1,"precio":4900000,"moneda":"RD","estado":"Terminado, 4.º piso","bono":true,"fuente":"Condominios del Caribe","url":"https://www.rdcondominio.com/property/apartamento-en-venta-centro-san-cristobal-3-hab-2-bn-1-parqueo","nota":"Residencial cerrado. Anunciado como bajo costo. Pregunta si tiene ascensor.","verificado":true,"revisadoEl":"2026-11-23T23:51:28.215Z","aviso":null},{"id":"ae3837","titulo":"Proyecto en El Hatillo (AE#3837)","sector":"El Hatillo","hab":3,"banos":2,"m2":95,"parqueos":1,"precio":88330,"moneda":"US","estado":"En plano, entrega 2027–2028","bono":true,"fuente":"Encuentra24","url":"https://www.encuentra24.com/dominican-en/real-estate-for-sale-apartments-condos/invest-in-san-cristobal/33031540","nota":"Reserva RD$50,000. Parece el mismo proyecto de Doña Ana que prometía entrega en 2023: pregunta por el retraso.","verificado":false,"revisadoEl":null,"aviso":"El portal no deja revisarlo automáticamente (403)"},{"id":"balc3","titulo":"Balcones de Alta Vista","sector":"Los Nova","hab":3,"banos":2,"m2":104,"parqueos":1,"precio":95000,"moneda":"US","estado":"En construcción","bono":false,"fuente":"Corotos","url":"https://www.corotos.com.do/anuncio/inmuebles-en-venta/apartamentos/residencial-balcones-de-alta-vista-seguridad-nadrxcy","nota":"Otro corredor (AA Realty) lo ofrece entre US$115,000 y US$140,000. Pide cotización por escrito.","verificado":true,"revisadoEl":"2026-11-23T23:51:28.215Z","aviso":null},{"id":"par3","titulo":"Residencial Paraíso de Dios","sector":"Canastica","hab":3,"banos":2,"m2":120,"parqueos":null,"precio":6300000,"moneda":"RD","estado":"Listo para estrenar","bono":false,"fuente":"Corotos","url":"https://www.corotos.com.do/anuncio/inmuebles-en-venta/apartamentos/residencial-paraiso-de-dios-apartamentos-nuevos-f7h6ame","nota":"Grande y terminado. Confirma la cantidad de habitaciones: un anuncio lo pone como de 2.","verificado":true,"revisadoEl":"2026-11-23T23:51:28.215Z","aviso":null},{"id":"dg3","titulo":"Doña Gladys III y IV","sector":"Madre Vieja Norte","hab":3,"banos":2.5,"m2":130,"parqueos":2,"precio":118600,"moneda":"US","estado":"Entrega anunciada mayo 2026","bono":false,"fuente":"Meléndez Vende","url":"https://melendezvende.com/propiedad/proyecto-de-apartamentos-residencial-dona-gladys-iii-y-iv-1147","nota":"Incluye 2 parqueos. Cerca de la autopista 6 de Noviembre, según el vendedor.","verificado":true,"revisadoEl":"2026-11-23T23:51:28.215Z","aviso":null},{"id":"cds3","titulo":"Camino del Sol","sector":"Madre Vieja Sur","hab":3,"banos":2.5,"m2":90,"parqueos":1,"precio":7000000,"moneda":"RD","estado":"Terminado (2020)","bono":false,"fuente":"Meléndez Vende","url":"https://melendezvende.com/propiedad/venta-de-apartamentos-camino-del-sol","nota":"Sector consolidado, pero es de lo más caro por metro cuadrado.","verificado":true,"revisadoEl":"2026-11-23T23:51:28.215Z","aviso":null},{"id":"mir3","titulo":"Ciudad Modelo Mirador Norte","sector":"Mirador Norte","hab":3,"banos":2,"m2":null,"parqueos":1,"precio":110000,"moneda":"US","estado":"En plano, entrega 2027","bono":false,"fuente":"Encuentra24","url":"https://www.encuentra24.com/dominican-en/real-estate-for-sale-apartments-condos/apartamento-en-san-cristobal/33171107","nota":"Precio \"desde\". Pide 10% de separación y 30% durante la obra.","verificado":false,"revisadoEl":null,"aviso":"El portal no deja revisarlo automáticamente (403)"},{"id":"pal2","titulo":"Palmeras del Norte","sector":"Madre Vieja Norte","hab":2,"banos":2,"m2":80,"parqueos":1,"precio":5025000,"moneda":"RD","estado":"Proyecto con unidades disponibles","bono":true,"fuente":"Clio Realty","url":"https://clio-realty-srl.alterestate.com/propiedad/palmeras-del-norte","nota":"Cuesta casi lo mismo que el de 3 habitaciones del mismo proyecto.","verificado":true,"revisadoEl":"2026-11-23T23:51:28.215Z","aviso":null},{"id":"dg2","titulo":"Doña Gladys III y IV","sector":"Madre Vieja Norte","hab":2,"banos":2.5,"m2":101,"parqueos":1,"precio":93400,"moneda":"US","estado":"Entrega anunciada mayo 2026","bono":false,"fuente":"Meléndez Vende","url":"https://melendezvende.com/propiedad/proyecto-de-apartamentos-residencial-dona-gladys-iii-y-iv-1147","nota":"Unidad del 5.º nivel.","verificado":true,"revisadoEl":"2026-11-23T23:51:28.215Z","aviso":null},{"id":"dg2b","titulo":"Doña Gladys III y IV (120 m²)","sector":"Madre Vieja Norte","hab":2,"banos":2.5,"m2":120,"parqueos":1,"precio":102900,"moneda":"US","estado":"Entrega anunciada mayo 2026","bono":false,"fuente":"Meléndez Vende","url":"https://melendezvende.com/propiedad/proyecto-de-apartamentos-residencial-dona-gladys-iii-y-iv-1147","nota":"Dos habitaciones grandes, casi del tamaño de un 3 habitaciones.","verificado":true,"revisadoEl":"2026-11-23T23:51:28.215Z","aviso":null},{"id":"yan2","titulo":"Residencial Yanna I","sector":"Madre Vieja Sur","hab":2,"banos":2,"m2":92,"parqueos":null,"precio":123542,"moneda":"US","estado":"Nuevo","bono":false,"fuente":"Corotos","url":"https://www.corotos.com.do/anuncio/inmuebles-en-venta/apartamentos/residencial-yanna-1-apartamentos-con-ascensor-y-se-zv4sjjv","nota":"Ascensor y seguridad 24/7.","verificado":true,"revisadoEl":"2026-11-23T23:51:28.215Z","aviso":null}],"busquedas":[{"id":"corotos","nombre":"Corotos","detalle":"Apartamentos en venta en San Cristóbal","url":"https://www.corotos.com.do/l/san-cristobal/sc/inmuebles-en-venta/apartamentos","verificado":true},{"id":"supercasas","nombre":"SuperCasas","detalle":"Propiedades en venta en San Cristóbal","url":"https://www.supercasas.com/buscar/?do=1&PriceType=400&Locations=10302&PriceFrom=0&PriceTo=150000000","verificado":true},{"id":"remax","nombre":"Remax RD","detalle":"Apartamentos en venta en San Cristóbal","url":"https://www.remaxrd.com/apartamentos-en-venta-en-san-cristobal","verificado":true},{"id":"encuentra24","nombre":"Encuentra24","detalle":"Apartamentos en venta en San Cristóbal","url":"https://www.encuentra24.com/dominicana-es/bienes-raices-venta-de-propiedades-apartamentos/san-cristobal","verificado":false}]}/*FIN*/;
+
+// ===== Estado =====
+const clone=o=>JSON.parse(JSON.stringify(o));
+function merge(base,over){const out=clone(base);(function m(o,s){for(const k in s){if(s[k]&&typeof s[k]==='object'&&!Array.isArray(s[k])&&o[k]&&typeof o[k]==='object'&&!Array.isArray(o[k]))m(o[k],s[k]);else o[k]=s[k];}})(out,over||{});return out;}
+const num=v=>{const n=parseFloat(v);return isFinite(n)?n:0;};
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const hoyISO=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');};
+
+// Pasa los datos de la versión anterior de la app (ahorro mensual en US$) al formato nuevo.
+function migrarViejo(o){
+  const s=clone(DEF);if(!o||typeof o!=='object')return s;
+  const ini=/^\d{4}-\d{2}$/.test(o.inicio)?o.inicio:'2026-11';const[y,m]=ini.split('-').map(Number);
+  for(const k of Object.keys(o.real||{})){const v=num(o.real[k]);if(!v&&o.real[k]!==0)continue;
+    const d=new Date(y,m-1+Number(k),15);s.aportes.push({id:uid(),fecha:d.toISOString().slice(0,10),monto:v,mon:'US',tag:'quincena',nota:'Pasado desde la versión anterior'});}
+  s.saldoInicial=Math.round(num(o.ahorroActual)*s.tasa);
+  s.onboarded=s.aportes.length>0||s.saldoInicial>0;
+  return s;
 }
-const pmt = (P,i,n) => i===0 ? P/n : P*i/(1-Math.pow(1+i,-n));
-const GI = {cons:0, mod:1, alto:2};
-const nMeses = S => Math.min(60, Math.max(6, Math.round(num(S.meses)||36)));
-const capacidad = S => num(S.ingreso)-num(S.renta)-num(S.gastos)-num(S.otros);
-const planMes = S => num(S.esc[S.escenario]);
-const enteredKeys = S => Object.keys(S.real).filter(k => S.real[k]!=='' && S.real[k]!=null && isFinite(parseFloat(S.real[k])) && +k < nMeses(S));
-const acumReal = S => num(S.ahorroActual) + enteredKeys(S).reduce((a,k)=>a+num(S.real[k]),0);
-const proyeccion = S => acumReal(S) + Math.max(0, nMeses(S)-enteredKeys(S).length)*planMes(S);
-function reservas(S, total){
-  const f = Math.min(Math.max(total,0), num(S.fondo));
-  const r = Math.min(Math.max(total,0)-f, num(S.reserva));
-  return {fondo:f, reserva:r, disp: Math.max(0,total)-f-r};
+function cargar(){
+  try{const r=localStorage.getItem(KEY);if(r)return merge(DEF,JSON.parse(r));}catch(_){}
+  try{const r=localStorage.getItem(OLD_KEY);if(r)return migrarViejo(JSON.parse(r));}catch(_){}
+  return clone(DEF);
 }
-const topeFuturo = S => num(S.topeBase)*Math.pow(1+num(S.topeCrece)/100, nMeses(S)/12);
-function calc(S, a, override){
-  const precio = override || a.precio;
-  const g = num(S.g[a.seg][GI[S.precioEsc]])/100;
-  const fx0 = num(S.fx0)||DEF.fx0, fxF = num(S.fxFuture)||DEF.fxFuture;
-  let nowRD, nowUSD, futRD, futUSD;
-  if (a.mon==='USD'){ nowUSD=precio; nowRD=precio*fx0; futUSD=precio*(1+g); futRD=futUSD*fxF; }
-  else { nowRD=precio; nowUSD=precio/fx0; futRD=precio*(1+g); futUSD=futRD/fxF; }
-  const ini = Math.max(num(S.inicialPct), a.ini||0)/100;
-  const iniUSD = futUSD*ini;
-  const cierreUSD = futUSD*num(S.cierreNormal)/100;
-  const cierreBajoUSD = futUSD*num(S.cierreBajo)/100;
-  const cash = iniUSD + cierreUSD;
-  const califica = futRD <= topeFuturo(S);
-  const loan = futRD*(1-ini);
-  const cuota = pmt(loan, num(S.tasa)/100/12, Math.round(num(S.plazo)*12));
-  const cuotaTotal = cuota + num(S.extras);
-  const ratio = cuotaTotal/Math.max(1,num(S.ingresoRD));
-  const sem = ratio<=0.30 ? 'g' : ratio<=0.35 ? 'y' : 'r';
-  const disp = reservas(S, proyeccion(S)).disp;
-  const cashOK = disp >= cash;
-  const falta = Math.max(0, cash-disp);
-  const m = Math.max(1, nMeses(S)-enteredKeys(S).length);
-  const needMonthly = Math.max(0, (num(S.fondo)+num(S.reserva)+cash-acumReal(S))/m);
-  const ingresoNecesario = cuotaTotal/0.35;
-  return {nowRD,nowUSD,futRD,futUSD,ini,iniUSD,cierreUSD,cierreBajoUSD,cash,califica,loan,cuota,cuotaTotal,ratio,sem,disp,cashOK,falta,needMonthly,ingresoNecesario,
-          ppm2: a.m2 ? nowRD/a.m2 : null};
+let S=cargar();
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(_){}}
+
+let DATA=FALLBACK||{apartamentos:[],busquedas:[],updatedAt:null};
+let datosEnLinea=false;
+let view=(location.hash||'#inicio').slice(1), aptSeg='explorar', aptFiltro='todos', soloIdeal=false, histTag='todos', anim=true;
+const sim={mensual:null,extra:0,anual:true};
+
+// ===== Dinero =====
+const otra=m=>m==='US'?'RD':'US';
+const toRD=(v,mon)=>mon==='US'?num(v)*num(S.tasa||60.5):num(v);
+const fromRD=(rd,mon)=>mon==='US'?rd/num(S.tasa||60.5):rd;
+const fmt=(v,mon)=>(v<0?'−':'')+(mon==='US'?'US$':'RD$')+Math.round(Math.abs(v)).toLocaleString('en-US');
+const M=rd=>fmt(fromRD(rd,S.moneda),S.moneda);
+const M2=rd=>'≈ '+fmt(fromRD(rd,otra(S.moneda)),otra(S.moneda));
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pmt=(P,i,n)=>i===0?P/n:P*i/(1-Math.pow(1+i,-n));
+
+// ===== Cálculos =====
+const ahorrado=()=>num(S.saldoInicial)+S.aportes.reduce((a,x)=>a+toRD(x.monto,x.mon),0);
+function meta(){const p=num(S.precio),ini=p*num(S.inicialPct)/100,gastos=p*num(S.gastosPct)/100;return {precio:p,inicial:ini,gastos,mudanza:num(S.mudanza),total:ini+gastos+num(S.mudanza)};}
+function hitos(){const m=meta();return [
+  {k:'reserva',t:'Separación',d:'Para apartar el apartamento',v:Math.min(num(S.reserva),m.inicial)},
+  {k:'i25',t:'25% del inicial',d:'Un cuarto del camino',v:m.inicial*.25},
+  {k:'i50',t:'Mitad del inicial',d:'¡Medio camino!',v:m.inicial*.5},
+  {k:'i100',t:`Inicial completo (${num(S.inicialPct)}%)`,d:'Lo que pide el banco',v:m.inicial},
+  {k:'total',t:'Gastos de cierre y mudanza',d:`Abogado, tasación, ${num(S.gastosPct)}% de impuestos y trámites, y la mudanza`,v:m.total}
+].sort((a,b)=>a.v-b.v);}
+const ymd=s=>{const[y,m,d]=String(s).split('-').map(Number);return new Date(y,(m||1)-1,d||1);};
+function promedioMensual(){
+  if(!S.aportes.length)return 0;
+  const first=S.aportes.map(a=>ymd(a.fecha)).sort((a,b)=>a-b)[0],t=new Date();
+  const meses=Math.max(1,(t.getFullYear()-first.getFullYear())*12+(t.getMonth()-first.getMonth())+1);
+  return S.aportes.reduce((a,x)=>a+toRD(x.monto,x.mon),0)/meses;
 }
-// ===== END LOGIC =====
-// ===== DATOS DE LOS APARTAMENTOS (anuncios consultados el 22 de noviembre de 2026) =====
-const ZON={norte:'Madre Vieja Norte',sur:'Madre Vieja Sur',centro:'Centro',hatillo:'El Hatillo',nova:'Los Nova / Alta Vista',otras:'Otras zonas'};
-const ZCOL={norte:'#3F8F7B',sur:'#7A6BB5',centro:'#D08A3A',hatillo:'#3B7FB8',nova:'#B5588A',otras:'#8A9A9F'};
-const VER={A:'Anuncio leído',B:'Visto en buscador',NV:'Sin verificar'};
-const APTS=[
- {id:'pal3',h:3,n:'Palmeras del Norte',z:'norte',m2:90,b:2,p:1,precio:5025000,mon:'RD',est:'Proyecto; con unidades disponibles',ini:20,seg:'bajo',v:'A',url:'https://clio-realty-srl.alterestate.com/propiedad/palmeras-del-norte',nota:'El vendedor muestra varias unidades disponibles entre RD$4,851,000 y RD$5,025,000 (revisado el 22-nov-2026); usamos el precio más alto para no quedarnos cortos. Dice tener fideicomiso y bono de primera vivienda (por confirmar). Su primera etapa estaba prevista para 2023: pregunta qué unidades quedan.'},
- {id:'ae4378',h:3,n:'AE-4378',z:'centro',m2:89,b:2,p:1,precio:4900000,mon:'RD',est:'Terminado (4.º piso)',ini:20,seg:'bajo',v:'A',url:'https://www.rdcondominio.com/properties/republica-dominicana/san-cristobal',nota:'Residencial cerrado, en el centro. Sin riesgo de obra. Sigue anunciado el 22-nov-2026 (RD$4,900,000, 89 m², 4.º piso). Confirma si hay ascensor.'},
- {id:'ae3837',h:3,n:'AE#3837',z:'hatillo',m2:95,b:2,p:1,precio:88330,mon:'USD',est:'En plano; entrega ago-2027 / ago-2028',ini:20,seg:'bajo',v:'B',url:'https://www.encuentra24.com/dominican-en/real-estate-for-sale-apartments-condos/invest-in-san-cristobal/32423062',nota:'Precio en dólares. Reserva RD$50,000. Parece ser el mismo proyecto de Doña Ana que anunciaba entrega en 2023: pregunta por el retraso. Baños: 2 o 3 según el anuncio.'},
- {id:'balc3',h:3,n:'Balcones de Alta Vista',z:'nova',m2:104,b:2,p:1,precio:95000,mon:'USD',alt:140000,est:'En construcción; entrega dic-2026',ini:20,seg:'medio',v:'B',url:'https://aarealtyrd.com/propiedad/residencial-privado-en-san-cristobal-1408',nota:'Los precios no coinciden: Corotos lo anuncia en US$95,000, pero AA Realty muestra unidades entre US$115,000 y US$140,000. Pide cotización escrita por unidad. 54 unidades, vigilancia 24 h.'},
- {id:'par3',h:3,n:'Paraíso de Dios',z:'otras',m2:120,b:2,p:null,precio:6300000,mon:'RD',est:'Terminado, listo para estrenar',ini:20,seg:'medio',v:'A',url:'https://www.corotos.com.do/l/san-crist%C3%B3bal/sc/inmuebles-en-venta/apartamentos',nota:'Grande y terminado. Un anuncio lo muestra como de 2 habitaciones con el mismo precio: confírmalo. El sector tiene valor de suelo bajo en el índice de Catastro.'},
- {id:'dg3',h:3,n:'Doña Gladys III y IV',z:'norte',m2:130,b:2.5,p:2,precio:118600,mon:'USD',est:'Entrega "mayo 2026" según un anuncio; sin verificar',ini:20,seg:'medio',v:'B',url:'https://melendezvende.com/propiedad/proyecto-de-apartamentos-residencial-dona-gladys-iii-y-iv-1147',nota:'Incluye 2 parqueos. El vendedor dice que está a 2 minutos de la autopista 6 de Noviembre (no medido). Hay otra unidad a US$120,400.'},
- {id:'cds3',h:3,n:'Camino del Sol',z:'sur',m2:90,b:2.5,p:1,precio:7000000,mon:'RD',est:'Terminado (2020)',ini:30,seg:'premium',v:'A',url:'https://www.melendezvende.com/propiedad/venta-de-apartamentos-camino-del-sol',nota:'El reel de Instagram decía RD$7.5M con 30% de inicial; este anuncio dice RD$7.0M. Pueden ser unidades distintas: pregunta. Es el más caro por metro cuadrado.'},
- {id:'mir3',h:3,n:'Ciudad Modelo Mirador Norte',z:'otras',m2:null,b:2,p:1,precio:110000,mon:'USD',est:'En plano; fases abr-2027 y dic-2027',ini:40,seg:'medio',v:'B',url:'https://www.encuentra24.com/dominican-en/real-estate-for-sale-apartments-condos/apartamento-en-san-cristobal/33171107',nota:'Precio "desde". Plan: reserva US$5,000, 10% de separación, 30% durante la obra y 60% contra entrega. No publica los metros cuadrados.'},
- {id:'pal2',h:2,n:'Palmeras del Norte',z:'norte',m2:80,b:2,p:1,precio:5025000,mon:'RD',est:'Proyecto; etapa actual por confirmar',ini:20,seg:'bajo',v:'B',url:'https://clio-realty-srl.alterestate.com/propiedad/palmeras-del-norte',nota:'Cuesta casi lo mismo que el de 3 habitaciones del mismo proyecto. Compara los dos antes de decidir.'},
- {id:'dg2',h:2,n:'Doña Gladys III y IV',z:'norte',m2:101,b:2.5,p:1,precio:93400,mon:'USD',est:'Entrega "mayo 2026" según un anuncio; sin verificar',ini:20,seg:'medio',v:'B',url:'https://melendezvende.com/propiedad/proyecto-de-apartamentos-residencial-dona-gladys-iii-y-iv-1147',nota:'Unidad del 5.º nivel. Hay otra de 120 m² a US$102,900.'},
- {id:'dg2b',h:2,n:'Doña Gladys III y IV · 120 m²',z:'norte',m2:120,b:2.5,p:1,precio:102900,mon:'USD',est:'Entrega "mayo 2026" según un anuncio; sin verificar',ini:20,seg:'medio',v:'B',url:'https://melendezvende.com/propiedad/proyecto-de-apartamentos-residencial-dona-gladys-iii-y-iv-1147',nota:'Dos habitaciones grandes; casi del tamaño de un 3 habitaciones.'},
- {id:'yan2',h:2,n:'Yanna I',z:'sur',m2:92,b:2,p:null,precio:123542,mon:'USD',est:'Sin dato',ini:20,seg:'premium',v:'A',url:'https://www.corotos.com.do/l/san-crist%C3%B3bal/sc/inmuebles-en-venta/apartamentos',nota:'Ascensor y seguridad 24/7. Es de lo más caro por metro cuadrado.'},
- {id:'part2',h:2,n:'Vendedor particular',z:'otras',m2:null,b:null,p:null,precio:6000000,mon:'RD',est:'Título al día',ini:20,seg:'medio',v:'A',url:'https://www.encuentra24.com/dominicana-es/bienes-raices-venta-de-propiedades-apartamentos/san-cristobal',nota:'Anuncio con los metros cuadrados mal cargados y ubicación sin precisar. Solo como referencia.'}];
-// Enlaces revisados el 22-nov-2026. gen: la página es una lista, no el anuncio exacto.
-const LINKS={
- pal3:{src:'Clio Realty'},pal2:{src:'Clio Realty'},
- ae4378:{src:'Condominios del Caribe',url:'https://www.rdcondominio.com/property/apartamento-en-venta-centro-san-cristobal-3-hab-2-bn-1-parqueo',v:'A'},
- ae3837:{src:'Encuentra24',url:'https://www.encuentra24.com/dominican-en/real-estate-for-sale-apartments-condos/invest-in-san-cristobal/33031540'},
- balc3:{src:'Corotos',url:'https://www.corotos.com.do/anuncio/inmuebles-en-venta/apartamentos/residencial-balcones-de-alta-vista-seguridad-nadrxcy',v:'A'},
- par3:{src:'Corotos',url:'https://www.corotos.com.do/anuncio/inmuebles-en-venta/apartamentos/residencial-paraiso-de-dios-apartamentos-nuevos-f7h6ame'},
- dg3:{src:'Meléndez Vende'},dg2:{src:'Meléndez Vende'},dg2b:{src:'Meléndez Vende'},
- cds3:{src:'Meléndez Vende',url:'https://melendezvende.com/propiedad/venta-de-apartamentos-camino-del-sol'},
- mir3:{src:'Encuentra24'},
- yan2:{src:'Corotos',url:'https://www.corotos.com.do/anuncio/inmuebles-en-venta/apartamentos/residencial-yanna-1-apartamentos-con-ascensor-y-se-zv4sjjv'},
- part2:{src:'Encuentra24',gen:1}};
-// Revisados abiertos el 22-nov-2026: precio confirmado en el anuncio.
-['ae3837','par3','dg3','dg2','dg2b','cds3','mir3','yan2'].forEach(id=>LINKS[id].v='A');
-APTS.forEach(a=>{const L=LINKS[a.id]||{};if('url' in L)a.url=L.url;if(L.v)a.v=L.v;a.src=L.src||'';a.gen=!!L.gen;});
-const byId=id=>APTS.find(a=>a.id===id)||APTS[0];
-const existe=id=>APTS.some(a=>a.id===id);
-// ===== ESTADO =====
-const KEY='mi-apartamento-sc';
-let S=(function(){try{const r=localStorage.getItem(KEY);if(r)return merge(DEF,JSON.parse(r));}catch(e){}return clone(DEF);})();
-let view=(location.hash||'#inicio').slice(1), open=null, flash=0, anim=true;
-// Quita apartamentos que ya no están en la lista (datos guardados viejos).
-S.compare=(S.compare||[]).filter(existe);if(!existe(S.obj3))S.obj3=DEF.obj3;if(!existe(S.obj2))S.obj2=DEF.obj2;
-function save(){S.savedAt=Date.now();try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
-// ===== FORMATO =====
-const nf=n=>Math.round(n).toLocaleString('en-US');
-const usd=n=>(n<0?'−':'')+'US$'+nf(Math.abs(n));
-const rd=n=>'RD$'+nf(n);
-const rdm=n=>'RD$'+(n/1e6).toFixed(2)+'M';
-const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function mesesHasta(mensual,extra,anual){
+  const falta=meta().total-ahorrado();if(falta<=0)return 0;
+  if(mensual<=0&&!(extra>0&&anual))return extra>=falta?1:Infinity;
+  let acc=0;const t=new Date();
+  for(let k=1;k<=600;k++){acc+=mensual;const mes=(t.getMonth()+k)%12;
+    if(extra>0&&((anual&&mes===11)||(!anual&&k===1)))acc+=extra;if(acc>=falta)return k;}
+  return Infinity;
+}
+const mesTxt=k=>{const t=new Date();const d=new Date(t.getFullYear(),t.getMonth()+k,1);return d.toLocaleDateString('es-DO',{month:'long',year:'numeric'});};
+const fechaCorta=s=>ymd(s).toLocaleDateString('es-DO',{day:'numeric',month:'short'});
 const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
-const ym=()=>{const v=/^\d{4}-\d{2}$/.test(S.inicio)?S.inicio:DEF.inicio;return v.split('-').map(Number);};
-function fecha(i){const[y,m]=ym();return new Date(y,(m-1)+i,1);}
-const mesLabel=i=>cap(fecha(i).toLocaleDateString('es-DO',{month:'long',year:'numeric'}));
-const mesCorto=i=>cap(fecha(i).toLocaleDateString('es-DO',{month:'short',year:'2-digit'}));
-const anioFinal=()=>fecha(nMeses(S)-1).getFullYear();
-const mesActual=()=>{const t=new Date(),[y,m]=ym();return (t.getFullYear()-y)*12+(t.getMonth()-(m-1));};
-const tile=(l,v,h,c)=>`<div class="tile ${c||''}"><div class="l">${l}</div><div class="v">${v}</div><div class="h">${h||''}</div></div>`;
-const SEM={g:'Cuota razonable',y:'Cuota ajustada',r:'Cuota muy alta'};
-function field(label,key,hint,type){const v=key.split('.').reduce((o,k)=>o[k],S);
-  return `<div class="field"><label for="f-${key}">${label}</label><input id="f-${key}" data-k="${key}" type="${type||'number'}" ${type?'':'inputmode="decimal" step="any"'} value="${v}">${hint?`<div class="h">${hint}</div>`:''}</div>`;}
-function chips(items,key,cur){return `<div class="chips">${items.map(([v,l])=>`<button class="chip" data-set="${key}" data-val="${v}" aria-pressed="${String(cur)===String(v)}">${l}</button>`).join('')}</div>`;}
-// ===== PANTALLA: INICIO =====
-function anillo(pct){const r=52,C=2*Math.PI*r,d=Math.max(0,Math.min(1,pct));
-  return `<div class="ring"><svg viewBox="0 0 118 118" width="118" height="118" aria-hidden="true"><circle cx="59" cy="59" r="${r}" fill="none" stroke="var(--line)" stroke-width="11"/><circle cx="59" cy="59" r="${r}" fill="none" stroke="var(--sage)" stroke-width="11" stroke-linecap="round" stroke-dasharray="${(C*d).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 59 59)"/></svg><b>${Math.round(d*100)}%<em>de mi meta</em></b></div>`;}
-function grafico(){
-  const n=nMeses(S),p=planMes(S),ent=enteredKeys(S),meta=num(S.fondo)+num(S.reserva)+calc(S,byId(S.obj3)).cash;
-  let run=num(S.ahorroActual);const pts=[run];
-  for(let i=0;i<n;i++){run+=ent.includes(String(i))?num(S.real[i]):p;pts.push(run);}
-  const W=640,H=188,pl=4,pr=4,pt=14,pb=26,top=Math.max(meta,Math.max(...pts))*1.08||1;
-  const X=i=>pl+i*(W-pl-pr)/(pts.length-1), Y=v=>pt+(1-v/top)*(H-pt-pb);
-  const line=pts.map((v,i)=>`${i?'L':'M'}${X(i).toFixed(1)} ${Y(v).toFixed(1)}`).join(' ');
-  const area=`${line} L${X(pts.length-1).toFixed(1)} ${Y(0)} L${X(0).toFixed(1)} ${Y(0)} Z`;
-  const lastEnt=ent.length?Math.max(...ent.map(Number))+1:0;
-  const ticks=[0,Math.floor(n/3),Math.floor(2*n/3),n].map(i=>`<text x="${X(i).toFixed(1)}" y="${H-7}" font-size="11" fill="var(--soft)" text-anchor="${i===0?'start':i===n?'end':'middle'}">${i===0?'Hoy':mesCorto(i-1)}</text>`).join('');
-  return `<svg class="chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="Gráfico del ahorro acumulado mes a mes">
-   <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(--sage)" stop-opacity=".30"/><stop offset="100%" stop-color="var(--sage)" stop-opacity="0"/></linearGradient></defs>
-   <line x1="${pl}" y1="${Y(meta).toFixed(1)}" x2="${W-pr}" y2="${Y(meta).toFixed(1)}" stroke="var(--rose)" stroke-width="2" stroke-dasharray="7 6"/>
-   <path class="ar" d="${area}" fill="url(#g)"/><path class="ln" pathLength="1" d="${line}" fill="none" stroke="var(--sage)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
-   ${lastEnt?`<circle cx="${X(lastEnt).toFixed(1)}" cy="${Y(pts[lastEnt]).toFixed(1)}" r="5.5" fill="var(--sage)" stroke="var(--card)" stroke-width="2.5"/>`:''}
-   ${ticks}</svg>
-   <div class="legend"><span><i style="background:var(--sage)"></i>Mi ahorro</span><span><i style="background:var(--rose)"></i>Mi meta: ${usd(meta)}</span></div>
-   <p class="note" style="margin-top:10px">${(()=>{const k=pts.findIndex(v=>v>=meta);
-     if(k===0)return '<b>¡Ya alcanzaste tu meta!</b> Todo lo que ahorres de aquí en adelante es extra.';
-     if(k>0)return `<b>Si sigues así, llegas a tu meta en ${mesLabel(k-1).toLowerCase()}</b>${k<n?`, ${n-k} ${n-k===1?'mes':'meses'} antes de lo planeado. 🎯`:'.'}`;
-     return `<b>Al terminar tendrías ${usd(pts[n])}.</b> Te faltarían ${usd(meta-pts[n])} para tu meta: serían unos ${usd((meta-pts[n])/Math.max(1,n-ent.length))} más al mes.`;})()}
-   La línea verde es tu ahorro; la roja punteada es lo que necesitas reunir (fondo de emergencia, viajes, entrada y cierre).</p>`;
+function mensaje(p){
+  if(p>=1)return '¡Lo lograste! Tu meta está completa 🔑💗';
+  if(p>=.9)return '¡Estás tan cerca! Un último empujón ✨';
+  if(p>=.75)return '¡Ya pasaste el 75%! Casi puedes oler la pintura nueva 🎨';
+  if(p>=.5)return '¡Más de la mitad! Vas increíble 💪';
+  if(p>=.25)return '¡Ya pasaste el 25%! Tu casita te espera 🏡';
+  if(p>0)return 'Ya diste el primer paso. ¡Sigue así! 🐰';
+  return '¡Hoy empieza tu historia! Cada peso cuenta 🌱';
 }
-function escCards(){const nm={cons:['Conservador','Si el año viene con imprevistos'],int:['Intermedio','Con algún mes flojo'],opt:['Optimista','Sin fallar ningún mes']};
-  return `<div class="esc">${['cons','int','opt'].map(k=>`<button data-set="escenario" data-val="${k}" aria-pressed="${S.escenario===k}"><div><div class="n">${nm[k][0]}</div><div class="d">${nm[k][1]}</div></div><div class="a">${usd(S.esc[k])}<span>${usd(S.esc[k]*nMeses(S))} en total</span></div></button>`).join('')}</div>`;}
+const aptList=()=>DATA.apartamentos||[];
+const aptById=id=>aptList().find(a=>a.id===id);
+function coincide(a){const I=S.ideal||{};
+  if(I.sectores&&I.sectores.length&&!I.sectores.includes(a.sector))return false;
+  if(I.hab&&a.hab!==I.hab)return false;
+  if(I.parqueos>1&&a.parqueos!=null&&a.parqueos<I.parqueos)return false;
+  if(I.bono&&!a.bono)return false;return true;}
+function calcApt(precioRD){const m=meta(),ini=precioRD*num(S.inicialPct)/100,gastos=precioRD*num(S.gastosPct)/100+m.mudanza,a=ahorrado();
+  return {ini,faltaIni:Math.max(0,ini-a),total:ini+gastos,faltaTotal:Math.max(0,ini+gastos-a),pct:Math.min(1,a/Math.max(1,ini)),
+    cuota:pmt(precioRD*(1-num(S.inicialPct)/100),TASA_HIPOTECA/100/12,PLAZO_ANOS*12)};}
+
+// ===== Dibujos =====
+const BUNNY=(id='')=>`<svg ${id?`id="${id}"`:''} class="bunny" viewBox="0 0 120 120" aria-hidden="true">
+ <g transform="rotate(-12 44 34)"><ellipse cx="44" cy="34" rx="11" ry="27" fill="#fff" stroke="#3B1E2B" stroke-width="3"/><ellipse cx="44" cy="37" rx="5" ry="17" fill="#F9A8D4"/></g>
+ <g transform="rotate(12 76 34)"><ellipse cx="76" cy="34" rx="11" ry="27" fill="#fff" stroke="#3B1E2B" stroke-width="3"/><ellipse cx="76" cy="37" rx="5" ry="17" fill="#F9A8D4"/></g>
+ <ellipse cx="60" cy="74" rx="35" ry="30" fill="#fff" stroke="#3B1E2B" stroke-width="3"/>
+ <path d="M38 52 q4-7 10-4" fill="none" stroke="#EC4899" stroke-width="3" stroke-linecap="round"/>
+ <circle cx="47" cy="72" r="4" fill="#3B1E2B"/><circle cx="73" cy="72" r="4" fill="#3B1E2B"/>
+ <circle cx="48.4" cy="70.6" r="1.3" fill="#fff"/><circle cx="74.4" cy="70.6" r="1.3" fill="#fff"/>
+ <ellipse cx="38" cy="82" rx="6" ry="4" fill="#F9A8D4" opacity=".8"/><ellipse cx="82" cy="82" rx="6" ry="4" fill="#F9A8D4" opacity=".8"/>
+ <path d="M56.5 79 q3.5 3 7 0 l-3.5 3.5z" fill="#EC4899" stroke="#EC4899" stroke-width="2" stroke-linejoin="round"/>
+ <path d="M60 83 v3 M55 87 q5 4 10 0" fill="none" stroke="#3B1E2B" stroke-width="2.4" stroke-linecap="round"/>
+ <g transform="translate(78 88) rotate(18)"><circle cx="0" cy="0" r="7" fill="none" stroke="#F59E0B" stroke-width="3.5"/><path d="M6 2 h14 v5 M15 2 v4" fill="none" stroke="#F59E0B" stroke-width="3.5" stroke-linecap="round"/></g>
+</svg>`;
+function anillo(p){const r=54,C=2*Math.PI*r,d=Math.max(0,Math.min(1,p));
+  return `<div class="ring"><svg viewBox="0 0 128 128" width="128" height="128" aria-hidden="true"><defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F9A8D4"/><stop offset="1" stop-color="#EC4899"/></linearGradient></defs>
+  <circle cx="64" cy="64" r="${r}" fill="none" stroke="#FCE7F3" stroke-width="13"/>
+  <circle class="arc" cx="64" cy="64" r="${r}" fill="none" stroke="url(#rg)" stroke-width="13" stroke-linecap="round" stroke-dasharray="${(C*d).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 64 64)"/></svg>
+  <div class="c"><b>${Math.floor(d*100)}%</b><span>de tu meta</span></div></div>`;}
+
+// ===== Pantalla: bienvenida =====
+function vBienvenida(){return `<div class="welcome"><div class="card" style="width:100%">${BUNNY('bunny')}
+  <h1>¡Hola! Vamos a armar tu plan 💗</h1><p class="lede">Solo tres datos y listo. Puedes cambiarlos cuando quieras.</p>
+  <div class="fields">
+   <div class="field"><label for="w-nombre">¿Cómo te llamas?</label><input id="w-nombre" value="${esc(S.nombre)}" autocomplete="given-name"></div>
+   <div class="field"><label for="w-precio">Precio estimado del apartamento (RD$)</label><input id="w-precio" type="number" inputmode="numeric" placeholder="5,025,000" value="${num(S.precio)||''}">
+     <div class="h">Un 3 habitaciones en San Cristóbal se anuncia entre RD$4.9 y 5.3 millones.</div></div>
+   <div class="field"><label for="w-ahorro">¿Cuánto tienes ahorrado hoy? (RD$)</label><input id="w-ahorro" type="number" inputmode="numeric" placeholder="0"></div>
+  </div>
+  <div class="btnrow"><button class="btn block" data-act="empezar">Empezar mi plan 🐰</button></div>
+  <button class="linkbtn" data-act="ejemplo">Explorar con datos de ejemplo</button></div></div>`;}
+
+// ===== Pantalla: inicio =====
 function vInicio(){
-  const t3=byId(S.obj3),c3=calc(S,t3),acum=acumReal(S),proy=proyeccion(S),res=reservas(S,acum),resP=reservas(S,proy);
-  const meta=num(S.fondo)+num(S.reserva)+c3.cash,pct=acum/Math.max(1,meta);
-  const ent=enteredKeys(S),dif=ent.reduce((a,k)=>a+num(S.real[k])-planMes(S),0);
-  const mi=Math.max(0,Math.min(nMeses(S)-1,mesActual())),ya=S.real[mi]!=null&&S.real[mi]!=='';
-  const ok=APTS.filter(a=>{const c=calc(S,a);return c.cashOK&&c.sem!=='r';});
-  let t,s;
-  if(!ent.length){t='Vamos a empezar.';s='Anota abajo lo que lograste ahorrar este mes. Con eso la app te dice si vas bien.';}
-  else if(dif>=0){t='¡Excelente! Vas según tu plan.';s=dif>0?'Llevas '+usd(dif)+' por encima de lo previsto.':'Ahorraste justo lo que planeaste.';}
-  else if(dif>=-0.1*planMes(S)*ent.length){t='Vas por buen camino.';s='Estás '+usd(-dif)+' por debajo de lo previsto, se puede recuperar.';}
-  else {t='Necesitas ahorrar un poco más.';s='Estás '+usd(-dif)+' por debajo de lo previsto.';}
-  let s2;
-  if(!ent.length) s2='';
-  else if(ok.length) s2=`Tu ahorro proyectado ya alcanza para ${ok.length} de ${APTS.length} opciones. Mira cuáles en Apartamentos.`;
-  else if(c3.cashOK) s2='Tendrás el dinero de la entrada, pero la cuota del banco sería muy alta con el ingreso que pusiste.';
-  else s2=`Para ${esc(t3.n)} te faltarían ${usd(c3.falta)}: serían ${usd(c3.needMonthly)} al mes.`;
-  const aviso=S.neto==='pendiente'?`<div class="alert y"><b>Un dato por confirmar:</b> estamos suponiendo que tus ${usd(num(S.ingreso))} son lo que te queda limpio cada mes. Si es antes de impuestos, podrás ahorrar menos. Puedes cambiarlo en Ajustes.</div>`:'';
-  return `<section class="card hero">${anillo(pct)}<div>${(()=>{const q=nMeses(S)-Math.max(0,mesActual());return q>1?`<div class="cd">⏳ Faltan ${q} meses</div>`:q===1?'<div class="cd">⏳ ¡Último mes!</div>':'<div class="cd">🏠 ¡Llegó el momento!</div>';})()}<div class="t">${t}</div><div class="s">${s}</div>${s2?`<div class="s">${s2}</div>`:''}</div></section>
-  <section class="card quick"><h2>${mesLabel(mi)}</h2><p class="lede">¿Cuánto lograste ahorrar este mes?</p>
-    <div class="row"><input type="number" inputmode="decimal" step="any" id="qk" value="${ya?S.real[mi]:''}" placeholder="${nf(planMes(S))}" aria-label="Ahorro de ${mesLabel(mi)} en dólares"><button class="ok" id="qkb">Guardar</button></div>
-    ${ya?`<div class="done">✓ Guardado: ${usd(num(S.real[mi]))} este mes</div>`:`<div class="done">Tu plan son ${usd(planMes(S))} al mes. Si ahorraste menos, anótalo igual.</div>`}</section>
-  ${(()=>{const fal=[];for(let i=0;i<Math.min(mi,nMeses(S));i++)if(!ent.includes(String(i)))fal.push(i);if(!fal.length)return '';
-    const L=fal.slice(-3);return `<section class="card"><h2>Te faltó anotar ${L.length>1?'estos meses':'un mes'}</h2><p class="lede">Escribe lo que ahorraste. Si no ahorraste nada, pon 0.</p><div class="fields">${L.map(i=>`<div class="field"><label for="f-real.${i}">${mesLabel(i)}</label><input id="f-real.${i}" data-k="real.${i}" type="number" inputmode="decimal" step="any" placeholder="${nf(planMes(S))}"></div>`).join('')}</div>${fal.length>3?`<p class="note">Hay ${fal.length-3} meses más sin anotar en Mi ahorro.</p>`:''}</section>`;})()}
-  ${ent.length>=2&&Date.now()-num(S.lastBackup)>45*864e5?`<div class="alert y"><b>Guarda una copia de tus datos.</b> ${S.lastBackup?'Hace más de mes y medio que no la guardas.':'Todavía no tienes ninguna.'} Si se borra Safari, se pierde lo anotado.<div class="btnrow"><button class="btn" data-tab="ajustes">Guardar copia ahora</button></div></div>`:''}
-  ${aviso}
-  <section class="card"><h2>Dónde voy</h2><div class="grid">
-    ${tile('Llevo ahorrado',usd(acum),ent.length+' de '+nMeses(S)+' meses','g')}
-    ${tile('Disponible para comprar',usd(res.disp),'Sin tocar el fondo de emergencia',res.disp>0?'g':'')}
-    ${tile('Tendré al terminar',usd(proy),'Si sigo mi plan')}
-    ${tile('Disponible al terminar',usd(resP.disp),'Para la entrada y el cierre')}
-  </div><p class="note">De lo que ahorres, ${usd(num(S.fondo))} son tu fondo de emergencia y ${usd(num(S.reserva))} quedan para viajes e imprevistos. Ese dinero no se usa para el apartamento.</p></section>
-  <section class="card"><h2>Cómo crece mi ahorro</h2>${grafico()}</section>
-  <section class="card"><h2>Mi apartamento</h2><p class="lede">${esc(t3.n)} · ${ZON[t3.z]}${t3.m2?' · '+t3.m2+' m²':''}</p>
-   <dl class="kv"><dt>Precio hoy</dt><dd>${rdm(c3.nowRD)}</dd><dt>Precio estimado en ${anioFinal()}</dt><dd>${rdm(c3.futRD)}</dd>
-   <dt>Entrada (${Math.round(c3.ini*100)}%)</dt><dd>${usd(c3.iniUSD)}</dd><dt>Gastos de cierre<small class="h" style="display:block;font-weight:400">Impuestos y abogado al firmar</small></dt><dd>${usd(c3.cierreUSD)}</dd>
-   <dt>Necesitas reunir</dt><dd>${usd(c3.cash)}</dd><dt>Tendrás disponible</dt><dd>${usd(c3.disp)}</dd>
-   <dt>Diferencia</dt><dd class="${c3.cashOK?'pos':'neg'}">${c3.cashOK?'Te sobran '+usd(c3.disp-c3.cash):'Te faltan '+usd(c3.falta)}</dd>
-   <dt>Cuota del banco</dt><dd>${rd(c3.cuotaTotal)} al mes</dd></dl>
-   <p class="note">El precio de ${anioFinal()} es un cálculo con el escenario "${{cons:'conservador',mod:'moderado',alto:'alto'}[S.precioEsc]}", no un precio garantizado.</p>
-   <div class="btnrow"><button class="btn ghost" data-tab="apartamentos">Cambiar de apartamento</button></div></section>
-  <section class="card"><h2>Mi plan de ahorro</h2><p class="lede">Toca el que vas a seguir.</p>${escCards()}</section>`;
+  const a=ahorrado(),m=meta(),p=a/Math.max(1,m.total),falta=Math.max(0,m.total-a),prom=promedioMensual(),k=prom>0?mesesHasta(prom,0,false):Infinity;
+  const H=hitos();
+  const apt=aptById(S.metaAptId)||S.favoritos.find(f=>f.id===S.metaAptId);
+  const nombreMeta=apt?(apt.titulo||apt.nombre):(S.metaNombre||'Mi apartamento');
+  if(sim.mensual==null)sim.mensual=Math.round((prom||20000)/1000)*1000;
+  const avisoCopia=!S.ejemplo&&S.aportes.length>=3&&Date.now()-num(S.lastBackup)>45*864e5;
+  return `${S.ejemplo?`<div class="banner gold">👀 Estás viendo <b>datos de ejemplo</b>. Cuando quieras, empieza con los tuyos.<div class="btnrow"><button class="btn sm" data-act="salirEjemplo">Empezar con mis datos</button></div></div>`:''}
+  <section class="card"><div class="hero">${anillo(p)}<div>
+    <div class="lbl">Llevas ahorrado</div><div class="big">${M(a)}<small>${M2(a)}</small></div>
+    <div class="of">de <b>${M(m.total)}</b> que necesitas</div></div>
+    <div class="msg">${mensaje(p)}</div>
+    <button class="btn block cta" data-act="nuevo">＋ Registrar ahorro</button></div></section>
+  ${avisoCopia?`<div class="banner">💾 <b>Guarda una copia de tus datos.</b> ${S.lastBackup?'Hace más de mes y medio que no la guardas.':'Todavía no tienes ninguna.'} Así no pierdes nada si cambias de celular.<div class="btnrow"><button class="btn sm" data-act="exportar">Guardar copia ahora</button></div></div>`:''}
+  <div class="kpis" style="margin-top:12px">
+    <div class="kpi p"><div class="l">Ahorrado</div><div class="v">${M(a)}</div><div class="h">${M2(a)}</div></div>
+    <div class="kpi"><div class="l">Te falta</div><div class="v">${M(falta)}</div><div class="h">${falta?M2(falta):'¡Nada! 🎉'}</div></div>
+    <div class="kpi"><div class="l">Promedio al mes</div><div class="v">${prom?M(prom):'—'}</div><div class="h">${prom?'Según tus registros':'Registra tu primer ahorro'}</div></div>
+    <div class="kpi"><div class="l">Llegarías en</div><div class="v">${falta<=0?'¡Ya! 🔑':isFinite(k)?cap(mesTxt(k)):'—'}</div><div class="h">${falta<=0?'Meta completa':isFinite(k)?`En ${k} ${k===1?'mes':'meses'}, a tu ritmo`:'Necesito tus registros'}</div></div>
+  </div>
+  <section class="card"><h2><span class="ic">🏁</span>Tus metas por etapas</h2><p class="lede">Ve paso a paso: cada etapa es un logro.</p><div class="hitos">
+   ${H.map((h,i)=>{const ok=a>=h.v,pr=Math.min(1,a/Math.max(1,h.v));return `<div class="hito ${ok?'done':''}"><div class="dot">${ok?'★':i+1}</div>
+     <div><div class="t">${esc(h.t)}</div><div class="d">${esc(h.d)}</div></div><div class="a">${M(h.v)}<small>${ok?'¡Logrado!':'Faltan '+M(h.v-a)}</small></div>
+     <div class="mini"><i style="width:${(pr*100).toFixed(1)}%"></i></div></div>`;}).join('')}
+  </div></section>
+  <section class="card"><h2><span class="ic">🔮</span>¿Qué pasaría si…?</h2><p class="lede">Mueve la barra y mira cuándo llegarías.</p>
+   <div class="simv"><span class="flabel" style="margin:0">Si ahorro al mes</span><b id="simM">${M(sim.mensual)}</b></div>
+   <input class="range" type="range" id="simR" min="0" max="${Math.max(200000,Math.ceil(prom*2/5000)*5000)}" step="1000" value="${sim.mensual}" aria-label="Ahorro mensual en el simulador">
+   <div class="field" style="margin-top:6px"><label for="simE">Y un extra (doble sueldo, bono…) en RD$</label><input id="simE" type="number" inputmode="numeric" placeholder="0" value="${sim.extra||''}"></div>
+   <div class="chips" style="margin-top:8px"><button class="chip" data-act="simAnual" data-v="1" aria-pressed="${sim.anual}">Cada diciembre</button><button class="chip" data-act="simAnual" data-v="0" aria-pressed="${!sim.anual}">Una sola vez</button></div>
+   <div class="simres" id="simRes">${simTexto(prom)}</div></section>
+  <section class="card"><h2><span class="ic">🏡</span>Mi meta</h2><p class="lede">${esc(nombreMeta)}</p>
+   <div class="need"><div class="row"><span>Precio del apartamento</span><b>${M(m.precio)}</b></div>
+   <div class="row"><span>Inicial (${num(S.inicialPct)}%)</span><b>${M(m.inicial)}</b></div>
+   <div class="row"><span>Gastos de cierre (${num(S.gastosPct)}%)</span><b>${M(m.gastos)}</b></div>
+   <div class="row"><span>Mudanza básica</span><b>${M(m.mudanza)}</b></div>
+   <div class="row big"><span>Total que necesitas</span><b>${M(m.total)}</b></div></div>
+   <div class="btnrow"><button class="btn ghost sm" data-act="ir" data-v="apartamentos">Ver apartamentos</button><button class="btn ghost sm" data-act="ir" data-v="ajustes">Cambiar mi meta</button></div></section>`;
 }
-// ===== PANTALLA: MI AHORRO =====
-function vAhorro(){
-  const n=nMeses(S),p=planMes(S),ent=enteredKeys(S),acum=acumReal(S),proy=proyeccion(S);
-  const zero=ent.filter(k=>num(S.real[k])===0).length,mi=mesActual();
-  let rows='';
-  for(let i=0;i<n;i++){
-    const has=ent.includes(String(i)),r=has?num(S.real[i]):null,hito=(i+1)%6===0;
-    const st=!has?['pend','Pendiente']:r===0?['no','Sin ahorro']:r>=p?['ok','Cumplido']:['lo','Por debajo'];
-    rows+=`<div class="m ${hito?'hito':''}"><div class="i">${i+1}${hito?'★':''}</div><div class="d"><b>${mesCorto(i)}</b><span>${has?(r>=p?'+':'')+usd(r-p)+' vs. tu plan':'Previsto '+usd(p)}</span></div>
-    <span class="st ${st[0]}">${st[1]}</span><input type="number" inputmode="decimal" step="any" data-k="real.${i}" value="${has?S.real[i]:''}" placeholder="—" aria-label="Ahorro de ${mesLabel(i)}"></div>`;}
-  const hitos=[6,12,18,24,30,36].filter(m=>m<=n).map(m=>{let a=num(S.ahorroActual);for(let i=0;i<m;i++)a+=ent.includes(String(i))?num(S.real[i]):p;
-    return `<div class="tile ${mi>=m?'g':''}"><div class="l">Mes ${m} · ${mesCorto(m-1)}</div><div class="v" style="font-size:19px">${usd(a)}</div></div>`;}).join('');
-  return `<section class="card"><h2>Mi ahorro mes a mes</h2><p class="lede">Escribe en la casilla de cada mes cuánto lograste ahorrar. Los meses que dejes vacíos se calculan con tu plan.</p>
-   <div class="grid three">${tile('Llevo ahorrado',usd(acum),ent.length+' meses anotados','g')}${tile('Tendré al terminar',usd(proy),'Si sigo igual')}${tile('Meses sin ahorrar',String(zero),zero?'Anotados con cero':'Ninguno',zero?'y':'g')}</div>
-   <div class="bar"><i style="width:${Math.min(100,acum/Math.max(1,proy)*100)}%"></i></div></section>
-  <section class="card"><h2>Mis revisiones</h2><p class="lede">Cada seis meses, mira cuánto llevas y ajusta si hace falta.</p><div class="grid three">${hitos}</div></section>
-  <section class="card"><h2>Los ${n} meses</h2><div class="months">${rows}</div></section>`;
+function simTexto(prom){
+  const k=mesesHasta(sim.mensual,num(sim.extra),sim.anual);
+  if(k===0)return '¡Ya tienes todo lo que necesitas! 🎉';
+  if(!isFinite(k))return 'Con ese monto no llegarías. Prueba subiendo la barra 💗';
+  let t=`Llegarías en <b>${mesTxt(k)}</b> (en ${k} ${k===1?'mes':'meses'}).`;
+  if(prom>0){const k0=mesesHasta(prom,0,false);if(isFinite(k0)&&k0!==k)t+=`<br>${k0>k?`¡Son <b>${k0-k} ${k0-k===1?'mes':'meses'} antes</b> que a tu ritmo actual! 🐰`:`Sería ${k-k0} ${k-k0===1?'mes':'meses'} más que a tu ritmo actual.`}`;}
+  return t;
 }
-// ===== PANTALLA: APARTAMENTOS =====
+
+// ===== Pantalla: mis ahorros =====
+function vAhorros(){
+  const tags=new Map(TAGS.map(t=>[t[0],t]));
+  const lista=S.aportes.filter(x=>histTag==='todos'||x.tag===histTag).slice().sort((a,b)=>b.fecha.localeCompare(a.fecha)||b.id.localeCompare(a.id));
+  const grupos=new Map();lista.forEach(x=>{const k=x.fecha.slice(0,7);if(!grupos.has(k))grupos.set(k,[]);grupos.get(k).push(x);});
+  const tot=S.aportes.reduce((a,x)=>a+toRD(x.monto,x.mon),0);
+  return `<section class="card"><h2><span class="ic">🌸</span>Mis ahorros</h2>
+   <p class="lede">${S.aportes.length?`${S.aportes.length} ${S.aportes.length===1?'registro':'registros'} · ${M(tot)} en total${num(S.saldoInicial)?` (más ${M(num(S.saldoInicial))} con los que empezaste)`:''}`:'Aquí verás todo lo que vayas guardando.'}</p>
+   <div class="btnrow"><button class="btn block" data-act="nuevo">＋ Registrar ahorro</button></div>
+   ${S.aportes.length?`<div class="chips" style="margin-top:12px"><button class="chip" data-act="histTag" data-v="todos" aria-pressed="${histTag==='todos'}">Todos</button>${TAGS.map(t=>`<button class="chip" data-act="histTag" data-v="${t[0]}" aria-pressed="${histTag===t[0]}">${t[2]} ${t[1]}</button>`).join('')}</div>`:''}</section>
+  ${!S.aportes.length?`<div class="empty">${BUNNY()}<p><b>Todavía no hay registros.</b><br>Toca “Registrar ahorro” cuando guardes tu próxima quincena.</p></div>`:
+   !lista.length?`<div class="empty"><p>No hay registros con esa etiqueta.</p></div>`:
+   [...grupos].map(([k,xs])=>`<div class="mes"><h3><span>${cap(ymd(k+'-01').toLocaleDateString('es-DO',{month:'long',year:'numeric'}))}</span><span>${M(xs.reduce((a,x)=>a+toRD(x.monto,x.mon),0))}</span></h3>
+    ${xs.map(x=>{const t=tags.get(x.tag)||TAGS[3];const rd=toRD(x.monto,x.mon);return `<button class="item" data-act="editar" data-v="${x.id}"><span class="em">${t[2]}</span><span><span class="t">${esc(t[1])}</span><span class="n">${fechaCorta(x.fecha)}${x.nota?' · '+esc(x.nota):''}</span></span><span class="m">${fmt(num(x.monto),x.mon)}<small>${x.mon===S.moneda?M2(rd):M(rd)}</small></span></button>`;}).join('')}</div>`).join('')}
+  ${S.aportes.length?'<p class="note" style="text-align:center">Toca un registro para corregirlo o borrarlo.</p>':''}`;
+}
+
+// ===== Pantalla: apartamentos =====
 function aptCard(a){
-  const c=calc(S,a),ab=open===a.id,cmp=S.compare.includes(a.id);
-  const st=c.cashOK?(c.sem==='r'?['r','Cuota muy alta']:['g','Te alcanzaría']):['y','Faltan '+usd(c.falta)];
-  const g3=['cons','mod','alto'].map(k=>{const g=num(S.g[a.seg][GI[k]])/100;const f=a.mon==='USD'?a.precio*(1+g)*num(S.fxFuture):a.precio*(1+g);
-    return `<dt>Si sube ${k==='cons'?'poco':k==='mod'?'lo normal':'mucho'} (+${S.g[a.seg][GI[k]]}%)</dt><dd>${rdm(f)}</dd>`;}).join('');
-  const alt=a.alt?(()=>{const c2=calc(S,a,a.alt);return `<p class="note"><b>Si termina costando ${usd(a.alt)}:</b> necesitarías reunir ${usd(c2.cash)} y la cuota sería ${rd(c2.cuotaTotal)} al mes.</p>`;})():'';
-  return `<article class="card apt"><div class="head" style="--z:${ZCOL[a.z]}">
-   <div class="ttl"><div><div class="nm">${esc(a.n)}</div><div class="meta">${ZON[a.z]} · ${a.h} habitaciones${a.m2?' · '+a.m2+' m²':' · metros sin dato'}${a.p?' · '+a.p+' parqueo'+(a.p>1?'s':''):''}</div></div><span class="pill ${st[0]}">${st[1]}</span></div>
-   <div class="price"><b>${a.mon==='USD'?usd(a.precio):rd(a.precio)}</b><span>${a.mon==='USD'?rd(c.nowRD):usd(c.nowUSD)}${c.ppm2?' · '+rd(c.ppm2)+' el m²':''}</span></div>
-   <div class="chips"><span class="pill n">${VER[a.v]}</span>${c.califica?'<span class="pill y" title="Vivienda con precio bajo el tope del gobierno: paga menos impuestos y puede tener mejor tasa">Podría ser de bajo costo</span>':''}<span class="pill n">${esc(a.est)}</span></div></div>
-   ${ab?`<div class="more"><dl class="kv">
-     <dt>Precio estimado en ${anioFinal()}</dt><dd>${rdm(c.futRD)}</dd></dl>
-     <p class="note" style="margin:12px 0 6px"><b>Según cuánto suban los precios:</b></p><dl class="kv">${g3}</dl><dl class="kv" style="margin-top:12px">
-     <dt>Entrada (${Math.round(c.ini*100)}%)</dt><dd>${usd(c.iniUSD)}</dd><dt>Gastos de cierre</dt><dd>${usd(c.cierreUSD)}</dd>
-     <dt>Necesitas reunir</dt><dd>${usd(c.cash)}</dd><dt>Tendrás disponible</dt><dd>${usd(c.disp)}</dd>
-     <dt>Tendrías que ahorrar</dt><dd>${usd(c.needMonthly)} al mes</dd>
-     <dt>Préstamo del banco</dt><dd>${rd(c.loan)}</dd><dt>Cuota, con seguro y mantenimiento</dt><dd>${rd(c.cuotaTotal)} al mes</dd>
-     <dt>Ingreso que pide esa cuota</dt><dd>${rd(c.ingresoNecesario)} al mes</dd></dl>
-    <p style="margin:12px 0 0"><span class="pill ${c.sem}">${SEM[c.sem]}: ${Math.round(c.ratio*100)}% de tu ingreso</span></p>
-    ${c.califica?`<p class="note"><b>Vivienda de bajo costo:</b> es la que cuesta menos que el tope que fija el gobierno; paga menos impuestos y puede tener mejor tasa. Si llegara a calificar, el cierre bajaría a ${S.cierreBajo}% y necesitarías ${usd(c.cash-c.cierreUSD+c.cierreBajoUSD)}. Hay que confirmarlo con la DGII, el banco y un abogado.</p>`:''}
-    ${alt}<p class="note">${esc(a.nota)}</p>
-    ${a.url&&a.gen?`<p class="note">El anuncio exacto ya no aparece. El botón abre la lista de ${esc(a.src)} para buscarlo, o pregúntale al vendedor.</p>`:''}${a.url?'':'<p class="note">Anuncio no disponible: ya no está publicado. Pregunta directamente al vendedor.</p>'}
-    <div class="btnrow">${a.url?`<a class="btn ghost" href="${a.url}" target="_blank" rel="noopener">${a.gen?'Buscar en ':'Ver anuncio en '}${esc(a.src)}</a>`:''}<button class="btn" data-obj="${a.id}">Este es mi apartamento</button></div></div>`:''}
-   <div class="foot"><button data-open="${a.id}" aria-expanded="${ab}">${ab?'Ocultar detalles':'Ver detalles y cuota'}</button>
-    <label><input type="checkbox" data-cmp="${a.id}" ${cmp?'checked':''}> Comparar</label></div></article>`;
-}
-function cmpTable(){
-  const L=S.compare.filter(existe).map(byId);if(L.length<2)return '';
-  const C=L.map(a=>calc(S,a)),row=(l,f)=>`<tr><td>${l}</td>${L.map((a,i)=>`<td>${f(a,C[i])}</td>`).join('')}</tr>`;
-  const mn=f=>C.reduce((b,c,i)=>f(c)<f(C[b])?i:b,0);
-  const con=[`<b>${esc(L[mn(c=>c.cash)].n)}</b> pide menos dinero de entrada: ${usd(C[mn(c=>c.cash)].cash)}.`,
-   `<b>${esc(L[mn(c=>c.cuotaTotal)].n)}</b> tiene la cuota más baja: ${rd(C[mn(c=>c.cuotaTotal)].cuotaTotal)} al mes.`];
-  const wm=L.map((a,i)=>i).filter(i=>L[i].m2);
-  if(wm.length>1){const b=wm.reduce((x,i)=>L[i].m2>L[x].m2?i:x,wm[0]);con.push(`<b>${esc(L[b].n)}</b> es el más grande: ${L[b].m2} m².`);}
-  C.forEach((c,i)=>{if(c.sem==='r')con.push(`<b>${esc(L[i].n)}</b> tiene una cuota más alta de lo que aguanta tu ingreso.`);});
-  return `<section class="card"><h2>Comparación</h2><div class="tw"><table><thead><tr><th></th>${L.map(a=>`<th>${esc(a.n)}</th>`).join('')}</tr></thead><tbody>
-   ${row('Habitaciones',a=>a.h)}${row('Metros',a=>a.m2?a.m2+' m²':'sin dato')}${row('Zona',a=>ZON[a.z])}${row('Precio hoy',(a,c)=>rdm(c.nowRD))}${row('Precio en '+anioFinal(),(a,c)=>rdm(c.futRD))}${row('Precio por m²',(a,c)=>c.ppm2?rd(c.ppm2):'sin dato')}${row('Entrada',(a,c)=>usd(c.iniUSD))}${row('Cierre',(a,c)=>usd(c.cierreUSD))}${row('Necesitas reunir',(a,c)=>usd(c.cash))}${row('Cuota al mes',(a,c)=>rd(c.cuotaTotal))}</tbody></table></div>
-   <ul class="note" style="padding-left:18px;margin-top:12px;display:flex;flex-direction:column;gap:5px">${con.map(x=>`<li>${x}</li>`).join('')}</ul>
-   <p class="note">No decidas solo por el precio: mira también los metros, la zona y la cuota.</p></section>`;
+  const rd=toRD(a.precio,a.moneda),c=calcApt(rd),fav=S.favApts.includes(a.id),esMeta=S.metaAptId===a.id;
+  const rev=a.revisadoEl?new Date(a.revisadoEl).toLocaleDateString('es-DO',{day:'numeric',month:'short'}):'';
+  return `<article class="card apt"><div style="display:flex;gap:10px;align-items:flex-start"><div style="flex:1;min-width:0"><h3>${esc(a.titulo)}</h3>
+   <div class="meta">📍 ${esc(a.sector)} · ${a.hab} hab.${a.banos?' · '+String(a.banos).replace('.5',' ½')+' baños':''}${a.m2?' · '+a.m2+' m²':''}${a.parqueos?' · '+a.parqueos+' parqueo'+(a.parqueos>1?'s':''):''}</div></div>
+   <button class="heart" data-act="favApt" data-v="${a.id}" aria-pressed="${fav}" aria-label="${fav?'Quitar de guardados':'Guardar'}">${fav?'♥':'♡'}</button></div>
+   <div class="price"><b>${fmt(num(a.precio),a.moneda)}</b><span>${a.moneda==='US'?'≈ '+fmt(rd,'RD'):'≈ '+fmt(rd/num(S.tasa),'US')}</span></div>
+   <div class="badges">${esMeta?'<span class="badge gold">⭐ Es tu meta</span>':''}${coincide(a)?'<span class="badge pink">💗 Coincide con lo que buscas</span>':''}${a.bono?'<span class="badge lila">🏷️ Podría aplicar a Bono / Fideicomiso</span>':''}<span class="badge">${esc(a.estado)}</span>
+   ${a.verificado?`<span class="badge ok">✓ Anuncio activo${rev?' ('+rev+')':''}</span>`:'<span class="badge warn">⚠ Ábrelo para confirmar</span>'}</div>
+   <div class="need"><div class="row"><span>Inicial (${num(S.inicialPct)}%)</span><b>${M(c.ini)}</b></div>
+    <div class="row big"><span>${c.faltaIni?'Te faltan para el inicial':'¡Ya tienes el inicial!'}</span><b>${c.faltaIni?M(c.faltaIni):'🎉'}</b></div>
+    <div class="bar"><i style="width:${(c.pct*100).toFixed(1)}%"></i></div>
+    <div class="row" style="margin-top:8px;font-size:13px;color:var(--soft)"><span>Con gastos y mudanza</span><span>${M(c.total)}</span></div>
+    <div class="row" style="font-size:13px;color:var(--soft)"><span>Cuota del banco (aprox.)</span><span>${fmt(c.cuota,'RD')}/mes</span></div></div>
+   ${a.nota?`<p class="note">${esc(a.nota)}</p>`:''}
+   <div class="btnrow"><a class="btn ghost sm" href="${esc(a.url)}" target="_blank" rel="noopener">Ver anuncio en ${esc(a.fuente)}</a>
+   ${esMeta?'':`<button class="btn sm" data-act="usarApt" data-v="${a.id}">Usar como mi meta</button>`}</div></article>`;
 }
 function vApts(){
-  const list=APTS.filter(a=>a.h===S.tipo);
-  return `<section class="card"><h2>Apartamentos</h2><p class="lede">Precios de anuncios de noviembre de 2026. No son ventas cerradas y pueden haber cambiado: confirma con el vendedor.</p>
-   <div class="seg"><button class="chip" data-set="tipo" data-val="3" aria-pressed="${S.tipo===3}">3 habitaciones</button><button class="chip" data-set="tipo" data-val="2" aria-pressed="${S.tipo===2}">2 habitaciones</button></div></section>
-  <section class="card"><h2>Mis supuestos</h2><p class="lede">Cambia esto y todos los números se recalculan.</p>
-   <div class="field"><label>¿Cuánto subirán los precios?</label>${chips([['cons','Poco'],['mod','Lo normal'],['alto','Mucho']],'precioEsc',S.precioEsc)}<div class="h">Nadie lo sabe. Son escenarios para planificar.</div></div>
-   <div class="field" style="margin-top:14px"><label>El dólar cuando compres (RD$)</label>${chips([[57,'57'],[60,'60'],[65,'65'],[70,'70']],'fxFuture',S.fxFuture)}<div class="h">Hoy está cerca de RD$${S.fx0}. Si baja, un apartamento en pesos te cuesta más dólares.</div></div>
-   <div class="field" style="margin-top:14px"><label>Tasa de interés del préstamo</label>${chips([[8,'8%'],[9.5,'9.5%'],[11.5,'11.5%'],[13.5,'13.5%']],'tasa',S.tasa)}<div class="h">El 11.5% es el promedio actual. El 8% solo aplica a vivienda de bajo costo que califique. El banco confirma la real.</div></div>
-   <div class="fields two" style="margin-top:14px">${field('Lo que ganarás al mes en RD$','ingresoRD','')}${field('Entrada mínima (%)','inicialPct','Algunos proyectos piden más.')}</div></section>
-  ${cmpTable()}${list.map(aptCard).join('')}`;
+  const upd=DATA.updatedAt?new Date(DATA.updatedAt).toLocaleDateString('es-DO',{day:'numeric',month:'long',year:'numeric'}):null;
+  const seg=`<div class="seg" role="tablist"><button data-act="aptSeg" data-v="explorar" aria-pressed="${aptSeg==='explorar'}">Explorar</button><button data-act="aptSeg" data-v="guardados" aria-pressed="${aptSeg==='guardados'}">Guardados ♥</button><button data-act="aptSeg" data-v="ideal" aria-pressed="${aptSeg==='ideal'}">Mi ideal</button></div>`;
+  let body='';
+  if(aptSeg==='explorar'){
+    let L=aptList();if(aptFiltro!=='todos')L=L.filter(a=>a.hab===Number(aptFiltro));if(soloIdeal)L=L.filter(coincide);
+    body=`<section class="card"><h2><span class="ic">🔎</span>Explorar apartamentos en SC</h2>
+     <p class="lede">${upd?`Los enlaces se revisan solos cada lunes. Última revisión: ${upd}.`:'Lista guardada en la app.'}${datosEnLinea?'':' (sin conexión: lista guardada)'}</p>
+     <div class="chips" style="margin-top:12px"><button class="chip" data-act="aptFiltro" data-v="todos" aria-pressed="${aptFiltro==='todos'}">Todos</button><button class="chip" data-act="aptFiltro" data-v="3" aria-pressed="${aptFiltro==='3'}">3 habitaciones</button><button class="chip" data-act="aptFiltro" data-v="2" aria-pressed="${aptFiltro==='2'}">2 habitaciones</button><button class="chip" data-act="soloIdeal" aria-pressed="${soloIdeal}">💗 Solo lo que busco</button></div>
+     <p class="note">Precios de anuncios, no ventas cerradas: confirma siempre con el vendedor.</p></section>
+     ${L.length?L.map(aptCard).join(''):`<div class="empty">${BUNNY()}<p>Ningún apartamento coincide con ese filtro.<br>Prueba con “Todos” o ajusta <b>Mi ideal</b>.</p></div>`}
+     <section class="card"><h2><span class="ic">🧭</span>Buscar más en los portales</h2><p class="lede">Abre búsquedas ya filtradas por San Cristóbal.</p>
+     <div class="portales">${(DATA.busquedas||[]).map(b=>`<a class="portal" href="${esc(b.url)}" target="_blank" rel="noopener"><b>${esc(b.nombre)} ↗</b><span>${esc(b.detalle)}</span></a>`).join('')}</div>
+     <p class="note">¿Viste uno que te gustó? Guárdalo en <b>Guardados ♥</b>.</p></section>`;
+  } else if(aptSeg==='guardados'){
+    const F=aptList().filter(a=>S.favApts.includes(a.id));
+    body=`<section class="card"><h2><span class="ic">📌</span>Guardar un apartamento</h2><p class="lede">Pega el link de uno que viste en Instagram, Facebook Marketplace o cualquier portal.</p>
+     <div class="fields"><div class="field"><label for="fv-t">Nombre para recordarlo</label><input id="fv-t" placeholder="Ej.: Apto en Madre Vieja del reel"></div>
+     <div class="field"><label for="fv-u">Link</label><input id="fv-u" type="url" inputmode="url" placeholder="https://…"></div>
+     <div class="field"><label for="fv-p">Precio (opcional)</label><div class="money-in"><input id="fv-p" type="number" inputmode="numeric" placeholder="0"><select id="fv-m" style="width:96px"><option value="RD">RD$</option><option value="US">US$</option></select></div></div>
+     <div class="field"><label for="fv-s">Sector (opcional)</label><select id="fv-s"><option value="">Sin elegir</option>${SECTORES.map(s=>`<option>${s}</option>`).join('')}</select></div>
+     <div class="field"><label for="fv-n">Nota (opcional)</label><input id="fv-n" placeholder="Ej.: me dijeron que quedan 3 unidades"></div></div>
+     <div class="btnrow"><button class="btn block" data-act="guardarFav">Guardar ♥</button></div><p class="note" id="fvMsg"></p></section>
+     ${S.favoritos.length?`<section class="card"><h2><span class="ic">♥</span>Mis links guardados</h2>${S.favoritos.map(f=>`<div class="need" style="margin-top:10px"><div class="row"><b style="color:var(--ink)">${esc(f.titulo)}</b>${f.precio?`<b>${fmt(num(f.precio),f.mon)}</b>`:''}</div>
+       <div style="font-size:13px;color:var(--soft)">${f.sector?'📍 '+esc(f.sector)+' · ':''}Guardado el ${fechaCorta(f.fecha)}${f.nota?' · '+esc(f.nota):''}</div>
+       <div class="btnrow"><a class="btn ghost sm" href="${esc(f.url)}" target="_blank" rel="noopener">Abrir ↗</a>${f.precio?`<button class="btn soft sm" data-act="usarFav" data-v="${f.id}">${S.metaAptId===f.id?'⭐ Es tu meta':'Usar como meta'}</button>`:''}<button class="btn danger sm" data-act="borrarFav" data-v="${f.id}">Borrar</button></div></div>`).join('')}</section>`:''}
+     ${F.length?`<h2 style="margin:18px 4px 0;font-size:17px">De la lista que guardaste ♥</h2>${F.map(aptCard).join('')}`:''}
+     ${!S.favoritos.length&&!F.length?`<div class="empty">${BUNNY()}<p>Todavía no guardaste ninguno.<br>Toca el ♡ en cualquier apartamento o pega un link arriba.</p></div>`:''}`;
+  } else {
+    const I=S.ideal,n=aptList().filter(coincide).length;
+    body=`<section class="card"><h2><span class="ic">✨</span>Mi apartamento ideal</h2><p class="lede">Elige lo que buscas y te marcamos los que coinciden con 💗.</p>
+     <div class="field" style="margin-top:12px"><span class="flabel">Sectores que me gustan</span><div class="chips">${SECTORES.map(s=>`<button class="chip" data-act="idealSector" data-v="${s}" aria-pressed="${I.sectores.includes(s)}">${s}</button>`).join('')}</div></div>
+     <div class="field" style="margin-top:14px"><span class="flabel">Habitaciones</span><div class="chips">${[1,2,3,4].map(h=>`<button class="chip" data-act="ideal" data-k="hab" data-v="${h}" aria-pressed="${I.hab===h}">${h}</button>`).join('')}</div></div>
+     <div class="field" style="margin-top:14px"><span class="flabel">Parqueos</span><div class="chips">${[[1,'1'],[2,'2 o más']].map(([v,l])=>`<button class="chip" data-act="ideal" data-k="parqueos" data-v="${v}" aria-pressed="${I.parqueos===v}">${l}</button>`).join('')}</div></div>
+     <div class="field" style="margin-top:14px"><span class="flabel">Piso</span><div class="chips">${[['cualquiera','Cualquiera'],['bajo','Bajo (1–2)'],['medio','Medio (3–5)'],['alto','Alto (6+)']].map(([v,l])=>`<button class="chip" data-act="ideal" data-k="piso" data-v="${v}" aria-pressed="${I.piso===v}">${l}</button>`).join('')}</div>
+      <div class="h" style="font-size:12px;color:var(--mute);margin-top:4px">Los anuncios casi nunca dicen el piso: pregúntalo al vendedor.</div></div>
+     <div class="field" style="margin-top:14px"><span class="flabel">Bono Primera Vivienda / Fideicomiso</span><div class="chips"><button class="chip" data-act="ideal" data-k="bono" data-v="1" aria-pressed="${!!I.bono}">Sí, que aplique</button><button class="chip" data-act="ideal" data-k="bono" data-v="0" aria-pressed="${!I.bono}">No importa</button></div>
+      <div class="h" style="font-size:12px;color:var(--mute);margin-top:4px">Las viviendas de bajo costo pagan menos impuestos y pueden recibir ayuda del gobierno para la primera casa. Hay que confirmarlo con el banco.</div></div>
+     <div class="simres">${n?`<b>${n} ${n===1?'apartamento coincide':'apartamentos coinciden'}</b> con lo que buscas.`:'Ninguno coincide todavía. Prueba con más sectores.'}</div>
+     <div class="btnrow"><button class="btn block" data-act="verIdeal">Ver los que coinciden</button></div></section>`;
+  }
+  return seg+body;
 }
-// ===== PANTALLA: AJUSTES =====
+
+// ===== Pantalla: ajustes =====
+function field(label,key,hint,attrs=''){const v=key.split('.').reduce((o,k)=>o[k],S);
+  return `<div class="field"><label for="f-${key}">${label}</label><input id="f-${key}" data-k="${key}" ${attrs||'type="number" inputmode="decimal" step="any"'} value="${esc(v)}">${hint?`<div class="h">${hint}</div>`:''}</div>`;}
 function vAjustes(){
-  const nm={bajo:'Proyectos de bajo costo',medio:'Proyectos medios en dólares',premium:'Reventa en Madre Vieja Sur'};
-  return `<section class="card"><h2>Mis datos</h2><div class="fields">${field('Lo que gano al mes (US$)','ingreso')}
-   <div class="field"><label for="f-neto">¿Ese es el dinero que te queda limpio?</label><select id="f-neto" data-k="neto"><option value="pendiente" ${S.neto==='pendiente'?'selected':''}>Todavía no lo sé</option><option value="si" ${S.neto==='si'?'selected':''}>Sí, es lo que me llega</option></select><div class="h">Es decir, después de impuestos.</div></div>
-   ${field('Alquiler (US$ al mes)','renta')}${field('Mis gastos (US$ al mes)','gastos')}${field('Otros gastos (US$ al mes)','otros')}
-   ${field('Lo que ya tengo ahorrado (US$)','ahorroActual')}${field('Meses que me quedan allá','meses','Entre 6 y 60.')}
-   ${field('Mes en que empiezo','inicio',null,'month')}
-   ${field('Fondo de emergencia (US$)','fondo','Este dinero no se toca para el apartamento. Son unos 6 meses de tus gastos.')}
-   ${field('Para viajes e imprevistos (US$)','reserva','Es un cálculo aparte, puedes cambiarlo.')}</div></section>
-  <section class="card"><h2>Mis tres escenarios</h2><p class="lede">Cuánto ahorrarías al mes en cada caso.</p><div class="fields two">${field('Conservador','esc.cons')}${field('Intermedio','esc.int')}${field('Optimista','esc.opt')}</div></section>
-  <section class="card"><h2>Más detalles</h2>
-   <details><summary>Dólar y gastos de cierre</summary><div class="fields" style="padding-bottom:14px">${field('El dólar hoy (RD$)','fx0','Referencia: RD$59.52 el 19 de noviembre de 2026.')}${field('El dólar cuando compres (RD$)','fxFuture')}${field('Gastos de cierre normales (%)','cierreNormal','3% de transferencia más gastos legales. Confírmalo con la DGII, el banco y un abogado.')}${field('Gastos de cierre si es de bajo costo (%)','cierreBajo','Solo si el apartamento califica.')}</div></details>
-   <details><summary>Vivienda de bajo costo</summary><div class="fields" style="padding-bottom:14px">${field('Tope de hoy (RD$)','topeBase','Tope de la DGII para 2026. Debajo de eso hay exención y mejores tasas.')}${field('Cuánto sube al año (%)','topeCrece','Subió cerca de 5% en 2026.')}</div></details>
-   <details><summary>Cuánto subirían los precios (%)</summary><div class="tw" style="padding-bottom:14px"><table><thead><tr><th>Tipo</th><th>Poco</th><th>Normal</th><th>Mucho</th></tr></thead><tbody>
-    ${['bajo','medio','premium'].map(k=>`<tr><td>${nm[k]}</td>${[0,1,2].map(i=>`<td><input type="number" inputmode="decimal" step="any" data-k="g.${k}.${i}" value="${S.g[k][i]}" style="width:74px" aria-label="${nm[k]}"></td>`).join('')}</tr>`).join('')}
-    </tbody></table></div></details>
-   <details><summary>El préstamo</summary><div class="fields two" style="padding-bottom:14px">${field('Años para pagar','plazo')}${field('Tasa anual (%)','tasa')}${field('Seguro y mantenimiento (RD$ al mes)','extras','Es un cálculo aproximado.')}</div></details></section>
-  <section class="card"><h2>Guardar mis datos</h2><p class="lede">Tus datos quedan guardados en este teléfono. Para pasarlos a otro teléfono: toca Copiar y guarda el texto en Notas. En el teléfono nuevo, borra lo que hay en el cuadro, pega tu texto y toca Restaurar.</p>
-   <textarea id="bk" aria-label="Copia de seguridad" autocapitalize="off" autocorrect="off" spellcheck="false">${esc(JSON.stringify(S))}</textarea>
-   <div class="btnrow"><button class="btn" id="dl">Guardar copia en Archivos</button><label class="btn ghost" style="display:inline-flex;align-items:center">Abrir copia<input type="file" id="fl" accept=".json,application/json,text/plain" style="display:none"></label></div>
-   <div class="btnrow"><button class="btn ghost" id="cp">Copiar texto</button><button class="btn ghost" id="rs">Restaurar texto</button></div><p class="note" id="bkmsg">${S.lastBackup?'Última copia: '+new Date(S.lastBackup).toLocaleDateString('es-DO',{day:'numeric',month:'long',year:'numeric'})+'.':'Todavía no has guardado ninguna copia.'}</p></section>
-  <section class="card"><h2>Colores</h2><div class="leg">
-   <div><span class="sw" style="background:var(--amber-bg);border:1.5px solid var(--amber-line)"></span>Amarillo: puedes cambiar este dato.</div>
-   <div><span class="sw" style="background:var(--sage-bg);border:1px solid var(--sage-line)"></span>Verde: va bien, o se calcula solo.</div>
-   <div><span class="sw" style="background:var(--rose-bg)"></span>Rojo: algo que debes revisar.</div></div>
-   <h3>Cómo usar la app</h3><ol class="steps"><li>Completa tus datos aquí, en Ajustes.</li><li>Cada mes anota lo que ahorraste en Inicio.</li><li>Mira tu avance en Mi ahorro.</li><li>Explora los apartamentos y compara.</li></ol></section>
-  <section class="card"><h2>De dónde salen los datos</h2><div class="leg">
-   <div><b>Anuncio leído:</b> se abrió y leyó el anuncio completo.</div><div><b>Visto en buscador:</b> solo se vio un resumen.</div><div><b>Sin verificar:</b> dato sin confirmar.</div></div>
-   <p class="note">Los precios son de anuncios consultados el 22 de noviembre de 2026, no ventas cerradas, y ningún vendedor los confirmó. Lo que suben los precios, el dólar y las tasas son cálculos para planificar, no predicciones. Antes de comprar, confirma los gastos de cierre, el bono y las exenciones con la DGII, el banco y un abogado. Esto no es asesoría financiera ni legal.</p>
-   <h3>Fuentes</h3><ul class="note" style="padding-left:18px;display:flex;flex-direction:column;gap:6px">
-   <li><a href="https://bdrexgroup.com/nueva-resolucion-2026-la-vivienda-de-bajo-costo-ahora-llega-hasta-los-rd5-45-millones/" target="_blank" rel="noopener">Tope de vivienda de bajo costo 2026</a></li>
-   <li><a href="https://hoy.com.do/economia/banreservas-inaugura-tercera-feria-inmobiliaria-nueva-york-lawrence-tasas-9-50_1080155.html" target="_blank" rel="noopener">Banreservas para dominicanos en el exterior</a></li>
-   <li><a href="https://eldia.com.do/comprar-una-vivienda-en-2026-el-inicial-las-tasas-hipotecarias-y-el-peso-de-las-cuotas-familiares/" target="_blank" rel="noopener">Inicial, tasas y cuotas en 2026</a></li>
-   <li><a href="https://www.bancentral.gov.do/" target="_blank" rel="noopener">Banco Central de la República Dominicana</a></li></ul></section>`;
+  const lb=S.lastBackup?new Date(S.lastBackup).toLocaleDateString('es-DO',{day:'numeric',month:'long',year:'numeric'}):null;
+  return `<section class="card"><h2><span class="ic">🎀</span>Sobre ti</h2><div class="fields">${field('Tu nombre','nombre','','type="text" autocomplete="given-name"')}</div></section>
+  <section class="card" id="meta"><h2><span class="ic">🏡</span>Mi meta</h2><p class="lede">Total que necesitas: <b>${M(meta().total)}</b></p>
+   <div class="fields">${field('Precio del apartamento (RD$)','precio',`${M2(num(S.precio))}`)}
+    <div class="field"><span class="flabel">Inicial que pide el banco</span><div class="chips">${[10,20,30].map(p=>`<button class="chip" data-act="setPct" data-v="${p}" aria-pressed="${num(S.inicialPct)===p}">${p}%</button>`).join('')}</div><div class="h">Lo normal es 20%. Algunos proyectos piden 30%.</div></div>
+    <div class="fields two" style="margin:0">${field('Separación (RD$)','reserva','Para apartarlo')}${field('Gastos de cierre (%)','gastosPct','3% impuesto + abogado y tasación')}</div>
+    <div class="fields two" style="margin:0">${field('Mudanza (RD$)','mudanza','Muebles básicos y transporte')}${field('Ahorro con el que empezaste (RD$)','saldoInicial','Lo que ya tenías')}</div></div></section>
+  <section class="card"><h2><span class="ic">💱</span>Moneda</h2>
+   <div class="field" style="margin-top:12px"><span class="flabel">Ver los montos en</span><div class="chips"><button class="chip" data-act="moneda" data-v="RD" aria-pressed="${S.moneda==='RD'}">Pesos (RD$)</button><button class="chip" data-act="moneda" data-v="US" aria-pressed="${S.moneda==='US'}">Dólares (US$)</button></div></div>
+   <div class="fields">${field('Tasa: RD$ por cada US$1','tasa','Cámbiala cuando cambie el dólar. A finales de noviembre de 2026 rondaba RD$59.5–60.')}</div></section>
+  <section class="card"><h2><span class="ic">💾</span>Copia de seguridad</h2>
+   <p class="lede">Tus datos viven solo en este celular. Guarda una copia y mándatela por WhatsApp o súbela a Google Drive: así no pierdes nada si cambias de teléfono.</p>
+   <div class="btnrow"><button class="btn" data-act="exportar">Exportar respaldo</button><label class="btn ghost">Importar respaldo<input type="file" id="imp" accept=".json,application/json,text/plain" class="sr"></label></div>
+   <div class="btnrow"><button class="btn soft block" data-act="csv">Descargar historial para Excel</button></div>
+   <p class="note">${lb?'Última copia: '+lb+'.':'Todavía no has guardado ninguna copia.'}</p></section>
+  <section class="card"><h2><span class="ic">📚</span>De dónde salen los datos</h2>
+   <p class="note">Los apartamentos salen de anuncios públicos de portales dominicanos. Cada lunes se revisa que los enlaces sigan activos y se quitan los que ya no existen. Los precios son de anuncios, no ventas cerradas. Los gastos de cierre, el bono y las exenciones hay que confirmarlos con la DGII, el banco y un abogado. La cuota del banco es aproximada (${TASA_HIPOTECA}% a ${PLAZO_ANOS} años). Esto no es asesoría financiera.</p></section>
+  <section class="card"><h2><span class="ic">🧹</span>Empezar de cero</h2><p class="lede">Borra todos tus registros de este celular.</p>
+   <div class="btnrow"><button class="btn danger block" data-act="reset">Borrar todo</button></div></section>`;
 }
-// ===== NAVEGACIÓN =====
-const IC={inicio:'<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9.5 21v-6h5v6"/>',
- ahorro:'<rect x="3" y="4.5" width="18" height="16" rx="3"/><path d="M3 9.5h18M8 3v3M16 3v3"/><path d="M7.5 14h3M13.5 14h3M7.5 17.5h3"/>',
- apartamentos:'<path d="M4 21V6l7-3v18"/><path d="M11 10h9v11"/><path d="M14.5 14h2M14.5 17.5h2M7 9.5h1M7 13h1M7 16.5h1"/>',
- ajustes:'<circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M21.5 12h-3M5.5 12h-3M18.7 5.3l-2.1 2.1M7.4 16.6l-2.1 2.1M18.7 18.7l-2.1-2.1M7.4 7.4 5.3 5.3"/>'};
-const TABS=[['inicio','Inicio'],['ahorro','Mi ahorro'],['apartamentos','Apartamentos'],['ajustes','Ajustes']];
+
+// ===== Hoja para registrar o corregir un ahorro =====
+let hoja=null;
+function abrirHoja(id){
+  const x=id?S.aportes.find(a=>a.id===id):null;
+  hoja={id:x?x.id:null,monto:x?x.monto:'',mon:x?x.mon:S.moneda,fecha:x?x.fecha:hoyISO(),tag:x?x.tag:'quincena',nota:x?x.nota:''};
+  pintarHoja();setTimeout(()=>{const i=document.getElementById('h-monto');if(i&&!id)i.focus();},350);
+}
+function pintarHoja(){
+  const r=document.getElementById('sheetRoot');if(!hoja){r.innerHTML='';return;}
+  r.innerHTML=`<div class="ov" data-act="cerrarHoja"><div class="sheet" role="dialog" aria-modal="true" aria-label="Registrar ahorro"><div class="grab"></div>
+   <h2>${hoja.id?'Corregir ahorro':'¿Cuánto guardaste? 💗'}</h2>
+   <div class="fields"><div class="field"><label for="h-monto">Monto</label><div class="money-in"><input id="h-monto" class="bigin" type="number" inputmode="decimal" step="any" placeholder="0" value="${esc(hoja.monto)}">
+     <select id="h-mon" style="width:96px"><option value="RD" ${hoja.mon==='RD'?'selected':''}>RD$</option><option value="US" ${hoja.mon==='US'?'selected':''}>US$</option></select></div>
+     <div class="h" id="h-eq"></div></div>
+    <div class="field"><label for="h-fecha">Fecha</label><input id="h-fecha" type="date" value="${esc(hoja.fecha)}" max="${hoyISO()}"></div>
+    <div class="field"><span class="flabel">¿De dónde salió?</span><div class="chips">${TAGS.map(t=>`<button class="chip" data-act="hTag" data-v="${t[0]}" aria-pressed="${hoja.tag===t[0]}">${t[2]} ${t[1]}</button>`).join('')}</div></div>
+    <div class="field"><label for="h-nota">Nota (opcional)</label><input id="h-nota" maxlength="140" placeholder="Ej.: quincena + me resistí a pedir delivery" value="${esc(hoja.nota)}"></div></div>
+   <div class="btnrow"><button class="btn block" data-act="guardarAporte">${hoja.id?'Guardar cambios':'Guardar ahorro'}</button></div>
+   <div class="btnrow">${hoja.id?'<button class="btn danger" data-act="borrarAporte">Borrar</button>':''}<button class="btn ghost" data-act="cerrarHoja" data-force="1">Cancelar</button></div></div></div>`;
+  eqHoja();
+}
+function leerHoja(){if(!hoja)return;const g=id=>document.getElementById(id);hoja.monto=g('h-monto').value;hoja.mon=g('h-mon').value;hoja.fecha=g('h-fecha').value||hoyISO();hoja.nota=g('h-nota').value.trim();}
+function eqHoja(){const g=id=>document.getElementById(id);if(!g('h-eq'))return;const v=num(g('h-monto').value),m=g('h-mon').value;
+  g('h-eq').textContent=v?'≈ '+fmt(m==='US'?v*num(S.tasa):v/num(S.tasa),otra(m)):'';}
+
+// ===== Celebraciones =====
+function toast(m){document.querySelectorAll('.toast').forEach(e=>e.remove());const d=document.createElement('div');d.className='toast';d.textContent=m;document.body.appendChild(d);setTimeout(()=>d.remove(),3500);}
+function confeti(n){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const C=['#EC4899','#F9A8D4','#C084FC','#FFFFFF','#F59E0B'],F=['♥','★','✦','♥','●'];
+  for(let i=0;i<n;i++){const e=document.createElement('span');e.className='cf';e.textContent=F[i%F.length];
+    e.style.cssText=`left:${Math.random()*100}vw;color:${C[i%C.length]};font-size:${11+Math.random()*13}px;--x:${(Math.random()-.5)*180}px;--r:${(Math.random()*900-450)|0}deg;--d:${1.8+Math.random()*1.5}s;animation-delay:${Math.random()*.4}s`;
+    document.body.appendChild(e);setTimeout(()=>e.remove(),4000);}}
+function saltito(){const b=document.getElementById('bunny');if(!b)return;b.classList.remove('hop');void b.getBoundingClientRect();b.classList.add('hop');}
+const FRASES=['¡Guardado! Tu casita está un poquito más cerca 🏡','¡Qué disciplina! 💗','¡Bien hecho! Cada peso cuenta ✨','¡Un pasito más hacia tu llave! 🔑','¡Eso! El conejito está orgulloso de ti 🐰'];
+
+// ===== Archivos =====
+function compartirArchivo(nombre,texto,tipo){
+  const f=new File([texto],nombre,{type:tipo});
+  if(navigator.canShare&&navigator.canShare({files:[f]}))return navigator.share({files:[f],title:nombre}).catch(()=>{});
+  const a=document.createElement('a');a.href=URL.createObjectURL(f);a.download=nombre;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1500);
+}
+const fechaArchivo=()=>hoyISO();
+function csvHistorial(){
+  const q=v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"';const tags=new Map(TAGS.map(t=>[t[0],t[1]]));
+  const filas=[['Fecha','Monto','Moneda','Equivalente RD$','Equivalente US$','Origen','Nota']];
+  S.aportes.slice().sort((a,b)=>a.fecha.localeCompare(b.fecha)).forEach(x=>{const rd=toRD(x.monto,x.mon);filas.push([x.fecha,num(x.monto),x.mon==='US'?'US$':'RD$',Math.round(rd),Math.round(rd/num(S.tasa)),tags.get(x.tag)||'',x.nota||'']);});
+  return '﻿'+filas.map(f=>f.map(q).join(';')).join('\r\n');
+}
+function importar(texto){
+  const o=JSON.parse(texto);if(!o||typeof o!=='object'||Array.isArray(o))throw 0;
+  if(Array.isArray(o.aportes))S=merge(DEF,o);else if('real' in o)S=migrarViejo(o);else throw 0;
+  S.onboarded=true;save();render();toast('Datos restaurados ✅');confeti(40);
+}
+
+// ===== Pintar =====
+const IC={inicio:'<path d="M3.5 11 12 4l8.5 7"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5.5h4V20"/>',
+ ahorros:'<path d="M12 20s-7-4.3-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.7-7 10-7 10z"/>',
+ apartamentos:'<path d="M4 20V7.5L10 4v16"/><path d="M10 9.5h10V20"/><path d="M13.5 13h3M13.5 16.5h3M6.5 9h1M6.5 12.5h1M6.5 16h1"/><path d="M3 20h18"/>',
+ ajustes:'<circle cx="12" cy="12" r="3"/><path d="M12 3v2.5M12 18.5V21M21 12h-2.5M5.5 12H3M18.4 5.6l-1.8 1.8M7.4 16.6l-1.8 1.8M18.4 18.4l-1.8-1.8M7.4 7.4 5.6 5.6"/>'};
+const TABS=[['inicio','Inicio'],['ahorros','Mis ahorros'],['apartamentos','Apartamentos'],['ajustes','Ajustes']];
 function render(){
-  const y=window.scrollY;
+  const y=window.scrollY,app=document.getElementById('app');
+  if(!S.onboarded){document.getElementById('top').innerHTML='';document.getElementById('tabs').innerHTML='';app.innerHTML=vBienvenida();return;}
   if(!TABS.some(t=>t[0]===view))view='inicio';
-  document.getElementById('tabs').innerHTML=TABS.map(([k,l])=>`<button data-tab="${k}" ${view===k?'aria-current="page"':''}><svg viewBox="0 0 24 24" aria-hidden="true">${IC[k]}</svg>${l}</button>`).join('');
-  const V=document.getElementById('view');
-  V.innerHTML=({inicio:vInicio,ahorro:vAhorro,apartamentos:vApts,ajustes:vAjustes})[view]();
-  V.classList.toggle('anim',anim);anim=false;
-  document.getElementById('eyebrow').textContent=view==='inicio'?'Hola, Valery 👋':'Mi plan';
-  const t3=byId(S.obj3);
-  document.getElementById('sub').textContent=view==='inicio'?`Meta: ${t3.n}, ${ZON[t3.z]}`:'Ahorrando para comprar';
+  document.getElementById('top').innerHTML=`<div class="wrap">${BUNNY('bunny')}<div class="grow"><h1>Hola, ${esc(S.nombre||'')} 💗</h1><div class="sub">Rumbo a tu apartamento 🏡</div></div>
+   <div class="cur" role="group" aria-label="Moneda"><button data-act="moneda" data-v="RD" aria-pressed="${S.moneda==='RD'}">RD$</button><button data-act="moneda" data-v="US" aria-pressed="${S.moneda==='US'}">US$</button></div></div>`;
+  document.getElementById('tabs').innerHTML=`<div class="wrap">${TABS.map(([k,l])=>`<button data-act="tab" data-v="${k}" ${view===k?'aria-current="page"':''}><svg viewBox="0 0 24 24" aria-hidden="true">${IC[k]}</svg>${l}</button>`).join('')}</div>`;
+  app.innerHTML=({inicio:vInicio,ahorros:vAhorros,apartamentos:vApts,ajustes:vAjustes})[view]();
+  app.classList.toggle('anim',anim);anim=false;
   window.scrollTo(0,y);
 }
-function toast(m){document.querySelectorAll('.toast').forEach(e=>e.remove());const d=document.createElement('div');d.className='toast';d.textContent=m;document.body.appendChild(d);setTimeout(()=>d.remove(),3300);}
-function confeti(n){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  const C=['#5FC49E','#F2B84B','#E8798A','#7FB3E0','#F6F3EC'];
-  for(let i=0;i<n;i++){const e=document.createElement('i');e.className='cf';
-    e.style.cssText=`left:${Math.random()*100}vw;background:${C[i%C.length]};--x:${(Math.random()-.5)*160}px;--r:${(Math.random()*900-450)|0}deg;--d:${1.6+Math.random()*1.4}s;animation-delay:${Math.random()*.35}s`;
-    document.body.appendChild(e);setTimeout(()=>e.remove(),3500);}}
+function ir(v){anim=view!==v;view=v;if(location.hash!=='#'+v)history.replaceState(null,'','#'+v);window.scrollTo(0,0);render();}
+
+// ===== Eventos =====
 function setPath(p,v){const k=p.split('.');let o=S;for(let i=0;i<k.length-1;i++)o=o[k[i]];o[k[k.length-1]]=v;}
 document.addEventListener('click',e=>{
-  const t=e.target.closest('[data-tab],[data-set],[data-open],[data-obj],#qkb,#cp,#rs,#dl');if(!t)return;
-  if(t.dataset.tab){anim=view!==t.dataset.tab;view=t.dataset.tab;location.hash=view;window.scrollTo(0,0);render();return;}
-  if(t.dataset.set){const k=t.dataset.set;let v=t.dataset.val;if(['fxFuture','tasa','tipo'].includes(k))v=parseFloat(v);S[k]=v;save();render();return;}
-  if(t.dataset.open){open=open===t.dataset.open?null:t.dataset.open;render();return;}
-  if(t.dataset.obj){const a=byId(t.dataset.obj);S[a.h===3?'obj3':'obj2']=a.id;save();view='inicio';location.hash='inicio';window.scrollTo(0,0);render();return;}
-  if(t.id==='qkb'){const el=document.getElementById('qk'),mi=Math.max(0,Math.min(nMeses(S)-1,mesActual()));
-    const meta=()=>num(S.fondo)+num(S.reserva)+calc(S,byId(S.obj3)).cash,p0=acumReal(S)/Math.max(1,meta());
-    if(el.value==='')delete S.real[mi];else S.real[mi]=parseFloat(el.value)||0;save();render();
-    const v=num(S.real[mi]),p1=acumReal(S)/Math.max(1,meta()),hit=[1,.75,.5,.25].find(h=>p0<h&&p1>=h);
-    if(hit){confeti(90);toast(hit===1?'🏠 ¡Llegaste a tu meta, Valery! Lo lograste.':`🎉 ¡Ya llevas el ${hit*100}% de tu meta!`);}
-    else if(v>0){confeti(v>=planMes(S)?50:25);toast(v>=planMes(S)?'¡Mes cumplido! 💪 Sigue así.':'¡Guardado! Cada peso cuenta. 💚');}
+  const t=e.target.closest('[data-act]');if(!t)return;const act=t.dataset.act,v=t.dataset.v;
+  switch(act){
+  case 'tab':case 'ir':return ir(v);
+  case 'moneda':S.moneda=v;save();return render();
+  case 'empezar':{const g=id=>document.getElementById(id);S.nombre=g('w-nombre').value.trim()||'Valery';const p=num(g('w-precio').value);if(p>0){S.precio=p;S.metaAptId=null;S.metaNombre='Mi apartamento';}
+    S.saldoInicial=Math.max(0,num(g('w-ahorro').value));S.onboarded=true;S.ejemplo=false;save();anim=true;window.scrollTo(0,0);render();setTimeout(()=>{saltito();confeti(50);toast(`¡Bienvenida, ${S.nombre}! 💗`);},200);return;}
+  case 'ejemplo':cargarEjemplo();return;
+  case 'salirEjemplo':{const n=S.nombre;S=clone(DEF);S.nombre=n;save();window.scrollTo(0,0);return render();}
+  case 'nuevo':return abrirHoja(null);
+  case 'editar':return abrirHoja(v);
+  case 'cerrarHoja':if(e.target===t||t.dataset.force){leerHoja();hoja=null;pintarHoja();}return;
+  case 'hTag':leerHoja();hoja.tag=v;return pintarHoja();
+  case 'guardarAporte':{leerHoja();const m=num(hoja.monto);if(m<=0){toast('Escribe cuánto guardaste 🙂');return;}
+    const antes=hitos().filter(h=>ahorrado()>=h.v).map(h=>h.k);
+    const reg={id:hoja.id||uid(),fecha:hoja.fecha,monto:m,mon:hoja.mon,tag:hoja.tag,nota:hoja.nota};
+    if(hoja.id){S.aportes=S.aportes.map(a=>a.id===reg.id?reg:a);}else S.aportes.push(reg);
+    if(S.ejemplo)S.ejemplo=false;save();const nuevo=!hoja.id;hoja=null;pintarHoja();
+    const nuevos=hitos().filter(h=>ahorrado()>=h.v&&!antes.includes(h.k));
+    anim=false;render();
+    if(nuevos.length){const h=nuevos[nuevos.length-1];confeti(130);saltito();toast(h.k==='total'?`🔑 ¡${S.nombre}, completaste tu meta! Lo lograste.`:`🎉 ¡Lograste una etapa: ${h.t}!`);}
+    else if(nuevo){confeti(55);saltito();toast(FRASES[Math.floor(Math.random()*FRASES.length)]);}else toast('Cambios guardados ✅');
     return;}
-  if(t.id==='dl'){S.lastBackup=Date.now();save();const txt=JSON.stringify(S),d=new Date(),nm=`mi-apartamento-${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}.json`;
-    const f=new File([txt],nm,{type:'application/json'});
-    if(navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f],title:'Copia de Mi apartamento'}).catch(()=>{});}
-    else{const a=document.createElement('a');a.href=URL.createObjectURL(f);a.download=nm;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1000);}
-    render();toast('Copia lista. Guárdala en Archivos o en iCloud. 💾');return;}
-  if(t.id==='cp'){S.lastBackup=Date.now();save();const ta=document.getElementById('bk'),msg=document.getElementById('bkmsg');ta.focus();ta.select();ta.setSelectionRange(0,ta.value.length);
-    const say=ok=>{msg.textContent=ok?'Copiado.':'Selecciona el texto y cópialo a mano.';};
-    let done=false;try{done=document.execCommand('copy');}catch(_){}
-    if(done){say(true);}
-    else if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(ta.value).then(()=>say(true),()=>say(false));}
-    else say(false);return;}
-  if(t.id==='rs'){try{const o=JSON.parse(document.getElementById('bk').value);if(!o||typeof o!=='object'||Array.isArray(o))throw 0;S=merge(DEF,o);save();render();const m=document.getElementById('bkmsg');if(m)m.textContent='Datos restaurados.';}
-    catch(_){document.getElementById('bkmsg').textContent='Ese texto no sirve, revisa que esté completo.';}}
+  case 'borrarAporte':if(!confirm('¿Borrar este registro? No se puede deshacer.'))return;S.aportes=S.aportes.filter(a=>a.id!==hoja.id);save();hoja=null;pintarHoja();render();toast('Registro borrado');return;
+  case 'histTag':histTag=v;return render();
+  case 'simAnual':sim.anual=v==='1';return render();
+  case 'aptSeg':aptSeg=v;anim=true;window.scrollTo(0,0);return render();
+  case 'aptFiltro':aptFiltro=v;return render();
+  case 'soloIdeal':soloIdeal=!soloIdeal;return render();
+  case 'verIdeal':aptSeg='explorar';soloIdeal=true;aptFiltro='todos';anim=true;window.scrollTo(0,0);return render();
+  case 'favApt':S.favApts=S.favApts.includes(v)?S.favApts.filter(x=>x!==v):[...S.favApts,v];save();render();if(S.favApts.includes(v))toast('Guardado en tus favoritos ♥');return;
+  case 'usarApt':{const a=aptById(v);if(!a)return;S.precio=Math.round(toRD(a.precio,a.moneda));S.metaAptId=a.id;S.metaNombre=a.titulo;save();anim=true;ir('inicio');confeti(40);toast(`⭐ ${a.titulo} es tu nueva meta`);return;}
+  case 'usarFav':{const f=S.favoritos.find(x=>x.id===v);if(!f)return;S.precio=Math.round(toRD(f.precio,f.mon));S.metaAptId=f.id;S.metaNombre=f.titulo;save();ir('inicio');confeti(40);toast(`⭐ ${f.titulo} es tu nueva meta`);return;}
+  case 'guardarFav':{const g=id=>document.getElementById(id),msg=g('fvMsg');let u=g('fv-u').value.trim();if(u&&!/^https?:\/\//i.test(u))u='https://'+u;
+    let ok=false;try{const x=new URL(u);ok=/^https?:$/.test(x.protocol)&&x.hostname.includes('.');}catch(_){}
+    if(!ok){msg.textContent='Ese link no parece válido. Cópialo completo desde el navegador o la app.';return;}
+    S.favoritos.unshift({id:'fav-'+uid(),titulo:g('fv-t').value.trim()||'Apartamento guardado',url:u,precio:num(g('fv-p').value)||null,mon:g('fv-m').value,sector:g('fv-s').value,nota:g('fv-n').value.trim(),fecha:hoyISO()});
+    save();render();toast('Guardado ♥');return;}
+  case 'borrarFav':if(!confirm('¿Borrar este link guardado?'))return;S.favoritos=S.favoritos.filter(f=>f.id!==v);if(S.metaAptId===v)S.metaAptId=null;save();return render();
+  case 'idealSector':{const L=S.ideal.sectores;S.ideal.sectores=L.includes(v)?L.filter(x=>x!==v):[...L,v];save();return render();}
+  case 'ideal':{const k=t.dataset.k;S.ideal[k]=k==='piso'?v:k==='bono'?v==='1':Number(v);save();return render();}
+  case 'setPct':S.inicialPct=Number(v);save();return render();
+  case 'exportar':S.lastBackup=Date.now();save();compartirArchivo(`mi-apartamento-respaldo-${fechaArchivo()}.json`,JSON.stringify(S,null,1),'application/json');render();toast('Respaldo listo 💾 Guárdalo en WhatsApp o Drive');return;
+  case 'csv':if(!S.aportes.length){toast('Todavía no hay ahorros para descargar');return;}compartirArchivo(`mi-apartamento-historial-${fechaArchivo()}.csv`,csvHistorial(),'text/csv');return;
+  case 'reset':if(!confirm('¿Seguro? Se borrarán todos tus registros de este celular. Si no tienes una copia, no se pueden recuperar.'))return;
+    {const n=S.nombre;S=clone(DEF);S.nombre=n;save();ir('inicio');}return;
+  }
+});
+document.addEventListener('input',e=>{
+  const el=e.target;
+  if(el.id==='simR'){sim.mensual=num(el.value);document.getElementById('simM').textContent=M(sim.mensual);document.getElementById('simRes').innerHTML=simTexto(promedioMensual());return;}
+  if(el.id==='simE'){sim.extra=num(el.value);document.getElementById('simRes').innerHTML=simTexto(promedioMensual());return;}
+  if(el.id==='h-monto'||el.id==='h-mon')eqHoja();
 });
 document.addEventListener('change',e=>{
   const el=e.target;
-  if(el.id==='fl'&&el.files[0]){const r=new FileReader();r.onload=()=>{try{const o=JSON.parse(r.result);if(!o||typeof o!=='object'||Array.isArray(o)||!('real' in o))throw 0;S=merge(DEF,o);save();render();toast('Datos restaurados. ✅');}catch(_){toast('Ese archivo no es una copia de la app.');}};r.readAsText(el.files[0]);return;}
-  if(el.dataset.cmp){const id=el.dataset.cmp;let c=S.compare.filter(x=>x!==id);
-    if(el.checked){c.push(id);if(c.length>3)c.shift();}S.compare=c;save();render();return;}
-  if(el.dataset.k){let v=el.value;
-    if(el.type==='number'){if(v===''){if(el.dataset.k.startsWith('real.')){delete S.real[el.dataset.k.slice(5)];save();render();return;}v=0;}else v=parseFloat(v);}
-    setPath(el.dataset.k,v);save();render();}
+  if(el.id==='h-mon'){eqHoja();return;}
+  if(el.id==='imp'&&el.files[0]){const r=new FileReader();r.onload=()=>{try{importar(r.result);}catch(_){toast('Ese archivo no es un respaldo de la app');}};r.readAsText(el.files[0]);el.value='';return;}
+  if(el.dataset.k){let v=el.value;if(el.type==='number'){v=v===''?0:Math.max(0,parseFloat(v)||0);if(el.dataset.k==='tasa'&&v<=0)v=DEF.tasa;}
+    setPath(el.dataset.k,v);if(el.dataset.k==='precio'){S.metaAptId=null;S.metaNombre='Mi apartamento';}save();render();}
 });
-document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='qk'){e.preventDefault();document.getElementById('qkb').click();}});
-window.addEventListener('hashchange',()=>{view=(location.hash||'#inicio').slice(1);render();});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='h-monto'){e.preventDefault();document.querySelector('[data-act="guardarAporte"]').click();}
+  if(e.key==='Escape'&&hoja){hoja=null;pintarHoja();}});
+window.addEventListener('hashchange',()=>{const v=(location.hash||'#inicio').slice(1);if(v!==view){anim=true;view=v;render();}});
+
+function cargarEjemplo(){
+  const n=S.nombre;S=clone(DEF);S.nombre=n||'Valery';S.onboarded=true;S.ejemplo=true;S.saldoInicial=40000;
+  const t=new Date(),add=(mAtras,dia,monto,tag,nota)=>{const d=new Date(t.getFullYear(),t.getMonth()-mAtras,dia);S.aportes.push({id:uid(),fecha:d.toISOString().slice(0,10),monto,mon:'RD',tag,nota});};
+  for(let m=6;m>=0;m--){add(m,15,9000+((m*1300)%4000),'quincena',m===3?'Quincena + me resistí a pedir delivery':'');if(m)add(m,28,8500+((m*900)%3000),'quincena','');}
+  add(5,20,25000,'bono','Bono de desempeño');add(2,10,6500,'venta','Vendí ropa que no usaba');add(1,5,300,'extra','');
+  save();anim=true;window.scrollTo(0,0);render();setTimeout(()=>{saltito();confeti(40);},200);
+}
+
+// ===== Arranque =====
+if('scrollRestoration' in history)history.scrollRestoration='manual';window.scrollTo(0,0);
 render();
-if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+fetch('./data/apartamentos.json',{cache:'no-cache'}).then(r=>r.ok?r.json():Promise.reject()).then(d=>{if(d&&Array.isArray(d.apartamentos)){DATA=d;datosEnLinea=true;if(view==='apartamentos'||view==='inicio')render();}}).catch(()=>{});
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 </script>
 </body>
 </html>
