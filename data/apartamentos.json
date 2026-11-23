@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-23T23:51:28.215Z",
+  "updatedAt": "2026-11-23T23:54:57.328Z",
   "total": 12,
   "apartamentos": [
     {
@@ -18,7 +18,7 @@
       "url": "https://clio-realty-srl.alterestate.com/propiedad/palmeras-del-norte",
       "nota": "Unidades entre RD$4,851,000 y RD$5,025,000. Fideicomiso y bono de primera vivienda según el vendedor.",
       "verificado": true,
-      "revisadoEl": "2026-11-23T23:51:28.215Z",
+      "revisadoEl": "2026-11-23T23:54:57.328Z",
       "aviso": null
     },
     {
@@ -37,7 +37,7 @@
       "url": "https://www.rdcondominio.com/property/apartamento-en-venta-centro-san-cristobal-3-hab-2-bn-1-parqueo",
       "nota": "Residencial cerrado. Anunciado como bajo costo. Pregunta si tiene ascensor.",
       "verificado": true,
-      "revisadoEl": "2026-11-23T23:51:28.215Z",
+      "revisadoEl": "2026-11-23T23:54:57.328Z",
       "aviso": null
     },
     {
@@ -75,7 +75,7 @@
       "url": "https://www.corotos.com.do/anuncio/inmuebles-en-venta/apartamentos/residencial-balcones-de-alta-vista-seguridad-nadrxcy",
       "nota": "Otro corredor (AA Realty) lo ofrece entre US$115,000 y US$140,000. Pide cotización por escrito.",
       "verificado": true,
-      "revisadoEl": "2026-11-23T23:51:28.215Z",
+      "revisadoEl": "2026-11-23T23:54:57.328Z",
       "aviso": null
     },
     {
@@ -94,7 +94,7 @@
       "url": "https://www.corotos.com.do/anuncio/inmuebles-en-venta/apartamentos/residencial-paraiso-de-dios-apartamentos-nuevos-f7h6ame",
       "nota": "Grande y terminado. Confirma la cantidad de habitaciones: un anuncio lo pone como de 2.",
       "verificado": true,
-      "revisadoEl": "2026-11-23T23:51:28.215Z",
+      "revisadoEl": "2026-11-23T23:54:57.328Z",
       "aviso": null
     },
     {
@@ -113,7 +113,7 @@
       "url": "https://melendezvende.com/propiedad/proyecto-de-apartamentos-residencial-dona-gladys-iii-y-iv-1147",
       "nota": "Incluye 2 parqueos. Cerca de la autopista 6 de Noviembre, según el vendedor.",
       "verificado": true,
-      "revisadoEl": "2026-11-23T23:51:28.215Z",
+      "revisadoEl": "2026-11-23T23:54:57.328Z",
       "aviso": null
     },
     {
@@ -132,7 +132,7 @@
       "url": "https://melendezvende.com/propiedad/venta-de-apartamentos-camino-del-sol",
       "nota": "Sector consolidado, pero es de lo más caro por metro cuadrado.",
       "verificado": true,
-      "revisadoEl": "2026-11-23T23:51:28.215Z",
+      "revisadoEl": "2026-11-23T23:54:57.328Z",
       "aviso": null
     },
     {
@@ -170,7 +170,7 @@
       "url": "https://clio-realty-srl.alterestate.com/propiedad/palmeras-del-norte",
       "nota": "Cuesta casi lo mismo que el de 3 habitaciones del mismo proyecto.",
       "verificado": true,
-      "revisadoEl": "2026-11-23T23:51:28.215Z",
+      "revisadoEl": "2026-11-23T23:54:57.328Z",
       "aviso": null
     },
     {
@@ -189,7 +189,7 @@
       "url": "https://melendezvende.com/propiedad/proyecto-de-apartamentos-residencial-dona-gladys-iii-y-iv-1147",
       "nota": "Unidad del 5.º nivel.",
       "verificado": true,
-      "revisadoEl": "2026-11-23T23:51:28.215Z",
+      "revisadoEl": "2026-11-23T23:54:57.328Z",
       "aviso": null
     },
     {
@@ -208,7 +208,7 @@
       "url": "https://melendezvende.com/propiedad/proyecto-de-apartamentos-residencial-dona-gladys-iii-y-iv-1147",
       "nota": "Dos habitaciones grandes, casi del tamaño de un 3 habitaciones.",
       "verificado": true,
-      "revisadoEl": "2026-11-23T23:51:28.215Z",
+      "revisadoEl": "2026-11-23T23:54:57.328Z",
       "aviso": null
     },
     {
@@ -227,7 +227,7 @@
       "url": "https://www.corotos.com.do/anuncio/inmuebles-en-venta/apartamentos/residencial-yanna-1-apartamentos-con-ascensor-y-se-zv4sjjv",
       "nota": "Ascensor y seguridad 24/7.",
       "verificado": true,
-      "revisadoEl": "2026-11-23T23:51:28.215Z",
+      "revisadoEl": "2026-11-23T23:54:57.328Z",
       "aviso": null
     }
   ],
@@ -251,7 +251,7 @@
       "nombre": "Remax RD",
       "detalle": "Apartamentos en venta en San Cristóbal",
       "url": "https://www.remaxrd.com/apartamentos-en-venta-en-san-cristobal",
-      "verificado": true
+      "verificado": false
     },
     {
       "id": "encuentra24",
