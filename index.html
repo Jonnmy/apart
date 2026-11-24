@@ -202,6 +202,16 @@ h1,h2,h3{font-family:var(--title);margin:0;letter-spacing:-.005em}
 .welcome .bunny{width:110px;height:110px;margin:0 auto}
 .welcome h1{font-size:25px;margin-top:6px}
 .welcome .fields{text-align:left}
+.pasos{display:flex;gap:6px;justify-content:center;margin:4px 0 6px}.pasos i{width:28px;height:6px;border-radius:9px;background:var(--line2)}.pasos i.on{background:var(--pri)}
+.opts{display:flex;flex-direction:column;gap:8px;margin-top:14px;text-align:left;max-height:46vh;overflow:auto;padding:2px}
+.opt{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;text-align:left;background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:11px 13px;color:var(--ink);font:inherit}
+.opt small{display:block;color:var(--soft);font-size:13px}.opt .p{font-weight:800;color:var(--pri);white-space:nowrap}
+.opt[aria-pressed=true]{border-color:var(--pri);background:#FCE7F3;box-shadow:0 0 0 2px var(--pri) inset}
+.btn:disabled{opacity:.45;pointer-events:none}
+.metabar{display:flex;align-items:center;gap:10px;margin:12px 0 0;padding:11px 13px;border-radius:16px;border:1.5px solid var(--line);background:#fff;font-size:14px}
+.metabar .grow{flex:1;min-width:0}.metabar b{display:block;font-size:15px}.metabar.ref{background:var(--oro-bg);border-color:#FCD34D}
+.guia ol{margin:8px 0 0;padding-left:20px;font-size:14.5px}.guia li{margin:5px 0}
+.hecho{margin-top:10px;font-size:14px;font-weight:700;color:var(--ok)}
 
 /* Animaciones */
 @media (prefers-reduced-motion:no-preference){
@@ -231,14 +241,17 @@ h1,h2,h3{font-family:var(--title);margin:0;letter-spacing:-.005em}
 'use strict';
 // ===== Datos base =====
 const KEY='apart_sc_v1', OLD_KEY='mi-apartamento-sc';
-const TAGS=[['quincena','Quincena','🌸'],['regalia','Doble sueldo / Regalía','🎁'],['bono','Bono','✨'],['extra','Ingreso extra','💼'],['venta','Venta','🛍️']];
+const TAGS=[['mes','Ahorro del mes','🌸'],['bono','Bono del trabajo','✨'],['extra','Ingreso extra','💼'],['regalo','Regalo','🎁'],['venta','Venta','🛍️']];
+const TAG_ALIAS={quincena:'mes',regalia:'bono'};
+const tagDe=k=>TAGS.find(t=>t[0]===(TAG_ALIAS[k]||k))||TAGS[2];
 const SECTORES=['Madre Vieja Norte','Madre Vieja Sur','Centro','Lavapiés','Canastica','Sainaguá','El Hatillo','Los Nova','Mirador Norte'];
 const TASA_HIPOTECA=11.5, PLAZO_ANOS=20;
-const DEF={v:1,onboarded:false,ejemplo:false,nombre:'Valery',moneda:'RD',tasa:60.5,precio:5025000,metaAptId:'pal3',metaNombre:'Palmeras del Norte',
+const PRECIO_TIPICO=5025000;
+const DEF={v:2,onboarded:false,ejemplo:false,guiaOk:false,nombre:'Valery',moneda:'US',tasa:60.5,precio:PRECIO_TIPICO,metaAptId:null,metaNombre:'',metaElegida:false,planMensualUS:1000,
   inicialPct:20,reserva:50000,gastosPct:4,mudanza:50000,saldoInicial:0,aportes:[],favoritos:[],favApts:[],
   ideal:{sectores:['Madre Vieja Norte','Centro'],hab:3,parqueos:1,piso:'cualquiera',bono:true},lastBackup:0};
 // Copia de la lista para cuando no hay internet (la versión al día está en data/apartamentos.json).
-const FALLBACK=/*FALLBACK*/{"updatedAt":"2026-11-23T23:54:57.328Z","apartamentos":[{"id":"pal3","titulo":"Palmeras del Norte","sector":"Madre Vieja Norte","hab":3,"banos":2,"m2":90,"parqueos":1,"precio":5025000,"moneda":"RD","estado":"Proyecto con unidades disponibles","bono":true,"fuente":"Clio Realty","url":"https://clio-realty-srl.alterestate.com/propiedad/palmeras-del-norte","nota":"Unidades entre RD$4,851,000 y RD$5,025,000. Fideicomiso y bono de primera vivienda según el vendedor.","verificado":true,"revisadoEl":"2026-11-23T23:54:57.328Z","aviso":null},{"id":"ae4378","titulo":"Apartamento en el centro (AE-4378)","sector":"Centro","hab":3,"banos":2,"m2":89,"parqueos":1,"precio":4900000,"moneda":"RD","estado":"Terminado, 4.º piso","bono":true,"fuente":"Condominios del Caribe","url":"https://www.rdcondominio.com/property/apartamento-en-venta-centro-san-cristobal-3-hab-2-bn-1-parqueo","nota":"Residencial cerrado. Anunciado como bajo costo. Pregunta si tiene ascensor.","verificado":true,"revisadoEl":"2026-11-23T23:54:57.328Z","aviso":null},{"id":"ae3837","titulo":"Proyecto en El Hatillo (AE#3837)","sector":"El Hatillo","hab":3,"banos":2,"m2":95,"parqueos":1,"precio":88330,"moneda":"US","estado":"En plano, entrega 2027–2028","bono":true,"fuente":"Encuentra24","url":"https://www.encuentra24.com/dominican-en/real-estate-for-sale-apartments-condos/invest-in-san-cristobal/33031540","nota":"Reserva RD$50,000. Parece el mismo proyecto de Doña Ana que prometía entrega en 2023: pregunta por el retraso.","verificado":false,"revisadoEl":null,"aviso":"El portal no deja revisarlo automáticamente (403)"},{"id":"balc3","titulo":"Balcones de Alta Vista","sector":"Los Nova","hab":3,"banos":2,"m2":104,"parqueos":1,"precio":95000,"moneda":"US","estado":"En construcción","bono":false,"fuente":"Corotos","url":"https://www.corotos.com.do/anuncio/inmuebles-en-venta/apartamentos/residencial-balcones-de-alta-vista-seguridad-nadrxcy","nota":"Otro corredor (AA Realty) lo ofrece entre US$115,000 y US$140,000. Pide cotización por escrito.","verificado":true,"revisadoEl":"2026-11-23T23:54:57.328Z","aviso":null},{"id":"par3","titulo":"Residencial Paraíso de Dios","sector":"Canastica","hab":3,"banos":2,"m2":120,"parqueos":null,"precio":6300000,"moneda":"RD","estado":"Listo para estrenar","bono":false,"fuente":"Corotos","url":"https://www.corotos.com.do/anuncio/inmuebles-en-venta/apartamentos/residencial-paraiso-de-dios-apartamentos-nuevos-f7h6ame","nota":"Grande y terminado. Confirma la cantidad de habitaciones: un anuncio lo pone como de 2.","verificado":true,"revisadoEl":"2026-11-23T23:54:57.328Z","aviso":null},{"id":"dg3","titulo":"Doña Gladys III y IV","sector":"Madre Vieja Norte","hab":3,"banos":2.5,"m2":130,"parqueos":2,"precio":118600,"moneda":"US","estado":"Entrega anunciada mayo 2026","bono":false,"fuente":"Meléndez Vende","url":"https://melendezvende.com/propiedad/proyecto-de-apartamentos-residencial-dona-gladys-iii-y-iv-1147","nota":"Incluye 2 parqueos. Cerca de la autopista 6 de Noviembre, según el vendedor.","verificado":true,"revisadoEl":"2026-11-23T23:54:57.328Z","aviso":null},{"id":"cds3","titulo":"Camino del Sol","sector":"Madre Vieja Sur","hab":3,"banos":2.5,"m2":90,"parqueos":1,"precio":7000000,"moneda":"RD","estado":"Terminado (2020)","bono":false,"fuente":"Meléndez Vende","url":"https://melendezvende.com/propiedad/venta-de-apartamentos-camino-del-sol","nota":"Sector consolidado, pero es de lo más caro por metro cuadrado.","verificado":true,"revisadoEl":"2026-11-23T23:54:57.328Z","aviso":null},{"id":"mir3","titulo":"Ciudad Modelo Mirador Norte","sector":"Mirador Norte","hab":3,"banos":2,"m2":null,"parqueos":1,"precio":110000,"moneda":"US","estado":"En plano, entrega 2027","bono":false,"fuente":"Encuentra24","url":"https://www.encuentra24.com/dominican-en/real-estate-for-sale-apartments-condos/apartamento-en-san-cristobal/33171107","nota":"Precio \"desde\". Pide 10% de separación y 30% durante la obra.","verificado":false,"revisadoEl":null,"aviso":"El portal no deja revisarlo automáticamente (403)"},{"id":"pal2","titulo":"Palmeras del Norte","sector":"Madre Vieja Norte","hab":2,"banos":2,"m2":80,"parqueos":1,"precio":5025000,"moneda":"RD","estado":"Proyecto con unidades disponibles","bono":true,"fuente":"Clio Realty","url":"https://clio-realty-srl.alterestate.com/propiedad/palmeras-del-norte","nota":"Cuesta casi lo mismo que el de 3 habitaciones del mismo proyecto.","verificado":true,"revisadoEl":"2026-11-23T23:54:57.328Z","aviso":null},{"id":"dg2","titulo":"Doña Gladys III y IV","sector":"Madre Vieja Norte","hab":2,"banos":2.5,"m2":101,"parqueos":1,"precio":93400,"moneda":"US","estado":"Entrega anunciada mayo 2026","bono":false,"fuente":"Meléndez Vende","url":"https://melendezvende.com/propiedad/proyecto-de-apartamentos-residencial-dona-gladys-iii-y-iv-1147","nota":"Unidad del 5.º nivel.","verificado":true,"revisadoEl":"2026-11-23T23:54:57.328Z","aviso":null},{"id":"dg2b","titulo":"Doña Gladys III y IV (120 m²)","sector":"Madre Vieja Norte","hab":2,"banos":2.5,"m2":120,"parqueos":1,"precio":102900,"moneda":"US","estado":"Entrega anunciada mayo 2026","bono":false,"fuente":"Meléndez Vende","url":"https://melendezvende.com/propiedad/proyecto-de-apartamentos-residencial-dona-gladys-iii-y-iv-1147","nota":"Dos habitaciones grandes, casi del tamaño de un 3 habitaciones.","verificado":true,"revisadoEl":"2026-11-23T23:54:57.328Z","aviso":null},{"id":"yan2","titulo":"Residencial Yanna I","sector":"Madre Vieja Sur","hab":2,"banos":2,"m2":92,"parqueos":null,"precio":123542,"moneda":"US","estado":"Nuevo","bono":false,"fuente":"Corotos","url":"https://www.corotos.com.do/anuncio/inmuebles-en-venta/apartamentos/residencial-yanna-1-apartamentos-con-ascensor-y-se-zv4sjjv","nota":"Ascensor y seguridad 24/7.","verificado":true,"revisadoEl":"2026-11-23T23:54:57.328Z","aviso":null}],"busquedas":[{"id":"corotos","nombre":"Corotos","detalle":"Apartamentos en venta en San Cristóbal","url":"https://www.corotos.com.do/l/san-cristobal/sc/inmuebles-en-venta/apartamentos","verificado":true},{"id":"supercasas","nombre":"SuperCasas","detalle":"Propiedades en venta en San Cristóbal","url":"https://www.supercasas.com/buscar/?do=1&PriceType=400&Locations=10302&PriceFrom=0&PriceTo=150000000","verificado":true},{"id":"remax","nombre":"Remax RD","detalle":"Apartamentos en venta en San Cristóbal","url":"https://www.remaxrd.com/apartamentos-en-venta-en-san-cristobal","verificado":false},{"id":"encuentra24","nombre":"Encuentra24","detalle":"Apartamentos en venta en San Cristóbal","url":"https://www.encuentra24.com/dominicana-es/bienes-raices-venta-de-propiedades-apartamentos/san-cristobal","verificado":false}]}/*FIN*/;
+const FALLBACK=/*FALLBACK*/{"updatedAt":"2026-11-23T23:51:28.215Z","apartamentos":[{"id":"pal3","titulo":"Palmeras del Norte","sector":"Madre Vieja Norte","hab":3,"banos":2,"m2":90,"parqueos":1,"precio":5025000,"moneda":"RD","estado":"Proyecto con unidades disponibles","bono":true,"fuente":"Clio Realty","url":"https://clio-realty-srl.alterestate.com/propiedad/palmeras-del-norte","nota":"Unidades entre RD$4,851,000 y RD$5,025,000. Fideicomiso y bono de primera vivienda según el vendedor.","verificado":true,"revisadoEl":"2026-11-23T23:51:28.215Z","aviso":null},{"id":"ae4378","titulo":"Apartamento en el centro (AE-4378)","sector":"Centro","hab":3,"banos":2,"m2":89,"parqueos":1,"precio":4900000,"moneda":"RD","estado":"Terminado, 4.º piso","bono":true,"fuente":"Condominios del Caribe","url":"https://www.rdcondominio.com/property/apartamento-en-venta-centro-san-cristobal-3-hab-2-bn-1-parqueo","nota":"Residencial cerrado. Anunciado como bajo costo. Pregunta si tiene ascensor.","verificado":true,"revisadoEl":"2026-11-23T23:51:28.215Z","aviso":null},{"id":"ae3837","titulo":"Proyecto en El Hatillo (AE#3837)","sector":"El Hatillo","hab":3,"banos":2,"m2":95,"parqueos":1,"precio":88330,"moneda":"US","estado":"En plano, entrega 2027–2028","bono":true,"fuente":"Encuentra24","url":"https://www.encuentra24.com/dominican-en/real-estate-for-sale-apartments-condos/invest-in-san-cristobal/33031540","nota":"Reserva RD$50,000. Parece el mismo proyecto de Doña Ana que prometía entrega en 2023: pregunta por el retraso.","verificado":false,"revisadoEl":null,"aviso":"El portal no deja revisarlo automáticamente (403)"},{"id":"balc3","titulo":"Balcones de Alta Vista","sector":"Los Nova","hab":3,"banos":2,"m2":104,"parqueos":1,"precio":95000,"moneda":"US","estado":"En construcción","bono":false,"fuente":"Corotos","url":"https://www.corotos.com.do/anuncio/inmuebles-en-venta/apartamentos/residencial-balcones-de-alta-vista-seguridad-nadrxcy","nota":"Otro corredor (AA Realty) lo ofrece entre US$115,000 y US$140,000. Pide cotización por escrito.","verificado":true,"revisadoEl":"2026-11-23T23:51:28.215Z","aviso":null},{"id":"par3","titulo":"Residencial Paraíso de Dios","sector":"Canastica","hab":3,"banos":2,"m2":120,"parqueos":null,"precio":6300000,"moneda":"RD","estado":"Listo para estrenar","bono":false,"fuente":"Corotos","url":"https://www.corotos.com.do/anuncio/inmuebles-en-venta/apartamentos/residencial-paraiso-de-dios-apartamentos-nuevos-f7h6ame","nota":"Grande y terminado. Confirma la cantidad de habitaciones: un anuncio lo pone como de 2.","verificado":true,"revisadoEl":"2026-11-23T23:51:28.215Z","aviso":null},{"id":"dg3","titulo":"Doña Gladys III y IV","sector":"Madre Vieja Norte","hab":3,"banos":2.5,"m2":130,"parqueos":2,"precio":118600,"moneda":"US","estado":"Entrega anunciada mayo 2026","bono":false,"fuente":"Meléndez Vende","url":"https://melendezvende.com/propiedad/proyecto-de-apartamentos-residencial-dona-gladys-iii-y-iv-1147","nota":"Incluye 2 parqueos. Cerca de la autopista 6 de Noviembre, según el vendedor.","verificado":true,"revisadoEl":"2026-11-23T23:51:28.215Z","aviso":null},{"id":"cds3","titulo":"Camino del Sol","sector":"Madre Vieja Sur","hab":3,"banos":2.5,"m2":90,"parqueos":1,"precio":7000000,"moneda":"RD","estado":"Terminado (2020)","bono":false,"fuente":"Meléndez Vende","url":"https://melendezvende.com/propiedad/venta-de-apartamentos-camino-del-sol","nota":"Sector consolidado, pero es de lo más caro por metro cuadrado.","verificado":true,"revisadoEl":"2026-11-23T23:51:28.215Z","aviso":null},{"id":"mir3","titulo":"Ciudad Modelo Mirador Norte","sector":"Mirador Norte","hab":3,"banos":2,"m2":null,"parqueos":1,"precio":110000,"moneda":"US","estado":"En plano, entrega 2027","bono":false,"fuente":"Encuentra24","url":"https://www.encuentra24.com/dominican-en/real-estate-for-sale-apartments-condos/apartamento-en-san-cristobal/33171107","nota":"Precio \"desde\". Pide 10% de separación y 30% durante la obra.","verificado":false,"revisadoEl":null,"aviso":"El portal no deja revisarlo automáticamente (403)"},{"id":"pal2","titulo":"Palmeras del Norte","sector":"Madre Vieja Norte","hab":2,"banos":2,"m2":80,"parqueos":1,"precio":5025000,"moneda":"RD","estado":"Proyecto con unidades disponibles","bono":true,"fuente":"Clio Realty","url":"https://clio-realty-srl.alterestate.com/propiedad/palmeras-del-norte","nota":"Cuesta casi lo mismo que el de 3 habitaciones del mismo proyecto.","verificado":true,"revisadoEl":"2026-11-23T23:51:28.215Z","aviso":null},{"id":"dg2","titulo":"Doña Gladys III y IV","sector":"Madre Vieja Norte","hab":2,"banos":2.5,"m2":101,"parqueos":1,"precio":93400,"moneda":"US","estado":"Entrega anunciada mayo 2026","bono":false,"fuente":"Meléndez Vende","url":"https://melendezvende.com/propiedad/proyecto-de-apartamentos-residencial-dona-gladys-iii-y-iv-1147","nota":"Unidad del 5.º nivel.","verificado":true,"revisadoEl":"2026-11-23T23:51:28.215Z","aviso":null},{"id":"dg2b","titulo":"Doña Gladys III y IV (120 m²)","sector":"Madre Vieja Norte","hab":2,"banos":2.5,"m2":120,"parqueos":1,"precio":102900,"moneda":"US","estado":"Entrega anunciada mayo 2026","bono":false,"fuente":"Meléndez Vende","url":"https://melendezvende.com/propiedad/proyecto-de-apartamentos-residencial-dona-gladys-iii-y-iv-1147","nota":"Dos habitaciones grandes, casi del tamaño de un 3 habitaciones.","verificado":true,"revisadoEl":"2026-11-23T23:51:28.215Z","aviso":null},{"id":"yan2","titulo":"Residencial Yanna I","sector":"Madre Vieja Sur","hab":2,"banos":2,"m2":92,"parqueos":null,"precio":123542,"moneda":"US","estado":"Nuevo","bono":false,"fuente":"Corotos","url":"https://www.corotos.com.do/anuncio/inmuebles-en-venta/apartamentos/residencial-yanna-1-apartamentos-con-ascensor-y-se-zv4sjjv","nota":"Ascensor y seguridad 24/7.","verificado":true,"revisadoEl":"2026-11-23T23:51:28.215Z","aviso":null}],"busquedas":[{"id":"corotos","nombre":"Corotos","detalle":"Apartamentos en venta en San Cristóbal","url":"https://www.corotos.com.do/l/san-cristobal/sc/inmuebles-en-venta/apartamentos","verificado":true},{"id":"supercasas","nombre":"SuperCasas","detalle":"Propiedades en venta en San Cristóbal","url":"https://www.supercasas.com/buscar/?do=1&PriceType=400&Locations=10302&PriceFrom=0&PriceTo=150000000","verificado":true},{"id":"remax","nombre":"Remax RD","detalle":"Apartamentos en venta en San Cristóbal","url":"https://www.remaxrd.com/apartamentos-en-venta-en-san-cristobal","verificado":true},{"id":"encuentra24","nombre":"Encuentra24","detalle":"Apartamentos en venta en San Cristóbal","url":"https://www.encuentra24.com/dominicana-es/bienes-raices-venta-de-propiedades-apartamentos/san-cristobal","verificado":false}]}/*FIN*/;
 
 // ===== Estado =====
 const clone=o=>JSON.parse(JSON.stringify(o));
@@ -252,17 +265,20 @@ function migrarViejo(o){
   const s=clone(DEF);if(!o||typeof o!=='object')return s;
   const ini=/^\d{4}-\d{2}$/.test(o.inicio)?o.inicio:'2026-11';const[y,m]=ini.split('-').map(Number);
   for(const k of Object.keys(o.real||{})){const v=num(o.real[k]);if(!v&&o.real[k]!==0)continue;
-    const d=new Date(y,m-1+Number(k),15);s.aportes.push({id:uid(),fecha:d.toISOString().slice(0,10),monto:v,mon:'US',tag:'quincena',nota:'Pasado desde la versión anterior'});}
+    const d=new Date(y,m-1+Number(k),15);s.aportes.push({id:uid(),fecha:d.toISOString().slice(0,10),monto:v,mon:'US',tag:'mes',nota:'Pasado desde la versión anterior'});}
   s.saldoInicial=Math.round(num(o.ahorroActual)*s.tasa);
-  s.onboarded=s.aportes.length>0||s.saldoInicial>0;
+  s.onboarded=s.aportes.length>0||s.saldoInicial>0;s.guiaOk=s.onboarded;
   return s;
 }
 function cargar(){
-  try{const r=localStorage.getItem(KEY);if(r)return merge(DEF,JSON.parse(r));}catch(_){}
+  try{const r=localStorage.getItem(KEY);if(r){const o=JSON.parse(r),x=merge(DEF,o);if(num(o.v)<2)x.v=1;return x;}}catch(_){}
   try{const r=localStorage.getItem(OLD_KEY);if(r)return migrarViejo(JSON.parse(r));}catch(_){}
   return clone(DEF);
 }
 let S=cargar();
+// Datos guardados con la versión 1: pasar a dólares y a etiquetas mensuales.
+function subir(){if(num(S.v)<2){S.v=2;S.moneda='US';if(S.metaAptId||num(S.precio)!==PRECIO_TIPICO)S.metaElegida=true;S.aportes.forEach(a=>{if(TAG_ALIAS[a.tag])a.tag=TAG_ALIAS[a.tag];});}}
+subir();
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(_){}}
 
 let DATA=FALLBACK||{apartamentos:[],busquedas:[],updatedAt:null};
@@ -315,7 +331,7 @@ function mensaje(p){
   if(p>=.5)return '¡Más de la mitad! Vas increíble 💪';
   if(p>=.25)return '¡Ya pasaste el 25%! Tu casita te espera 🏡';
   if(p>0)return 'Ya diste el primer paso. ¡Sigue así! 🐰';
-  return '¡Hoy empieza tu historia! Cada peso cuenta 🌱';
+  return '¡Hoy empieza tu historia! Cada dólar cuenta 🌱';
 }
 const aptList=()=>DATA.apartamentos||[];
 const aptById=id=>aptList().find(a=>a.id===id);
@@ -348,37 +364,66 @@ function anillo(p){const r=54,C=2*Math.PI*r,d=Math.max(0,Math.min(1,p));
   <div class="c"><b>${Math.floor(d*100)}%</b><span>de tu meta</span></div></div>`;}
 
 // ===== Pantalla: bienvenida =====
-function vBienvenida(){return `<div class="welcome"><div class="card" style="width:100%">${BUNNY('bunny')}
-  <h1>¡Hola! Vamos a armar tu plan 💗</h1><p class="lede">Solo tres datos y listo. Puedes cambiarlos cuando quieras.</p>
+let paso=1;const wz={nombre:null,ahorro:'',plan:null,apt:null};
+const usd=rd=>fmt(fromRD(rd,'US'),'US');
+function vBienvenida(){
+  if(wz.nombre==null)wz.nombre=S.nombre||'';if(wz.plan==null)wz.plan=num(S.planMensualUS)||1000;
+  const pasos=`<div class="pasos" aria-label="Paso ${paso} de 2"><i class="${paso>=1?'on':''}"></i><i class="${paso>=2?'on':''}"></i></div>`;
+  if(paso===1)return `<div class="welcome"><div class="card" style="width:100%">${BUNNY('bunny')}${pasos}
+  <h1>¡Hola! Vamos a armar tu plan 💗</h1><p class="lede">Esta app te ayuda a ahorrar para el inicial de tu apartamento en San Cristóbal. Todo va en dólares.</p>
   <div class="fields">
-   <div class="field"><label for="w-nombre">¿Cómo te llamas?</label><input id="w-nombre" value="${esc(S.nombre)}" autocomplete="given-name"></div>
-   <div class="field"><label for="w-precio">Precio estimado del apartamento (RD$)</label><input id="w-precio" type="number" inputmode="numeric" placeholder="5,025,000" value="${num(S.precio)||''}">
-     <div class="h">Un 3 habitaciones en San Cristóbal se anuncia entre RD$4.9 y 5.3 millones.</div></div>
-   <div class="field"><label for="w-ahorro">¿Cuánto tienes ahorrado hoy? (RD$)</label><input id="w-ahorro" type="number" inputmode="numeric" placeholder="0"></div>
+   <div class="field"><label for="w-nombre">¿Cómo te llamas?</label><input id="w-nombre" value="${esc(wz.nombre)}" autocomplete="given-name"></div>
+   <div class="field"><label for="w-ahorro">¿Cuánto tienes ahorrado hoy? (US$)</label><input id="w-ahorro" type="number" inputmode="decimal" placeholder="0" value="${esc(wz.ahorro)}">
+     <div class="h">Si todavía no tienes nada, déjalo en 0.</div></div>
+   <div class="field"><label for="w-plan">¿Cuánto piensas ahorrar cada mes? (US$)</label><input id="w-plan" type="number" inputmode="decimal" placeholder="1000" value="${esc(wz.plan)}">
+     <div class="h">Es solo una idea para calcular cuándo llegarías. Puedes cambiarlo luego.</div></div>
   </div>
-  <div class="btnrow"><button class="btn block" data-act="empezar">Empezar mi plan 🐰</button></div>
-  <button class="linkbtn" data-act="ejemplo">Explorar con datos de ejemplo</button></div></div>`;}
+  <div class="btnrow"><button class="btn block" data-act="wzSig">Siguiente →</button></div>
+  <button class="linkbtn" data-act="ejemplo">Solo quiero ver cómo funciona (datos de ejemplo)</button></div></div>`;
+  const L=aptList().slice().sort((a,b)=>toRD(a.precio,a.moneda)-toRD(b.precio,b.moneda));
+  const op=(id,tit,sub,precio)=>`<button class="opt" data-act="wzApt" data-v="${id}" aria-pressed="${wz.apt===id}"><span><b>${tit}</b><small>${sub}</small></span><span class="p">${precio}</span></button>`;
+  return `<div class="welcome"><div class="card" style="width:100%">${pasos}
+  <h1>¿Cuál apartamento te gusta? 🏡</h1><p class="lede">Con su precio calculamos cuánto necesitas para el inicial y los gastos. Si todavía no sabes, no pasa nada: usamos un precio típico y lo cambias cuando quieras.</p>
+  <div class="opts">${op('tipico','Todavía no sé','Usar un precio típico de San Cristóbal',usd(PRECIO_TIPICO))}
+   ${L.map(a=>op(a.id,esc(a.titulo),`📍 ${esc(a.sector)} · ${a.hab} hab.`,usd(toRD(a.precio,a.moneda)))).join('')}</div>
+  <div class="btnrow"><button class="btn block" data-act="empezar" ${wz.apt?'':'disabled'}>Empezar mi plan 🐰</button></div>
+  <button class="linkbtn" data-act="wzAtras">← Volver</button></div></div>`;}
 
 // ===== Pantalla: inicio =====
+const esteMes=()=>{const k=hoyISO().slice(0,7);return S.aportes.filter(x=>x.fecha.slice(0,7)===k).reduce((a,x)=>a+toRD(x.monto,x.mon),0);};
+const planRD=()=>toRD(num(S.planMensualUS)||0,'US');
+const nombreMes=()=>new Date().toLocaleDateString('es-DO',{month:'long'});
 function vInicio(){
-  const a=ahorrado(),m=meta(),p=a/Math.max(1,m.total),falta=Math.max(0,m.total-a),prom=promedioMensual(),k=prom>0?mesesHasta(prom,0,false):Infinity;
+  const a=ahorrado(),m=meta(),p=a/Math.max(1,m.total),falta=Math.max(0,m.total-a),prom=promedioMensual(),plan=planRD();
+  const ritmo=prom>0?prom:plan,k=ritmo>0?mesesHasta(ritmo,0,false):Infinity,mes=esteMes();
   const H=hitos();
   const apt=aptById(S.metaAptId)||S.favoritos.find(f=>f.id===S.metaAptId);
   const nombreMeta=apt?(apt.titulo||apt.nombre):(S.metaNombre||'Mi apartamento');
-  if(sim.mensual==null)sim.mensual=Math.round((prom||20000)/1000)*1000;
+  if(sim.mensual==null)sim.mensual=ritmo||toRD(1000,'US');
   const avisoCopia=!S.ejemplo&&S.aportes.length>=3&&Date.now()-num(S.lastBackup)>45*864e5;
+  const metaBar=S.metaElegida
+    ?`<div class="metabar"><span style="font-size:22px">🏡</span><div class="grow"><span style="color:var(--soft)">Tu meta</span><b>${esc(nombreMeta)}</b><span style="color:var(--soft)">Precio: ${M(m.precio)}</span></div><button class="btn ghost sm" data-act="ir" data-v="apartamentos">Cambiar</button></div>`
+    :`<div class="metabar ref"><span style="font-size:22px">🏡</span><div class="grow"><b>Todavía no eliges apartamento</b><span style="color:var(--soft)">Por ahora calculamos con un precio típico de San Cristóbal (${M(m.precio)}).</span></div><button class="btn sm" data-act="ir" data-v="apartamentos">Elegir</button></div>`;
   return `${S.ejemplo?`<div class="banner gold">👀 Estás viendo <b>datos de ejemplo</b>. Cuando quieras, empieza con los tuyos.<div class="btnrow"><button class="btn sm" data-act="salirEjemplo">Empezar con mis datos</button></div></div>`:''}
+  ${!S.guiaOk&&!S.ejemplo?`<section class="card guia"><h2><span class="ic">🐰</span>Así funciona tu app</h2><ol>
+    <li><b>Cada mes</b>, cuando guardes dinero, anótalo con el botón rosado <b>“Registrar”</b>.</li>
+    <li>El <b>círculo</b> te dice cuánto llevas de todo lo que necesitas para comprar (inicial, gastos y mudanza).</li>
+    <li>En <b>Apartamentos</b> eliges el que te guste y tu meta se ajusta sola.</li>
+    <li>Todo está en <b>dólares</b>. Si quieres verlo en pesos, toca <b>RD$</b> arriba.</li></ol>
+    <div class="btnrow"><button class="btn soft block" data-act="guiaOk">¡Entendido! 💗</button></div></section>`:''}
+  ${metaBar}
   <section class="card"><div class="hero">${anillo(p)}<div>
     <div class="lbl">Llevas ahorrado</div><div class="big">${M(a)}<small>${M2(a)}</small></div>
-    <div class="of">de <b>${M(m.total)}</b> que necesitas</div></div>
+    <div class="of">de <b>${M(m.total)}</b> que necesitas para el inicial, los gastos y la mudanza</div></div>
     <div class="msg">${mensaje(p)}</div>
-    <button class="btn block cta" data-act="nuevo">＋ Registrar ahorro</button></div></section>
+    ${mes>0?`<div class="hecho">✓ Ya registraste ${M(mes)} en ${nombreMes()}</div>`:''}
+    <button class="btn block cta" data-act="nuevo">${mes>0?'＋ Agregar otro ahorro':`＋ Registrar el ahorro de ${nombreMes()}`}</button></div></section>
   ${avisoCopia?`<div class="banner">💾 <b>Guarda una copia de tus datos.</b> ${S.lastBackup?'Hace más de mes y medio que no la guardas.':'Todavía no tienes ninguna.'} Así no pierdes nada si cambias de celular.<div class="btnrow"><button class="btn sm" data-act="exportar">Guardar copia ahora</button></div></div>`:''}
   <div class="kpis" style="margin-top:12px">
-    <div class="kpi p"><div class="l">Ahorrado</div><div class="v">${M(a)}</div><div class="h">${M2(a)}</div></div>
-    <div class="kpi"><div class="l">Te falta</div><div class="v">${M(falta)}</div><div class="h">${falta?M2(falta):'¡Nada! 🎉'}</div></div>
-    <div class="kpi"><div class="l">Promedio al mes</div><div class="v">${prom?M(prom):'—'}</div><div class="h">${prom?'Según tus registros':'Registra tu primer ahorro'}</div></div>
-    <div class="kpi"><div class="l">Llegarías en</div><div class="v">${falta<=0?'¡Ya! 🔑':isFinite(k)?cap(mesTxt(k)):'—'}</div><div class="h">${falta<=0?'Meta completa':isFinite(k)?`En ${k} ${k===1?'mes':'meses'}, a tu ritmo`:'Necesito tus registros'}</div></div>
+    <div class="kpi p"><div class="l">Este mes</div><div class="v">${M(mes)}</div><div class="h">${plan?(mes>=plan?'¡Cumpliste tu plan! 🎉':`Tu plan: ${M(plan)}`):cap(nombreMes())}</div></div>
+    <div class="kpi"><div class="l">Te falta</div><div class="v">${M(falta)}</div><div class="h">${falta?'Para completar tu meta':'¡Nada! 🎉'}</div></div>
+    <div class="kpi"><div class="l">Ahorras al mes</div><div class="v">${ritmo?M(ritmo):'—'}</div><div class="h">${prom>0?'Promedio de tus registros':'Lo que planeaste'}</div></div>
+    <div class="kpi"><div class="l">Llegarías en</div><div class="v">${falta<=0?'¡Ya! 🔑':isFinite(k)?cap(mesTxt(k)):'—'}</div><div class="h">${falta<=0?'Meta completa':isFinite(k)?`En ${k} ${k===1?'mes':'meses'}${prom>0?', a tu ritmo':', con tu plan'}`:'Dime cuánto ahorras al mes'}</div></div>
   </div>
   <section class="card"><h2><span class="ic">🏁</span>Tus metas por etapas</h2><p class="lede">Ve paso a paso: cada etapa es un logro.</p><div class="hitos">
    ${H.map((h,i)=>{const ok=a>=h.v,pr=Math.min(1,a/Math.max(1,h.v));return `<div class="hito ${ok?'done':''}"><div class="dot">${ok?'★':i+1}</div>
@@ -387,41 +432,43 @@ function vInicio(){
   </div></section>
   <section class="card"><h2><span class="ic">🔮</span>¿Qué pasaría si…?</h2><p class="lede">Mueve la barra y mira cuándo llegarías.</p>
    <div class="simv"><span class="flabel" style="margin:0">Si ahorro al mes</span><b id="simM">${M(sim.mensual)}</b></div>
-   <input class="range" type="range" id="simR" min="0" max="${Math.max(200000,Math.ceil(prom*2/5000)*5000)}" step="1000" value="${sim.mensual}" aria-label="Ahorro mensual en el simulador">
-   <div class="field" style="margin-top:6px"><label for="simE">Y un extra (doble sueldo, bono…) en RD$</label><input id="simE" type="number" inputmode="numeric" placeholder="0" value="${sim.extra||''}"></div>
+   <input class="range" type="range" id="simR" min="0" max="${simMax(ritmo)}" step="${simPaso()}" value="${Math.round(fromRD(sim.mensual,S.moneda)/simPaso())*simPaso()}" aria-label="Ahorro mensual en el simulador">
+   <div class="field" style="margin-top:6px"><label for="simE">Y un extra (bono, regalo…) en ${S.moneda==='US'?'US$':'RD$'}</label><input id="simE" type="number" inputmode="decimal" placeholder="0" value="${sim.extra?Math.round(fromRD(sim.extra,S.moneda)):''}"></div>
    <div class="chips" style="margin-top:8px"><button class="chip" data-act="simAnual" data-v="1" aria-pressed="${sim.anual}">Cada diciembre</button><button class="chip" data-act="simAnual" data-v="0" aria-pressed="${!sim.anual}">Una sola vez</button></div>
-   <div class="simres" id="simRes">${simTexto(prom)}</div></section>
-  <section class="card"><h2><span class="ic">🏡</span>Mi meta</h2><p class="lede">${esc(nombreMeta)}</p>
+   <div class="simres" id="simRes">${simTexto(ritmo)}</div></section>
+  <section class="card"><h2><span class="ic">🏡</span>Lo que necesitas</h2><p class="lede">${S.metaElegida?esc(nombreMeta):'Con un precio típico (todavía no eliges apartamento)'}</p>
    <div class="need"><div class="row"><span>Precio del apartamento</span><b>${M(m.precio)}</b></div>
    <div class="row"><span>Inicial (${num(S.inicialPct)}%)</span><b>${M(m.inicial)}</b></div>
    <div class="row"><span>Gastos de cierre (${num(S.gastosPct)}%)</span><b>${M(m.gastos)}</b></div>
    <div class="row"><span>Mudanza básica</span><b>${M(m.mudanza)}</b></div>
    <div class="row big"><span>Total que necesitas</span><b>${M(m.total)}</b></div></div>
-   <div class="btnrow"><button class="btn ghost sm" data-act="ir" data-v="apartamentos">Ver apartamentos</button><button class="btn ghost sm" data-act="ir" data-v="ajustes">Cambiar mi meta</button></div></section>`;
+   <p class="note">El resto del precio lo paga el banco con el préstamo.</p>
+   <div class="btnrow"><button class="btn ghost sm" data-act="ir" data-v="apartamentos">${S.metaElegida?'Ver apartamentos':'Elegir mi apartamento'}</button><button class="btn ghost sm" data-act="ir" data-v="ajustes">Ajustar números</button></div></section>`;
 }
+const simPaso=()=>S.moneda==='US'?50:1000;
+const simMax=r=>{const top=Math.max(fromRD(r,S.moneda)*2,S.moneda==='US'?3000:200000);const s=simPaso()*10;return Math.ceil(top/s)*s;};
 function simTexto(prom){
   const k=mesesHasta(sim.mensual,num(sim.extra),sim.anual);
   if(k===0)return '¡Ya tienes todo lo que necesitas! 🎉';
   if(!isFinite(k))return 'Con ese monto no llegarías. Prueba subiendo la barra 💗';
   let t=`Llegarías en <b>${mesTxt(k)}</b> (en ${k} ${k===1?'mes':'meses'}).`;
-  if(prom>0){const k0=mesesHasta(prom,0,false);if(isFinite(k0)&&k0!==k)t+=`<br>${k0>k?`¡Son <b>${k0-k} ${k0-k===1?'mes':'meses'} antes</b> que a tu ritmo actual! 🐰`:`Sería ${k-k0} ${k-k0===1?'mes':'meses'} más que a tu ritmo actual.`}`;}
+  if(prom>0){const k0=mesesHasta(prom,0,false);if(isFinite(k0)&&k0!==k)t+=`<br>${k0>k?`¡Son <b>${k0-k} ${k0-k===1?'mes':'meses'} antes</b> que a tu ritmo! 🐰`:`Sería ${k-k0} ${k-k0===1?'mes':'meses'} más que a tu ritmo.`}`;}
   return t;
 }
 
 // ===== Pantalla: mis ahorros =====
 function vAhorros(){
-  const tags=new Map(TAGS.map(t=>[t[0],t]));
-  const lista=S.aportes.filter(x=>histTag==='todos'||x.tag===histTag).slice().sort((a,b)=>b.fecha.localeCompare(a.fecha)||b.id.localeCompare(a.id));
+  const lista=S.aportes.filter(x=>histTag==='todos'||tagDe(x.tag)[0]===histTag).slice().sort((a,b)=>b.fecha.localeCompare(a.fecha)||b.id.localeCompare(a.id));
   const grupos=new Map();lista.forEach(x=>{const k=x.fecha.slice(0,7);if(!grupos.has(k))grupos.set(k,[]);grupos.get(k).push(x);});
   const tot=S.aportes.reduce((a,x)=>a+toRD(x.monto,x.mon),0);
   return `<section class="card"><h2><span class="ic">🌸</span>Mis ahorros</h2>
    <p class="lede">${S.aportes.length?`${S.aportes.length} ${S.aportes.length===1?'registro':'registros'} · ${M(tot)} en total${num(S.saldoInicial)?` (más ${M(num(S.saldoInicial))} con los que empezaste)`:''}`:'Aquí verás todo lo que vayas guardando.'}</p>
    <div class="btnrow"><button class="btn block" data-act="nuevo">＋ Registrar ahorro</button></div>
    ${S.aportes.length?`<div class="chips" style="margin-top:12px"><button class="chip" data-act="histTag" data-v="todos" aria-pressed="${histTag==='todos'}">Todos</button>${TAGS.map(t=>`<button class="chip" data-act="histTag" data-v="${t[0]}" aria-pressed="${histTag===t[0]}">${t[2]} ${t[1]}</button>`).join('')}</div>`:''}</section>
-  ${!S.aportes.length?`<div class="empty">${BUNNY()}<p><b>Todavía no hay registros.</b><br>Toca “Registrar ahorro” cuando guardes tu próxima quincena.</p></div>`:
+  ${!S.aportes.length?`<div class="empty">${BUNNY()}<p><b>Todavía no hay registros.</b><br>Toca “Registrar ahorro” cuando guardes tu ahorro del mes.</p></div>`:
    !lista.length?`<div class="empty"><p>No hay registros con esa etiqueta.</p></div>`:
    [...grupos].map(([k,xs])=>`<div class="mes"><h3><span>${cap(ymd(k+'-01').toLocaleDateString('es-DO',{month:'long',year:'numeric'}))}</span><span>${M(xs.reduce((a,x)=>a+toRD(x.monto,x.mon),0))}</span></h3>
-    ${xs.map(x=>{const t=tags.get(x.tag)||TAGS[3];const rd=toRD(x.monto,x.mon);return `<button class="item" data-act="editar" data-v="${x.id}"><span class="em">${t[2]}</span><span><span class="t">${esc(t[1])}</span><span class="n">${fechaCorta(x.fecha)}${x.nota?' · '+esc(x.nota):''}</span></span><span class="m">${fmt(num(x.monto),x.mon)}<small>${x.mon===S.moneda?M2(rd):M(rd)}</small></span></button>`;}).join('')}</div>`).join('')}
+    ${xs.map(x=>{const t=tagDe(x.tag);const rd=toRD(x.monto,x.mon);return `<button class="item" data-act="editar" data-v="${x.id}"><span class="em">${t[2]}</span><span><span class="t">${esc(t[1])}</span><span class="n">${fechaCorta(x.fecha)}${x.nota?' · '+esc(x.nota):''}</span></span><span class="m">${fmt(num(x.monto),x.mon)}<small>${x.mon===S.moneda?M2(rd):M(rd)}</small></span></button>`;}).join('')}</div>`).join('')}
   ${S.aportes.length?'<p class="note" style="text-align:center">Toca un registro para corregirlo o borrarlo.</p>':''}`;
 }
 
@@ -439,7 +486,7 @@ function aptCard(a){
     <div class="row big"><span>${c.faltaIni?'Te faltan para el inicial':'¡Ya tienes el inicial!'}</span><b>${c.faltaIni?M(c.faltaIni):'🎉'}</b></div>
     <div class="bar"><i style="width:${(c.pct*100).toFixed(1)}%"></i></div>
     <div class="row" style="margin-top:8px;font-size:13px;color:var(--soft)"><span>Con gastos y mudanza</span><span>${M(c.total)}</span></div>
-    <div class="row" style="font-size:13px;color:var(--soft)"><span>Cuota del banco (aprox.)</span><span>${fmt(c.cuota,'RD')}/mes</span></div></div>
+    <div class="row" style="font-size:13px;color:var(--soft)"><span>Cuota del banco (aprox.)</span><span>${M(c.cuota)}/mes</span></div></div>
    ${a.nota?`<p class="note">${esc(a.nota)}</p>`:''}
    <div class="btnrow"><a class="btn ghost sm" href="${esc(a.url)}" target="_blank" rel="noopener">Ver anuncio en ${esc(a.fuente)}</a>
    ${esMeta?'':`<button class="btn sm" data-act="usarApt" data-v="${a.id}">Usar como mi meta</button>`}</div></article>`;
@@ -463,7 +510,7 @@ function vApts(){
     body=`<section class="card"><h2><span class="ic">📌</span>Guardar un apartamento</h2><p class="lede">Pega el link de uno que viste en Instagram, Facebook Marketplace o cualquier portal.</p>
      <div class="fields"><div class="field"><label for="fv-t">Nombre para recordarlo</label><input id="fv-t" placeholder="Ej.: Apto en Madre Vieja del reel"></div>
      <div class="field"><label for="fv-u">Link</label><input id="fv-u" type="url" inputmode="url" placeholder="https://…"></div>
-     <div class="field"><label for="fv-p">Precio (opcional)</label><div class="money-in"><input id="fv-p" type="number" inputmode="numeric" placeholder="0"><select id="fv-m" style="width:96px"><option value="RD">RD$</option><option value="US">US$</option></select></div></div>
+     <div class="field"><label for="fv-p">Precio (opcional)</label><div class="money-in"><input id="fv-p" type="number" inputmode="numeric" placeholder="0"><select id="fv-m" style="width:96px"><option value="US">US$</option><option value="RD">RD$</option></select></div></div>
      <div class="field"><label for="fv-s">Sector (opcional)</label><select id="fv-s"><option value="">Sin elegir</option>${SECTORES.map(s=>`<option>${s}</option>`).join('')}</select></div>
      <div class="field"><label for="fv-n">Nota (opcional)</label><input id="fv-n" placeholder="Ej.: me dijeron que quedan 3 unidades"></div></div>
      <div class="btnrow"><button class="btn block" data-act="guardarFav">Guardar ♥</button></div><p class="note" id="fvMsg"></p></section>
@@ -491,16 +538,19 @@ function vApts(){
 // ===== Pantalla: ajustes =====
 function field(label,key,hint,attrs=''){const v=key.split('.').reduce((o,k)=>o[k],S);
   return `<div class="field"><label for="f-${key}">${label}</label><input id="f-${key}" data-k="${key}" ${attrs||'type="number" inputmode="decimal" step="any"'} value="${esc(v)}">${hint?`<div class="h">${hint}</div>`:''}</div>`;}
+const SIM=()=>S.moneda==='US'?'US$':'RD$';
+function fieldM(label,key,hint){const v=Math.round(fromRD(num(S[key]),S.moneda));
+  return `<div class="field"><label for="f-${key}">${label} (${SIM()})</label><input id="f-${key}" data-k="${key}" data-money="1" type="number" inputmode="decimal" step="any" value="${v}"><div class="h">${hint?hint+' · ':''}${M2(num(S[key]))}</div></div>`;}
 function vAjustes(){
   const lb=S.lastBackup?new Date(S.lastBackup).toLocaleDateString('es-DO',{day:'numeric',month:'long',year:'numeric'}):null;
-  return `<section class="card"><h2><span class="ic">🎀</span>Sobre ti</h2><div class="fields">${field('Tu nombre','nombre','','type="text" autocomplete="given-name"')}</div></section>
+  return `<section class="card"><h2><span class="ic">🎀</span>Sobre ti</h2><div class="fields">${field('Tu nombre','nombre','','type="text" autocomplete="given-name"')}${field('Cuánto piensas ahorrar al mes (US$)','planMensualUS','Se usa para calcular cuándo llegarías mientras no tengas registros.')}</div></section>
   <section class="card" id="meta"><h2><span class="ic">🏡</span>Mi meta</h2><p class="lede">Total que necesitas: <b>${M(meta().total)}</b></p>
-   <div class="fields">${field('Precio del apartamento (RD$)','precio',`${M2(num(S.precio))}`)}
+   <div class="fields">${fieldM('Precio del apartamento','precio',S.metaElegida?'':'Precio típico mientras eliges')}
     <div class="field"><span class="flabel">Inicial que pide el banco</span><div class="chips">${[10,20,30].map(p=>`<button class="chip" data-act="setPct" data-v="${p}" aria-pressed="${num(S.inicialPct)===p}">${p}%</button>`).join('')}</div><div class="h">Lo normal es 20%. Algunos proyectos piden 30%.</div></div>
-    <div class="fields two" style="margin:0">${field('Separación (RD$)','reserva','Para apartarlo')}${field('Gastos de cierre (%)','gastosPct','3% impuesto + abogado y tasación')}</div>
-    <div class="fields two" style="margin:0">${field('Mudanza (RD$)','mudanza','Muebles básicos y transporte')}${field('Ahorro con el que empezaste (RD$)','saldoInicial','Lo que ya tenías')}</div></div></section>
+    <div class="fields two" style="margin:0">${fieldM('Separación','reserva','Para apartarlo')}${field('Gastos de cierre (%)','gastosPct','3% impuesto + abogado y tasación')}</div>
+    <div class="fields two" style="margin:0">${fieldM('Mudanza','mudanza','Muebles y transporte')}${fieldM('Ahorro con el que empezaste','saldoInicial','Lo que ya tenías')}</div></div></section>
   <section class="card"><h2><span class="ic">💱</span>Moneda</h2>
-   <div class="field" style="margin-top:12px"><span class="flabel">Ver los montos en</span><div class="chips"><button class="chip" data-act="moneda" data-v="RD" aria-pressed="${S.moneda==='RD'}">Pesos (RD$)</button><button class="chip" data-act="moneda" data-v="US" aria-pressed="${S.moneda==='US'}">Dólares (US$)</button></div></div>
+   <div class="field" style="margin-top:12px"><span class="flabel">Ver los montos en</span><div class="chips"><button class="chip" data-act="moneda" data-v="US" aria-pressed="${S.moneda==='US'}">Dólares (US$)</button><button class="chip" data-act="moneda" data-v="RD" aria-pressed="${S.moneda==='RD'}">Pesos (RD$)</button></div><div class="h" style="font-size:12px;color:var(--mute);margin-top:4px">Lo normal es dólares. Pesos es solo para ver cuánto sería en RD$.</div></div>
    <div class="fields">${field('Tasa: RD$ por cada US$1','tasa','Cámbiala cuando cambie el dólar. A finales de noviembre de 2026 rondaba RD$59.5–60.')}</div></section>
   <section class="card"><h2><span class="ic">💾</span>Copia de seguridad</h2>
    <p class="lede">Tus datos viven solo en este celular. Guarda una copia y mándatela por WhatsApp o súbela a Google Drive: así no pierdes nada si cambias de teléfono.</p>
@@ -517,7 +567,7 @@ function vAjustes(){
 let hoja=null;
 function abrirHoja(id){
   const x=id?S.aportes.find(a=>a.id===id):null;
-  hoja={id:x?x.id:null,monto:x?x.monto:'',mon:x?x.mon:S.moneda,fecha:x?x.fecha:hoyISO(),tag:x?x.tag:'quincena',nota:x?x.nota:''};
+  hoja={id:x?x.id:null,monto:x?x.monto:'',mon:x?x.mon:'US',fecha:x?x.fecha:hoyISO(),tag:x?(TAG_ALIAS[x.tag]||x.tag):'mes',nota:x?x.nota:''};
   pintarHoja();setTimeout(()=>{const i=document.getElementById('h-monto');if(i&&!id)i.focus();},350);
 }
 function pintarHoja(){
@@ -525,11 +575,11 @@ function pintarHoja(){
   r.innerHTML=`<div class="ov" data-act="cerrarHoja"><div class="sheet" role="dialog" aria-modal="true" aria-label="Registrar ahorro"><div class="grab"></div>
    <h2>${hoja.id?'Corregir ahorro':'¿Cuánto guardaste? 💗'}</h2>
    <div class="fields"><div class="field"><label for="h-monto">Monto</label><div class="money-in"><input id="h-monto" class="bigin" type="number" inputmode="decimal" step="any" placeholder="0" value="${esc(hoja.monto)}">
-     <select id="h-mon" style="width:96px"><option value="RD" ${hoja.mon==='RD'?'selected':''}>RD$</option><option value="US" ${hoja.mon==='US'?'selected':''}>US$</option></select></div>
+     <select id="h-mon" style="width:96px"><option value="US" ${hoja.mon==='US'?'selected':''}>US$</option><option value="RD" ${hoja.mon==='RD'?'selected':''}>RD$</option></select></div>
      <div class="h" id="h-eq"></div></div>
     <div class="field"><label for="h-fecha">Fecha</label><input id="h-fecha" type="date" value="${esc(hoja.fecha)}" max="${hoyISO()}"></div>
     <div class="field"><span class="flabel">¿De dónde salió?</span><div class="chips">${TAGS.map(t=>`<button class="chip" data-act="hTag" data-v="${t[0]}" aria-pressed="${hoja.tag===t[0]}">${t[2]} ${t[1]}</button>`).join('')}</div></div>
-    <div class="field"><label for="h-nota">Nota (opcional)</label><input id="h-nota" maxlength="140" placeholder="Ej.: quincena + me resistí a pedir delivery" value="${esc(hoja.nota)}"></div></div>
+    <div class="field"><label for="h-nota">Nota (opcional)</label><input id="h-nota" maxlength="140" placeholder="Ej.: lo que me sobró del mes 💪" value="${esc(hoja.nota)}"></div></div>
    <div class="btnrow"><button class="btn block" data-act="guardarAporte">${hoja.id?'Guardar cambios':'Guardar ahorro'}</button></div>
    <div class="btnrow">${hoja.id?'<button class="btn danger" data-act="borrarAporte">Borrar</button>':''}<button class="btn ghost" data-act="cerrarHoja" data-force="1">Cancelar</button></div></div></div>`;
   eqHoja();
@@ -546,7 +596,7 @@ function confeti(n){if(matchMedia('(prefers-reduced-motion: reduce)').matches)re
     e.style.cssText=`left:${Math.random()*100}vw;color:${C[i%C.length]};font-size:${11+Math.random()*13}px;--x:${(Math.random()-.5)*180}px;--r:${(Math.random()*900-450)|0}deg;--d:${1.8+Math.random()*1.5}s;animation-delay:${Math.random()*.4}s`;
     document.body.appendChild(e);setTimeout(()=>e.remove(),4000);}}
 function saltito(){const b=document.getElementById('bunny');if(!b)return;b.classList.remove('hop');void b.getBoundingClientRect();b.classList.add('hop');}
-const FRASES=['¡Guardado! Tu casita está un poquito más cerca 🏡','¡Qué disciplina! 💗','¡Bien hecho! Cada peso cuenta ✨','¡Un pasito más hacia tu llave! 🔑','¡Eso! El conejito está orgulloso de ti 🐰'];
+const FRASES=['¡Guardado! Tu casita está un poquito más cerca 🏡','¡Qué disciplina! 💗','¡Bien hecho! Cada dólar cuenta ✨','¡Un pasito más hacia tu llave! 🔑','¡Eso! El conejito está orgulloso de ti 🐰'];
 
 // ===== Archivos =====
 function compartirArchivo(nombre,texto,tipo){
@@ -556,14 +606,14 @@ function compartirArchivo(nombre,texto,tipo){
 }
 const fechaArchivo=()=>hoyISO();
 function csvHistorial(){
-  const q=v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"';const tags=new Map(TAGS.map(t=>[t[0],t[1]]));
+  const q=v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"';
   const filas=[['Fecha','Monto','Moneda','Equivalente RD$','Equivalente US$','Origen','Nota']];
-  S.aportes.slice().sort((a,b)=>a.fecha.localeCompare(b.fecha)).forEach(x=>{const rd=toRD(x.monto,x.mon);filas.push([x.fecha,num(x.monto),x.mon==='US'?'US$':'RD$',Math.round(rd),Math.round(rd/num(S.tasa)),tags.get(x.tag)||'',x.nota||'']);});
+  S.aportes.slice().sort((a,b)=>a.fecha.localeCompare(b.fecha)).forEach(x=>{const rd=toRD(x.monto,x.mon);filas.push([x.fecha,num(x.monto),x.mon==='US'?'US$':'RD$',Math.round(rd),Math.round(rd/num(S.tasa)),tagDe(x.tag)[1],x.nota||'']);});
   return '﻿'+filas.map(f=>f.map(q).join(';')).join('\r\n');
 }
 function importar(texto){
   const o=JSON.parse(texto);if(!o||typeof o!=='object'||Array.isArray(o))throw 0;
-  if(Array.isArray(o.aportes))S=merge(DEF,o);else if('real' in o)S=migrarViejo(o);else throw 0;
+  if(Array.isArray(o.aportes)){S=merge(DEF,o);if(num(o.v)<2)S.v=1;subir();}else if('real' in o)S=migrarViejo(o);else throw 0;
   S.onboarded=true;save();render();toast('Datos restaurados ✅');confeti(40);
 }
 
@@ -578,7 +628,7 @@ function render(){
   if(!S.onboarded){document.getElementById('top').innerHTML='';document.getElementById('tabs').innerHTML='';app.innerHTML=vBienvenida();return;}
   if(!TABS.some(t=>t[0]===view))view='inicio';
   document.getElementById('top').innerHTML=`<div class="wrap">${BUNNY('bunny')}<div class="grow"><h1>Hola, ${esc(S.nombre||'')} 💗</h1><div class="sub">Rumbo a tu apartamento 🏡</div></div>
-   <div class="cur" role="group" aria-label="Moneda"><button data-act="moneda" data-v="RD" aria-pressed="${S.moneda==='RD'}">RD$</button><button data-act="moneda" data-v="US" aria-pressed="${S.moneda==='US'}">US$</button></div></div>`;
+   <div class="cur" role="group" aria-label="Moneda"><button data-act="moneda" data-v="US" aria-pressed="${S.moneda==='US'}">US$</button><button data-act="moneda" data-v="RD" aria-pressed="${S.moneda==='RD'}">RD$</button></div></div>`;
   document.getElementById('tabs').innerHTML=`<div class="wrap">${TABS.map(([k,l])=>`<button data-act="tab" data-v="${k}" ${view===k?'aria-current="page"':''}><svg viewBox="0 0 24 24" aria-hidden="true">${IC[k]}</svg>${l}</button>`).join('')}</div>`;
   app.innerHTML=({inicio:vInicio,ahorros:vAhorros,apartamentos:vApts,ajustes:vAjustes})[view]();
   app.classList.toggle('anim',anim);anim=false;
@@ -587,16 +637,24 @@ function render(){
 function ir(v){anim=view!==v;view=v;if(location.hash!=='#'+v)history.replaceState(null,'','#'+v);window.scrollTo(0,0);render();}
 
 // ===== Eventos =====
+function leerWz(){const g=id=>document.getElementById(id);if(g('w-nombre'))wz.nombre=g('w-nombre').value;if(g('w-ahorro'))wz.ahorro=g('w-ahorro').value;if(g('w-plan'))wz.plan=g('w-plan').value;}
 function setPath(p,v){const k=p.split('.');let o=S;for(let i=0;i<k.length-1;i++)o=o[k[i]];o[k[k.length-1]]=v;}
 document.addEventListener('click',e=>{
   const t=e.target.closest('[data-act]');if(!t)return;const act=t.dataset.act,v=t.dataset.v;
   switch(act){
   case 'tab':case 'ir':return ir(v);
   case 'moneda':S.moneda=v;save();return render();
-  case 'empezar':{const g=id=>document.getElementById(id);S.nombre=g('w-nombre').value.trim()||'Valery';const p=num(g('w-precio').value);if(p>0){S.precio=p;S.metaAptId=null;S.metaNombre='Mi apartamento';}
-    S.saldoInicial=Math.max(0,num(g('w-ahorro').value));S.onboarded=true;S.ejemplo=false;save();anim=true;window.scrollTo(0,0);render();setTimeout(()=>{saltito();confeti(50);toast(`¡Bienvenida, ${S.nombre}! 💗`);},200);return;}
+  case 'wzSig':leerWz();paso=2;anim=true;window.scrollTo(0,0);return render();
+  case 'wzAtras':paso=1;anim=true;return render();
+  case 'wzApt':wz.apt=v;return render();
+  case 'guiaOk':S.guiaOk=true;save();return render();
+  case 'empezar':{if(!wz.apt)return;S.nombre=String(wz.nombre||'').trim()||'Valery';S.planMensualUS=Math.max(0,num(wz.plan));
+    const a=wz.apt==='tipico'?null:aptById(wz.apt);
+    if(a){S.precio=Math.round(toRD(a.precio,a.moneda));S.metaAptId=a.id;S.metaNombre=a.titulo;S.metaElegida=true;}
+    else{S.precio=PRECIO_TIPICO;S.metaAptId=null;S.metaNombre='';S.metaElegida=false;}
+    S.moneda='US';sim.mensual=null;S.saldoInicial=Math.round(toRD(Math.max(0,num(wz.ahorro)),'US'));S.onboarded=true;S.ejemplo=false;save();anim=true;window.scrollTo(0,0);render();setTimeout(()=>{saltito();confeti(50);toast(`¡Bienvenida, ${S.nombre}! 💗`);},200);return;}
   case 'ejemplo':cargarEjemplo();return;
-  case 'salirEjemplo':{const n=S.nombre;S=clone(DEF);S.nombre=n;save();window.scrollTo(0,0);return render();}
+  case 'salirEjemplo':{const n=S.nombre;S=clone(DEF);S.nombre=n;paso=1;wz.apt=null;wz.nombre=n;sim.mensual=null;save();window.scrollTo(0,0);return render();}
   case 'nuevo':return abrirHoja(null);
   case 'editar':return abrirHoja(v);
   case 'cerrarHoja':if(e.target===t||t.dataset.force){leerHoja();hoja=null;pintarHoja();}return;
@@ -619,27 +677,28 @@ document.addEventListener('click',e=>{
   case 'soloIdeal':soloIdeal=!soloIdeal;return render();
   case 'verIdeal':aptSeg='explorar';soloIdeal=true;aptFiltro='todos';anim=true;window.scrollTo(0,0);return render();
   case 'favApt':S.favApts=S.favApts.includes(v)?S.favApts.filter(x=>x!==v):[...S.favApts,v];save();render();if(S.favApts.includes(v))toast('Guardado en tus favoritos ♥');return;
-  case 'usarApt':{const a=aptById(v);if(!a)return;S.precio=Math.round(toRD(a.precio,a.moneda));S.metaAptId=a.id;S.metaNombre=a.titulo;save();anim=true;ir('inicio');confeti(40);toast(`⭐ ${a.titulo} es tu nueva meta`);return;}
-  case 'usarFav':{const f=S.favoritos.find(x=>x.id===v);if(!f)return;S.precio=Math.round(toRD(f.precio,f.mon));S.metaAptId=f.id;S.metaNombre=f.titulo;save();ir('inicio');confeti(40);toast(`⭐ ${f.titulo} es tu nueva meta`);return;}
+  case 'usarApt':{const a=aptById(v);if(!a)return;S.precio=Math.round(toRD(a.precio,a.moneda));S.metaAptId=a.id;S.metaNombre=a.titulo;S.metaElegida=true;save();anim=true;ir('inicio');confeti(40);toast(`⭐ ${a.titulo} es tu nueva meta`);return;}
+  case 'usarFav':{const f=S.favoritos.find(x=>x.id===v);if(!f)return;S.precio=Math.round(toRD(f.precio,f.mon));S.metaAptId=f.id;S.metaNombre=f.titulo;S.metaElegida=true;save();ir('inicio');confeti(40);toast(`⭐ ${f.titulo} es tu nueva meta`);return;}
   case 'guardarFav':{const g=id=>document.getElementById(id),msg=g('fvMsg');let u=g('fv-u').value.trim();if(u&&!/^https?:\/\//i.test(u))u='https://'+u;
     let ok=false;try{const x=new URL(u);ok=/^https?:$/.test(x.protocol)&&x.hostname.includes('.');}catch(_){}
     if(!ok){msg.textContent='Ese link no parece válido. Cópialo completo desde el navegador o la app.';return;}
     S.favoritos.unshift({id:'fav-'+uid(),titulo:g('fv-t').value.trim()||'Apartamento guardado',url:u,precio:num(g('fv-p').value)||null,mon:g('fv-m').value,sector:g('fv-s').value,nota:g('fv-n').value.trim(),fecha:hoyISO()});
     save();render();toast('Guardado ♥');return;}
-  case 'borrarFav':if(!confirm('¿Borrar este link guardado?'))return;S.favoritos=S.favoritos.filter(f=>f.id!==v);if(S.metaAptId===v)S.metaAptId=null;save();return render();
+  case 'borrarFav':if(!confirm('¿Borrar este link guardado?'))return;S.favoritos=S.favoritos.filter(f=>f.id!==v);if(S.metaAptId===v){S.metaAptId=null;S.metaNombre='Apartamento guardado';}save();return render();
   case 'idealSector':{const L=S.ideal.sectores;S.ideal.sectores=L.includes(v)?L.filter(x=>x!==v):[...L,v];save();return render();}
   case 'ideal':{const k=t.dataset.k;S.ideal[k]=k==='piso'?v:k==='bono'?v==='1':Number(v);save();return render();}
   case 'setPct':S.inicialPct=Number(v);save();return render();
   case 'exportar':S.lastBackup=Date.now();save();compartirArchivo(`mi-apartamento-respaldo-${fechaArchivo()}.json`,JSON.stringify(S,null,1),'application/json');render();toast('Respaldo listo 💾 Guárdalo en WhatsApp o Drive');return;
   case 'csv':if(!S.aportes.length){toast('Todavía no hay ahorros para descargar');return;}compartirArchivo(`mi-apartamento-historial-${fechaArchivo()}.csv`,csvHistorial(),'text/csv');return;
   case 'reset':if(!confirm('¿Seguro? Se borrarán todos tus registros de este celular. Si no tienes una copia, no se pueden recuperar.'))return;
-    {const n=S.nombre;S=clone(DEF);S.nombre=n;save();ir('inicio');}return;
+    {const n=S.nombre;S=clone(DEF);S.nombre=n;paso=1;wz.apt=null;wz.nombre=n;sim.mensual=null;save();ir('inicio');}return;
   }
 });
 document.addEventListener('input',e=>{
   const el=e.target;
-  if(el.id==='simR'){sim.mensual=num(el.value);document.getElementById('simM').textContent=M(sim.mensual);document.getElementById('simRes').innerHTML=simTexto(promedioMensual());return;}
-  if(el.id==='simE'){sim.extra=num(el.value);document.getElementById('simRes').innerHTML=simTexto(promedioMensual());return;}
+  if(el.id==='simR'){sim.mensual=toRD(num(el.value),S.moneda);document.getElementById('simM').textContent=M(sim.mensual);document.getElementById('simRes').innerHTML=simTexto(promedioMensual()||planRD());return;}
+  if(el.id==='simE'){sim.extra=toRD(num(el.value),S.moneda);document.getElementById('simRes').innerHTML=simTexto(promedioMensual()||planRD());return;}
+  if(el.id&&el.id.startsWith('w-')){leerWz();return;}
   if(el.id==='h-monto'||el.id==='h-mon')eqHoja();
 });
 document.addEventListener('change',e=>{
@@ -647,17 +706,19 @@ document.addEventListener('change',e=>{
   if(el.id==='h-mon'){eqHoja();return;}
   if(el.id==='imp'&&el.files[0]){const r=new FileReader();r.onload=()=>{try{importar(r.result);}catch(_){toast('Ese archivo no es un respaldo de la app');}};r.readAsText(el.files[0]);el.value='';return;}
   if(el.dataset.k){let v=el.value;if(el.type==='number'){v=v===''?0:Math.max(0,parseFloat(v)||0);if(el.dataset.k==='tasa'&&v<=0)v=DEF.tasa;}
-    setPath(el.dataset.k,v);if(el.dataset.k==='precio'){S.metaAptId=null;S.metaNombre='Mi apartamento';}save();render();}
+    if(el.dataset.money)v=Math.round(toRD(v,S.moneda));
+    setPath(el.dataset.k,v);if(el.dataset.k==='precio'){S.metaAptId=null;S.metaNombre='Precio que escribiste';S.metaElegida=true;}if(el.dataset.k==='planMensualUS')sim.mensual=null;save();render();}
 });
 document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='h-monto'){e.preventDefault();document.querySelector('[data-act="guardarAporte"]').click();}
   if(e.key==='Escape'&&hoja){hoja=null;pintarHoja();}});
 window.addEventListener('hashchange',()=>{const v=(location.hash||'#inicio').slice(1);if(v!==view){anim=true;view=v;render();}});
 
 function cargarEjemplo(){
-  const n=S.nombre;S=clone(DEF);S.nombre=n||'Valery';S.onboarded=true;S.ejemplo=true;S.saldoInicial=40000;
-  const t=new Date(),add=(mAtras,dia,monto,tag,nota)=>{const d=new Date(t.getFullYear(),t.getMonth()-mAtras,dia);S.aportes.push({id:uid(),fecha:d.toISOString().slice(0,10),monto,mon:'RD',tag,nota});};
-  for(let m=6;m>=0;m--){add(m,15,9000+((m*1300)%4000),'quincena',m===3?'Quincena + me resistí a pedir delivery':'');if(m)add(m,28,8500+((m*900)%3000),'quincena','');}
-  add(5,20,25000,'bono','Bono de desempeño');add(2,10,6500,'venta','Vendí ropa que no usaba');add(1,5,300,'extra','');
+  const n=S.nombre;S=clone(DEF);S.nombre=n||'Valery';S.onboarded=true;S.ejemplo=true;S.guiaOk=true;S.saldoInicial=Math.round(toRD(800,'US'));sim.mensual=null;
+  const ap=aptList().find(a=>a.hab===3)||aptList()[0];if(ap){S.precio=Math.round(toRD(ap.precio,ap.moneda));S.metaAptId=ap.id;S.metaNombre=ap.titulo;S.metaElegida=true;}
+  const t=new Date(),add=(mAtras,dia,monto,tag,nota)=>{const d=new Date(t.getFullYear(),t.getMonth()-mAtras,dia);S.aportes.push({id:uid(),fecha:d.toISOString().slice(0,10),monto,mon:'US',tag,nota});};
+  for(let m=6;m>=1;m--)add(m,5,900+((m*130)%300),'mes',m===3?'Me resistí a pedir delivery 💪':'');
+  add(5,20,1500,'bono','Bono de desempeño');add(2,10,120,'venta','Vendí ropa que no usaba');add(1,24,200,'regalo','');
   save();anim=true;window.scrollTo(0,0);render();setTimeout(()=>{saltito();confeti(40);},200);
 }
 

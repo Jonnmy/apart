@@ -1,5 +1,5 @@
 // Guarda la app para que abra sin internet. Siempre intenta la versión nueva primero.
-const CACHE = 'mi-apartamento-v2';
+const CACHE = 'mi-apartamento-v3';
 const FILES = ['./', './index.html', './manifest.webmanifest', './favicon.svg', './icon-180.png', './icon-192.png', './icon-512.png', './data/apartamentos.json'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => Promise.all(FILES.map(f => c.add(f).catch(() => {})))).then(() => self.skipWaiting()));
