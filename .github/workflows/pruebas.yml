@@ -1,0 +1,25 @@
+name: Pruebas
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  calculos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Pruebas de los cálculos
+        run: node --test tests/
+      - name: Revisar que la página no tenga errores de sintaxis
+        run: |
+          node -e '
+          const s=require("fs").readFileSync("index.html","utf8");
+          const js=s.slice(s.lastIndexOf("<script>")+8,s.lastIndexOf("</script>"));
+          new Function(js);
+          if(!/\/\*FALLBACK\*\/[\s\S]*?\/\*FIN\*\//.test(s)) throw new Error("Falta la copia de la lista de apartamentos");
+          console.log("index.html OK");'

@@ -1,17 +1,25 @@
 {
+  "id": "./",
   "name": "Mi apartamento en San Cristóbal",
   "short_name": "Mi apartamento",
   "description": "Plan de ahorro para comprar un apartamento en San Cristóbal.",
   "lang": "es-DO",
-  "start_url": "./",
+  "dir": "ltr",
+  "start_url": "./#inicio",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#FFF5F7",
   "theme_color": "#FDF2F4",
+  "categories": ["finance", "lifestyle"],
   "icons": [
     { "src": "./favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
     { "src": "./icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+    { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Mis ahorros", "url": "./#ahorros", "icons": [{ "src": "./icon-192.png", "sizes": "192x192" }] },
+    { "name": "Apartamentos", "url": "./#apartamentos", "icons": [{ "src": "./icon-192.png", "sizes": "192x192" }] }
   ]
 }
